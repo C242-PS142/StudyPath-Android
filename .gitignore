@@ -1,12 +1,14 @@
-# Gradle files
+# Gradle files and build artifacts
 .gradle/
 build/
 
-# Local configuration file (sdk path, etc)
+# Local configuration file (e.g., SDK path, local paths)
 local.properties
 
-# Log/OS Files
+# Log files and OS-specific files
 *.log
+*.DS_Store
+Thumbs.db
 
 # Android Studio generated files and folders
 captures/
@@ -22,12 +24,23 @@ misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
-# Keystore files
+# Keystore files (for signing the app)
 *.jks
 *.keystore
 
-# Google Services (e.g. APIs or Firebase)
+# Google Services and API keys (e.g., Firebase, third-party APIs)
 google-services.json
+*.key
+*.pem
+*.p12
+secrets.json
 
-# Android Profiling
+# Android Profiling and memory dump files
 *.hprof
+
+# Machine learning model files and AI resources
+*.tflite
+*.onnx
+models/
+checkpoints/
+weights/
