@@ -47,4 +47,34 @@
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
     </style>
+
+    <style name="Theme.StudyPath.Text.Black" parent="TextAppearance.AppCompat.Large">
+        <item name="android:fontFamily">@font/poppins_black</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="Theme.StudyPath.Text.Bold" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Theme.StudyPath.Text.SemiBold" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Theme.StudyPath.Text.Medium" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Theme.StudyPath.Text.Regular" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.StudyPath.Text.Light" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
