@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:text="BLACK"
         android:textColor="@color/md_theme_primaryContainer"
-        android:theme="@style/Theme.StudyPath.Text.Black" />
+        android:theme="@style/Theme.StudyPath.Text.Black"
+        android:textSize="@dimen/text_size_title"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="BOLD"
         android:textColor="@color/md_theme_primary"
+        android:textSize="@dimen/text_size_heading"
         android:theme="@style/Theme.StudyPath.Text.Bold" />
 
     <TextView
