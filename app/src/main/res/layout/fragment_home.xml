@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:background="@drawable/agreeableness_gradient"
+            tools:background="@drawable/gradient_agreeableness"
             tools:layout_marginHorizontal="@dimen/margin_small" />
 
         <LinearLayout
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_small"
                 android:layout_marginVertical="@dimen/margin_small"
-                android:background="@drawable/button_gemini"
+                android:background="@drawable/gradient_gemini"
                 android:text="@string/get_study_recommendation"
                 android:textAppearance="@style/Theme.StudyPath.Text.Medium"
                 android:textColor="@android:color/white"
@@ -157,8 +157,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
-            android:elevation="16dp"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_medium"
             app:cardBackgroundColor="@color/gemini_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,19 +172,20 @@
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_large"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/google_gemini" />
+                    android:src="@drawable/image_gemini" />
 
                 <TextView
                     android:id="@+id/tv_recommendation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingHorizontal="@dimen/padding_large"
+                    android:paddingHorizontal="@dimen/padding_medium"
+                    android:letterSpacing="0.05"
                     android:text="@string/example_recomendation"
                     android:textAppearance="@style/Theme.StudyPath.Text.Light"
                     android:visibility="gone"

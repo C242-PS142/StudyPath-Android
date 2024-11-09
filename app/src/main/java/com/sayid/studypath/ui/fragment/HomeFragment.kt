@@ -35,11 +35,10 @@ class HomeFragment : Fragment() {
 
         binding.apply {
             btnGetRecommendation.setOnClickListener {
-                if (tvWait.visibility == View.GONE)
-                    {
-                        tvRecommendation.visibility = View.VISIBLE
-                        tvWait.visibility = View.VISIBLE
-                    } else {
+                if (tvWait.visibility == View.GONE) {
+                    tvRecommendation.visibility = View.VISIBLE
+                    tvWait.visibility = View.VISIBLE
+                } else {
                     tvRecommendation.visibility = View.GONE
                     tvWait.visibility = View.GONE
                 }
@@ -50,11 +49,11 @@ class HomeFragment : Fragment() {
     private fun initializeCarousel() {
         val gradients =
             listOf(
-                R.drawable.agreeableness_gradient,
-                R.drawable.conscientiousness_gradient,
-                R.drawable.extraversion_gradient,
-                R.drawable.neuroticism_gradient,
-                R.drawable.openness_gradient,
+                R.drawable.gradient_agreeableness,
+                R.drawable.gradient_conscientiousness,
+                R.drawable.gradient_extraversion,
+                R.drawable.gradient_neuroticism,
+                R.drawable.gradient_openness,
             )
 
         val personalityData =
