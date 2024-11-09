@@ -3,4 +3,11 @@
     <string name="statistics">Statistik</string>
     <string name="home">Beranda</string>
     <string name="settings">Pengaturan</string>
+
+    <string name="welcome_message">Selamat Datang,</string>
+    <string name="my_personality_card">Kartu Kepribadian Saya</string>
+    <string name="get_study_recommendation">Dapatkan Rekomendasi Belajar</string>
+    <string name="waiting_time_format">Tunggu %1$d:%2$02d:%3$02d</string>
+    <string name="example_recomendation">Dengan profil kepribadian yang menunjukkan kecenderungan tinggi dalam keterbukaan terhadap pengalaman baru dan kesadaran diri yang kuat, serta kecenderungan rendah dalam ekstroversi, kamu sangat cocok dengan gaya belajar yang mandiri dan mendalam. Manfaatkan kreativitasmu untuk membuat materi pelajaran menjadi lebih menarik, misalnya dengan membuat mind map atau cerita pendek. Disiplin dan tanggung jawab yang tinggi akan membantumu tetap fokus pada tujuan belajar. Meskipun kamu lebih suka belajar sendiri, jangan ragu untuk mencari kelompok belajar kecil untuk mendiskusikan materi yang sulit. Kelola stres dengan baik agar kamu bisa selalu optimal dalam belajar.</string>
+    <string name="dummy_wait">Tunggu 01:40:00</string>
 </resources>

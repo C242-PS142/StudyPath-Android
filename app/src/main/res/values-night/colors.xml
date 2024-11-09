@@ -141,4 +141,6 @@
     <color name="md_theme_surfaceContainer_highContrast">#1B211E</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#252B28</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#303633</color>
+
+    <color name="gemini_background">#131314</color>
 </resources>
