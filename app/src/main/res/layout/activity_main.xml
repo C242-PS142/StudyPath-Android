@@ -1,75 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.view.MainActivity">
-<!--    EXAMPLE-->
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".ui.activity.MainActivity">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="0dp"
+        android:id="@+id/nav_view"
         android:layout_height="wrap_content"
-        android:text="BLACK"
-        android:theme="@style/Theme.StudyPath.Text.Black"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BLACK"
-        android:textColor="@color/md_theme_primaryContainer"
-        android:theme="@style/Theme.StudyPath.Text.Black"
-        android:textSize="@dimen/text_size_title"/>
+    <fragment
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/navigation" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BOLD"
-        android:theme="@style/Theme.StudyPath.Text.Bold"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BOLD"
-        android:textColor="@color/md_theme_primary"
-        android:textSize="@dimen/text_size_heading"
-        android:theme="@style/Theme.StudyPath.Text.Bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEMI BOLD"
-        android:theme="@style/Theme.StudyPath.Text.SemiBold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SEMI BOLD"
-        android:textColor="@color/md_theme_error"
-        android:theme="@style/Theme.StudyPath.Text.SemiBold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MEDIUM"
-        android:theme="@style/Theme.StudyPath.Text.Medium" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REGULAR"
-        android:theme="@style/Theme.StudyPath.Text.Regular" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LIGHT"
-        android:theme="@style/Theme.StudyPath.Text.Light" />
-    <!--    EXAMPLE-->
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
