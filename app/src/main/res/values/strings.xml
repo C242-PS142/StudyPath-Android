@@ -10,4 +10,24 @@
     <string name="waiting_time_format">Tunggu %1$d:%2$02d:%3$02d</string>
     <string name="example_recomendation">Dengan profil kepribadian yang menunjukkan kecenderungan tinggi dalam keterbukaan terhadap pengalaman baru dan kesadaran diri yang kuat, serta kecenderungan rendah dalam ekstroversi, kamu sangat cocok dengan gaya belajar yang mandiri dan mendalam. Manfaatkan kreativitasmu untuk membuat materi pelajaran menjadi lebih menarik, misalnya dengan membuat mind map atau cerita pendek. Disiplin dan tanggung jawab yang tinggi akan membantumu tetap fokus pada tujuan belajar. Meskipun kamu lebih suka belajar sendiri, jangan ragu untuk mencari kelompok belajar kecil untuk mendiskusikan materi yang sulit. Kelola stres dengan baik agar kamu bisa selalu optimal dalam belajar.</string>
     <string name="dummy_wait">Tunggu 01:40:00</string>
+
+    <!--    Onboarding Screen Contents-->
+    <string name="onboarding_title_1">Selamat Datang\ndi StudyPath!</string>
+    <string name="onboarding_desc_1">Temukan gaya belajar unik Anda dengan StudyPath, aplikasi yang membantu belajar lebih efektif dan menyenangkan sesuai dengan kepribadian Anda.</string>
+
+    <string name="onboarding_title_2">Pembelajaran yang\nDipersonalisasi</string>
+    <string name="onboarding_desc_2">StudyPath menggunakan Lima Dimensi Kepribadian untuk membantu Anda memahami cara belajar yang paling efektif berdasarkan sifat pribadi Anda.</string>
+
+    <string name="onboarding_title_3">Belajar dengan Rekomendasi\nyang Disesuaikan</string>
+    <string name="onboarding_desc_3">Dapatkan tips belajar yang dipersonalisasi untuk meningkatkan produktivitas dan mengurangi stres berdasarkan analisis kepribadian Anda.</string>
+
+    <string name="onboarding_title_4">Machine Learning untuk\nPembelajaran Anda</string>
+    <string name="onboarding_desc_4">Didukung machine learning, StudyPath memberikan rekomendasi belajar berbasis data yang disesuaikan dengan kebutuhan Anda.</string>
+
+    <string name="onboarding_title_5">Tingkatkan Pengalaman\nBelajar Anda</string>
+    <string name="onboarding_desc_5">Mulailah perjalanan belajar yang lebih efektif dengan strategi yang sesuai dengan kepribadian Anda untuk belajar dengan nyaman dan percaya diri.</string>
+    <!--*****************-->
+    <string name="start">Mulai</string>
+    <string name="next">Lanjut</string>
+    <string name="enter">Masuk</string>
 </resources>
