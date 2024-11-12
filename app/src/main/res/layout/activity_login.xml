@@ -36,16 +36,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/start_your_study_path"
                 android:layout_marginTop="30dp"
+                android:textAppearance="@style/Theme.StudyPath.Text.Bold"
                 android:gravity="center"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:textSize="14sp"
                 android:text="@string/login_description"
                 android:textAlignment="center" />
 
