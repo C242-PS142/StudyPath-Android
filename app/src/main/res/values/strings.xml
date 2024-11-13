@@ -49,4 +49,7 @@
     <string name="about_our_app_title">About Our App</string>
     <string name="about_our_app_subtitle">This application personalizes study strategies based on students’ unique personalities and learning styles, using Big Five insights to enhance learning effectiveness and cater to the demand for individualized educational support.</string>
     <string name="logout_text_btn">Logout</string>
+    <string name="your_name">Nama Anda</string>
+    <string name="enter_your_name">Masukkan nama anda…</string>
+    <string name="save">Simpan</string>
 </resources>

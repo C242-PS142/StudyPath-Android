@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/padding_large"
     tools:layout_gravity="center"
     tools:gravity="center">
 
@@ -13,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:importantForAccessibility="no"
-        android:padding="@dimen/padding_large"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         tools:src="@drawable/undraw_onboarding_certification" />
@@ -22,6 +20,7 @@
         android:id="@+id/tv_onboarding_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_large"
         android:gravity="center"
         android:textAppearance="@style/Theme.StudyPath.Text.Bold"
         tools:text="@string/onboarding_title_1" />
@@ -29,6 +28,7 @@
     <TextView
         android:id="@+id/tv_onboarding_description"
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/margin_large"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="@style/Theme.StudyPath.Text.Light"
