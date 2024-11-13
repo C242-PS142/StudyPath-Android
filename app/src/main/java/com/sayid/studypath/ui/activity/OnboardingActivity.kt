@@ -25,7 +25,7 @@ class OnboardingActivity : AppCompatActivity() {
             if (binding.viewPager.currentItem < (binding.viewPager.adapter?.itemCount ?: 0) - 1) {
                 binding.viewPager.currentItem += 1
             } else {
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, NewUserDataActivity::class.java)
                 startActivity(intent)
             }
         }

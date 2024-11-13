@@ -16,6 +16,9 @@
             android:name=".ui.activity.LoginActivity"
             android:exported="false" />
         <activity
+        android:name=".ui.activity.NewUserDataActivity"
+        android:exported="false" />
+        <activity
             android:name=".ui.activity.QuizConfirmationActivity"
             android:exported="false" />
         <activity

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:paddingHorizontal="@dimen/padding_large"
+    tools:context=".ui.activity.QuizConfirmationActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/padding_large">
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/shape_circle"
+                    android:importantForAccessibility="no"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/undraw_male_avatar" />
+
+                <ImageButton
+                    android:id="@+id/ib_edit"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/shape_circle_solid"
+                    android:importantForAccessibility="no"
+                    android:padding="@dimen/padding_medium"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_edit_24"
+                    app:tint="@color/md_theme_onTertiary" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_xlarge"
+                android:paddingBottom="@dimen/padding_small"
+                android:text="@string/your_name"
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />
+
+            <com.sayid.studypath.ui.customview.CustomEditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edit_text"
+                android:focusable="true"
+                android:hint="@string/enter_your_name"
+                android:inputType="text"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/padding_large"
+                android:paddingVertical="@dimen/margin_large" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding_large"
+                android:enabled="false"
+                android:text="@string/save"
+                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
+                app:cornerRadius="@dimen/corner_radius_medium" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
