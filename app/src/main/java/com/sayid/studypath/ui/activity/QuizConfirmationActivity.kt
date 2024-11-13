@@ -44,12 +44,8 @@ class QuizConfirmationActivity : AppCompatActivity() {
             }
 
             btnRefreshData.setOnClickListener {
-                Toast
-                    .makeText(
-                        this@QuizConfirmationActivity,
-                        getString(R.string.refresh_data),
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                val intent = Intent(this@QuizConfirmationActivity, QuizActivity::class.java)
+                startActivity(intent)
             }
         }
     }
