@@ -2,22 +2,21 @@ package com.sayid.studypath.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.sayid.studypath.R
-import com.sayid.studypath.data.model.OnboardingPreference
 import com.sayid.studypath.databinding.ActivityOnboardingBinding
 import com.sayid.studypath.ui.adapter.OnboardingPageAdapter
 import com.sayid.studypath.utils.updateIndicator
 import com.sayid.studypath.viewmodel.OnboardingViewModel
-import com.sayid.studypath.viewmodel.factory.OnboardingViewModelFactory
 
 class OnboardingActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: ActivityOnboardingBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: OnboardingViewModel
+    private val onboardingViewModel: OnboardingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,21 +38,14 @@ class OnboardingActivity : AppCompatActivity() {
                 ) {
                     binding.viewPager.currentItem += 1
                 } else {
-                    viewModel.completeOnboarding()
+                    onboardingViewModel.completeOnboarding()
                 }
             }
         }
     }
 
     private fun hasOnboardingCompleted() {
-        val onboardingPreference = OnboardingPreference(this)
-        viewModel =
-            ViewModelProvider(
-                this,
-                OnboardingViewModelFactory(onboardingPreference),
-            )[OnboardingViewModel::class.java]
-
-        viewModel.onboardingCompleted.observe(this) { completed ->
+        onboardingViewModel.onboardingCompleted.observe(this) { completed ->
             if (completed) {
                 navigateToLoginScreen()
             }
