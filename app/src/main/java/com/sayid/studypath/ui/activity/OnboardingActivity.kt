@@ -3,32 +3,66 @@ package com.sayid.studypath.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.sayid.studypath.R
+import com.sayid.studypath.data.model.OnboardingPreference
 import com.sayid.studypath.databinding.ActivityOnboardingBinding
 import com.sayid.studypath.ui.adapter.OnboardingPageAdapter
 import com.sayid.studypath.utils.updateIndicator
+import com.sayid.studypath.viewmodel.OnboardingViewModel
+import com.sayid.studypath.viewmodel.factory.OnboardingViewModelFactory
 
 class OnboardingActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: ActivityOnboardingBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: OnboardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        hasOnboardingCompleted()
         initializeOnboardingPage()
+        setListener()
+    }
 
-        binding.btnOnboarding.setOnClickListener {
-            if (binding.viewPager.currentItem < (binding.viewPager.adapter?.itemCount ?: 0) - 1) {
-                binding.viewPager.currentItem += 1
-            } else {
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+    private fun setListener() {
+        binding.apply {
+            btnOnboarding.setOnClickListener {
+                if (binding.viewPager.currentItem < (
+                        binding.viewPager.adapter?.itemCount
+                            ?: 0
+                    ) - 1
+                ) {
+                    binding.viewPager.currentItem += 1
+                } else {
+                    viewModel.completeOnboarding()
+                }
             }
         }
+    }
+
+    private fun hasOnboardingCompleted() {
+        val onboardingPreference = OnboardingPreference(this)
+        viewModel =
+            ViewModelProvider(
+                this,
+                OnboardingViewModelFactory(onboardingPreference),
+            )[OnboardingViewModel::class.java]
+
+        viewModel.onboardingCompleted.observe(this) { completed ->
+            if (completed) {
+                navigateToLoginScreen()
+            }
+        }
+    }
+
+    private fun navigateToLoginScreen() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
     private fun initializeOnboardingPage() {
