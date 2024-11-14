@@ -1,4 +1,5 @@
 [versions]
+aachartcoreKotlin = "7.2.0"
 agp = "8.6.0"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
@@ -15,6 +16,7 @@ securityCrypto = "1.1.0-alpha06"
 viewpager2 = "1.1.0"
 
 [libraries]
+aachartcore-kotlin = { module = "com.github.AAChartModel:AAChartCore-Kotlin", version.ref = "aachartcoreKotlin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
