@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">StudyPath</string>
-    <string name="statistics">Statistik</string>
+    <string name="statistics">Big Five Stats</string>
     <string name="home">Beranda</string>
     <string name="settings">Pengaturan</string>
 
@@ -52,4 +52,5 @@
     <string name="your_name">Nama Anda</string>
     <string name="enter_your_name">Masukkan nama anda…</string>
     <string name="save">Simpan</string>
+    <string name="chart_base_on_big_five">Chart base on Big Five</string>
 </resources>

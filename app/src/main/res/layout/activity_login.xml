@@ -67,7 +67,7 @@
                 app:iconSize="32dp"
                 app:iconTint="@null"
                 app:strokeColor="@color/md_theme_primary"
-                app:strokeWidth="2dp" />
+                app:strokeWidth="1dp" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
