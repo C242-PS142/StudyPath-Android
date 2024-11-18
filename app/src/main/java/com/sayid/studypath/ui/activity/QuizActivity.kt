@@ -19,11 +19,12 @@ class QuizActivity : AppCompatActivity() {
         val viewPager: ViewPager2 = binding.quizAnswerViewpager
 
         // Daftar item untuk ViewPager
-        val items = listOf(
-            listOf("Agree", R.color.md_theme_primary),
-            listOf("Neutral", R.color.md_theme_tertiary),
-            listOf("Disagree", R.color.md_theme_errorContainer_mediumContrast),
-        )
+        val items =
+            listOf(
+                listOf("Agree", R.color.md_theme_primary),
+                listOf("Neutral", R.color.md_theme_tertiary),
+                listOf("Disagree", R.color.md_theme_error),
+            )
 
         // Set adapter ke ViewPager2
         val adapter = QuizAnswerAdapter(items)
@@ -36,7 +37,7 @@ class QuizActivity : AppCompatActivity() {
             page.scaleY = 1 - (0.15f * abs(position))
         }
 
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(1)
         val middleItemIndex = items.size / 2
         viewPager.setCurrentItem(middleItemIndex, false)
     }

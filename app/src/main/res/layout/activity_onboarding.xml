@@ -41,7 +41,7 @@
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:layout_margin="4dp"
-                    android:background="@drawable/indicator_inactive" />
+                    android:background="@drawable/indicator_active" />
 
                 <View
                     android:layout_width="8dp"
@@ -72,7 +72,7 @@
                 android:id="@+id/btn_onboarding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
+                android:textAppearance="@style/Theme.StudyPath.Text.Button"
                 app:cornerRadius="@dimen/corner_radius_medium"
                 android:layout_marginBottom="@dimen/margin_large"
                 tools:text="@string/start" />
