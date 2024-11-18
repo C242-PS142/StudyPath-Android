@@ -58,7 +58,7 @@
                 android:paddingVertical="10dp"
                 android:text="@string/login_with_google"
                 android:textAppearance="@style/Theme.StudyPath.Text.Button"
-                app:cornerRadius="@dimen/corner_radius_medium"
+                app:cornerRadius="@dimen/corner_radius_large"
                 app:iconGravity="textStart"
                 app:iconSize="32dp"
                 app:iconTint="@null"

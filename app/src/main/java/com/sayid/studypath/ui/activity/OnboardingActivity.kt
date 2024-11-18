@@ -60,11 +60,11 @@ class OnboardingActivity : AppCompatActivity() {
     private fun initializeOnboardingPage() {
         val illustrations =
             listOf(
-                R.drawable.undraw_onboarding_welcoming,
-                R.drawable.undraw_onboarding_exams,
-                R.drawable.undraw_onboarding_mobile_app,
-                R.drawable.undraw_onboarding_chat_bot,
-                R.drawable.undraw_onboarding_certification,
+                R.drawable.icon_onboarding_1,
+                R.drawable.icon_onboarding_2,
+                R.drawable.icon_onboarding_3,
+                R.drawable.icon_onboarding_4,
+                R.drawable.icon_onboarding_5,
             )
         val personalityData =
             mapOf(

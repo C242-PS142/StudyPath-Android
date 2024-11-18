@@ -84,7 +84,7 @@
                 android:enabled="false"
                 android:text="@string/save"
                 android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-                app:cornerRadius="@dimen/corner_radius_medium" />
+                app:cornerRadius="@dimen/corner_radius_large" />
         </LinearLayout>
     </ScrollView>
 
