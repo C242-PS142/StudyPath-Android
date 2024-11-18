@@ -52,7 +52,7 @@
     <string name="about_our_app_subtitle">Aplikasi Ini Mempersonalisasi Strategi Belajar Berdasarkan Kepribadian Unik Dan Gaya Belajar Siswa, Menggunakan Wawasan Big Five Untuk Meningkatkan Efektivitas Pembelajaran Dan Memenuhi Kebutuhan Dukungan Pendidikan Yang Dipersonalisasi.</string>
     <string name="logout_text_btn">Keluar</string>
     <string name="your_name">Nama Anda</string>
-    <string name="enter_your_name">Masukkan nama Anda…</string>
+    <string name="enter_your_name">Masukkan Nama Anda</string>
     <string name="save">Simpan</string>
     <string name="chart_base_on_big_five">Diagram Berdasarkan Big Five</string>
 
@@ -62,4 +62,8 @@
     <string name="conscientiousness">KETELITIAN</string>
     <string name="agreeableness">KESEPAKATAN</string>
     <string name="click_to_view">Klik Untuk Membaca Rekomendasi</string>
+    <string name="current_grade">Jenjang Saat Ini</string>
+    <string name="current_education">Jenjang Sekolah Anda Saat Ini</string>
+    <string name="current_age">Rentang Usia Kamu</string>
+    <string name="your_age_range">Rentang Usia Anda Saat Ini</string>
 </resources>
