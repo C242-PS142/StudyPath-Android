@@ -25,12 +25,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/padding_large"
             android:paddingVertical="@dimen/padding_medium"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar"
             app:layout_constraintTop_toTopOf="@+id/iv_avatar">
@@ -40,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/welcome_message"
-                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold"
+                android:textSize="@dimen/text_size_heading"/>
 
             <TextView
                 android:id="@+id/tv_username"
@@ -64,11 +65,13 @@
             android:textAppearance="@style/Theme.StudyPath.Text.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_large"
+
             android:layout_height="225dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +83,7 @@
             android:id="@+id/indicatorLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/padding_medium"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_small"
             android:gravity="center"

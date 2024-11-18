@@ -46,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/email_user"
-            android:textAppearance="@style/Theme.StudyPath.Text.Light"
-            android:textColor="@color/md_theme_tertiary"
+            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
+            android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/profile_pict"
@@ -88,7 +88,6 @@
             android:layout_height="wrap_content"
             android:text="@string/theme_subtitle"
             android:textAppearance="@style/Theme.StudyPath.Text.Light"
-            android:textColor="@color/md_theme_onTertiaryContainer"
             app:layout_constraintEnd_toStartOf="@+id/switch_theme"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +98,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:thumbTint="@color/md_theme_primary"
-            app:trackTint="@color/md_theme_onSurfaceVariant_mediumContrast"
             app:layout_constraintBottom_toBottomOf="@+id/theme_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/theme_subtitle" />
@@ -124,7 +122,6 @@
             android:layout_height="wrap_content"
             android:text="@string/preference_subtitle"
             android:textAppearance="@style/Theme.StudyPath.Text.Light"
-            android:textColor="@color/md_theme_onTertiaryContainer"
             app:layout_constraintEnd_toStartOf="@+id/switch_preference"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,8 +134,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/preference_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/preference_subtitle"
-            app:thumbTint="@color/md_theme_primary"
-            app:trackTint="@color/md_theme_onSurfaceVariant_mediumContrast" />
+            app:thumbTint="@color/md_theme_primary" />
 
         <!-- About App   -->
         <TextView
@@ -160,7 +156,6 @@
             android:layout_height="wrap_content"
             android:text="@string/about_our_app_subtitle"
             android:textAppearance="@style/Theme.StudyPath.Text.Light"
-            android:textColor="@color/md_theme_onTertiaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/about_app_title" />
@@ -171,11 +166,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/md_theme_errorContainer_mediumContrast"
+            android:backgroundTint="@color/md_theme_error"
             android:text="@string/logout_text_btn"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textColor="@color/md_theme_onPrimaryFixed_highContrast"
             app:cornerRadius="@dimen/corner_radius_medium"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

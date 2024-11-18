@@ -39,7 +39,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/start_your_study_path"
                 android:textAlignment="center"
-                android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+                android:textAppearance="@style/Theme.StudyPath.Text.Heading"
                 android:textSize="24sp" />
 
             <TextView
@@ -51,18 +51,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="@dimen/margin_large"
-                android:backgroundTint="@color/md_theme_inverseOnSurface_highContrast"
                 android:paddingVertical="10dp"
                 android:text="@string/login_with_google"
-                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-                android:textColor="@color/md_theme_primary"
+                android:textAppearance="@style/Theme.StudyPath.Text.Button"
                 app:cornerRadius="@dimen/corner_radius_medium"
-                app:icon="@drawable/ic_google_svgrepo"
                 app:iconGravity="textStart"
                 app:iconSize="32dp"
                 app:iconTint="@null"

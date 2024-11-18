@@ -1,56 +1,57 @@
 <resources>
     <string name="app_name">StudyPath</string>
-    <string name="statistics">Big Five Stats</string>
+    <string name="statistics">Statistik Big Five</string>
     <string name="home">Beranda</string>
     <string name="settings">Pengaturan</string>
 
-    <string name="welcome_message">Selamat Datang,</string>
+    <string name="welcome_message">Halo! Selamat Datang,</string>
     <string name="my_personality_card">Kartu Kepribadian Saya</string>
-    <string name="get_study_recommendation">Dapatkan Rekomendasi Belajar</string>
+    <string name="get_study_recommendation">Temukan Tips Belajar untuk Kamu!</string>
     <string name="waiting_time_format">Tunggu %1$d:%2$02d:%3$02d</string>
     <string name="example_recomendation">Dengan profil kepribadian yang menunjukkan kecenderungan tinggi dalam keterbukaan terhadap pengalaman baru dan kesadaran diri yang kuat, serta kecenderungan rendah dalam ekstroversi, kamu sangat cocok dengan gaya belajar yang mandiri dan mendalam. Manfaatkan kreativitasmu untuk membuat materi pelajaran menjadi lebih menarik, misalnya dengan membuat mind map atau cerita pendek. Disiplin dan tanggung jawab yang tinggi akan membantumu tetap fokus pada tujuan belajar. Meskipun kamu lebih suka belajar sendiri, jangan ragu untuk mencari kelompok belajar kecil untuk mendiskusikan materi yang sulit. Kelola stres dengan baik agar kamu bisa selalu optimal dalam belajar.</string>
     <string name="dummy_wait">Tunggu 01:40:00</string>
 
-    <!--    Onboarding Screen Contents-->
+    <!-- Onboarding Screen Contents -->
     <string name="onboarding_title_1">Selamat Datang di StudyPath!</string>
-    <string name="onboarding_desc_1">Temukan gaya belajar unik Anda dengan StudyPath, aplikasi yang membantu belajar lebih efektif dan menyenangkan sesuai dengan kepribadian Anda.</string>
+    <string name="onboarding_desc_1">Hai, Teman-teman! Pernah bingung gimana cara belajar yang pas buat kamu? Yuk, bareng StudyPath, kita cari tahu gaya belajar yang seru dan cocok banget sama kepribadian kamu!</string>
 
-    <string name="onboarding_title_2">Pembelajaran yang Dipersonalisasi</string>
-    <string name="onboarding_desc_2">StudyPath menggunakan Lima Dimensi Kepribadian untuk membantu Anda memahami cara belajar yang paling efektif berdasarkan sifat pribadi Anda.</string>
+    <string name="onboarding_title_2">Belajar Lebih Personal</string>
+    <string name="onboarding_desc_2">Gaya belajar setiap orang beda, loh! StudyPath pakai Lima Dimensi Kepribadian buat bantu kamu tahu cara belajar yang paling efektif sesuai dengan karakter kamu.</string>
 
-    <string name="onboarding_title_3">Belajar dengan Rekomendasi yang Disesuaikan</string>
-    <string name="onboarding_desc_3">Dapatkan tips belajar yang dipersonalisasi untuk meningkatkan produktivitas dan mengurangi stres berdasarkan analisis kepribadian Anda.</string>
+    <string name="onboarding_title_3">Rekomendasi Belajar Keren</string>
+    <string name="onboarding_desc_3">Bayangin belajar dengan tips yang pas banget buat kamu. Dengan StudyPath, kamu bisa belajar lebih produktif dan jauh dari stres. Asik, kan?</string>
 
-    <string name="onboarding_title_4">Machine Learning untuk Pembelajaran Anda</string>
-    <string name="onboarding_desc_4">Didukung machine learning, StudyPath memberikan rekomendasi belajar berbasis data yang disesuaikan dengan kebutuhan Anda.</string>
+    <string name="onboarding_title_4">Teknologi Canggih di Balik StudyPath</string>
+    <string name="onboarding_desc_4">Didukung teknologi machine learning, StudyPath kasih rekomendasi belajar berbasis data, jadi semua saran belajar kami pasti sesuai dengan kebutuhan kamu.</string>
 
-    <string name="onboarding_title_5">Tingkatkan Pengalaman Belajar Anda</string>
-    <string name="onboarding_desc_5">Mulailah perjalanan belajar yang lebih efektif dengan strategi yang sesuai dengan kepribadian Anda untuk belajar dengan nyaman dan percaya diri.</string>
+    <string name="onboarding_title_5">Waktunya Belajar Tanpa Beban</string>
+    <string name="onboarding_desc_5">Belajar itu nggak harus ribet. Dengan strategi yang sesuai kepribadian kamu, StudyPath bantu kamu belajar lebih nyaman, santai, dan percaya diri!</string>
     <!--*****************-->
+
     <string name="start">Mulai</string>
     <string name="next">Lanjut</string>
     <string name="enter">Masuk</string>
     <string name="has_data">Sepertinya Anda sudah memiliki data kepribadian sebelumnya</string>
     <string name="has_no_data">Ayo cari tahu kepribadian Anda dengan mengikuti tes berikut</string>
-    <string name="take_test">Mulai Tes</string>
+    <string name="take_test">Ikuti Tes</string>
     <string name="load_data">Muat Data</string>
     <string name="refresh_data">Perbarui Data</string>
-    <string name="image_illustration_for_login">Image Illustration For Login</string>
-    <string name="login_with_google">Login with Google</string>
-    <string name="start_your_study_path">Start your study path!</string>
-    <string name="login_description">Personalized study recommendations based on Big Five personality traits. Discover effective methods to maximize your learning potential uniquely tailored for you!</string>
+    <string name="image_illustration_for_login">Ilustrasi Gambar untuk Login</string>
+    <string name="login_with_google">Masuk dengan Google</string>
+    <string name="start_your_study_path">Ayo Mulai Perjalanan Belajarmu</string>
+    <string name="login_description">Yuk, temukan cara belajar paling seru dan efektif yang dirancang khusus buat kamu! Maksimalkan potensimu dan jadikan belajar lebih asyik bareng StudyPath!</string>
     <string name="username">Sayid Achmad Maulana</string>
     <string name="email_user">Sayid@mail.com</string>
-    <string name="text_edit_profile_btn">Edit Profile</string>
-    <string name="theme_title">Theme</string>
-    <string name="theme_subtitle">Light Mode</string>
-    <string name="preference_title">Preference Test</string>
-    <string name="preference_subtitle">Reminder Re-Test Big Five Personality</string>
-    <string name="about_our_app_title">About Our App</string>
-    <string name="about_our_app_subtitle">This application personalizes study strategies based on students’ unique personalities and learning styles, using Big Five insights to enhance learning effectiveness and cater to the demand for individualized educational support.</string>
-    <string name="logout_text_btn">Logout</string>
+    <string name="text_edit_profile_btn">Edit Profil</string>
+    <string name="theme_title">Tema</string>
+    <string name="theme_subtitle">Mode Terang</string>
+    <string name="preference_title">Tes Preferensi</string>
+    <string name="preference_subtitle">Pengingat untuk Tes Ulang Kepribadian Big Five</string>
+    <string name="about_our_app_title">Tentang Aplikasi Kami</string>
+    <string name="about_our_app_subtitle">Aplikasi Ini Mempersonalisasi Strategi Belajar Berdasarkan Kepribadian Unik Dan Gaya Belajar Siswa, Menggunakan Wawasan Big Five Untuk Meningkatkan Efektivitas Pembelajaran Dan Memenuhi Kebutuhan Dukungan Pendidikan Yang Dipersonalisasi.</string>
+    <string name="logout_text_btn">Keluar</string>
     <string name="your_name">Nama Anda</string>
-    <string name="enter_your_name">Masukkan nama anda…</string>
+    <string name="enter_your_name">Masukkan nama Anda…</string>
     <string name="save">Simpan</string>
-    <string name="chart_base_on_big_five">Chart base on Big Five</string>
+    <string name="chart_base_on_big_five">Diagram Berdasarkan Big Five</string>
 </resources>

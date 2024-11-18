@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_large"
         android:gravity="center"
-        android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+        android:textAppearance="@style/Theme.StudyPath.Text.Heading"
         tools:text="@string/onboarding_title_1" />
 
     <TextView

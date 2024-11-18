@@ -50,7 +50,7 @@
                     android:padding="@dimen/padding_medium"
                     android:scaleType="fitCenter"
                     android:src="@drawable/baseline_edit_24"
-                    app:tint="@color/md_theme_onTertiary" />
+                    app:tint="@android:color/white" />
 
             </FrameLayout>
 
