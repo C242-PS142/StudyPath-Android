@@ -5,8 +5,8 @@
     android:id="@+id/quiz_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".ui.activity.QuizActivity">
 
     <!-- Progress Indicator -->
@@ -14,8 +14,8 @@
         android:id="@+id/quiz_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,9 +58,9 @@
         android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_indicator"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintVertical_bias="0.3">
 
         <!-- Quiz Text -->
@@ -68,24 +68,24 @@
             android:id="@+id/quiz_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:paddingHorizontal="20dp"
             android:text="I often forget to put things back in their proper place."
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:layout_weight="0.5"/>
+            android:textAppearance="@style/Theme.StudyPath.Text.Medium" />
 
         <!-- Response Buttons -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/quiz_answer_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"/>
+            android:layout_weight="1.5" />
 
         <!-- Next Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next_quiz"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginHorizontal="20dp"
             android:text="Next"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:scrollbars="none"
     tools:context=".ui.fragment.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_large">
-
 
         <ImageView
             android:id="@+id/iv_avatar"
@@ -39,21 +39,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:height="28dp"
                 android:text="@string/welcome_message"
-                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold"
-                android:textSize="@dimen/text_size_heading"/>
+                android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+                android:textSize="@dimen/text_size_heading" />
 
             <TextView
                 android:id="@+id/tv_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:height="25dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/welcome_message"
                 android:textAppearance="@style/Theme.StudyPath.Text.Regular"
                 tools:text="Sayid Achmad Maulana" />
-
         </LinearLayout>
 
         <TextView
@@ -61,33 +62,42 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
+            android:height="36dp"
             android:text="@string/my_personality_card"
-            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+            android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
+        <TextView
+            android:id="@+id/tv_title_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/my_personality_description_card"
+            android:textAppearance="@style/Theme.StudyPath.Text.Regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
+            android:layout_height="270dp"
             android:layout_marginTop="@dimen/margin_large"
-
-            android:layout_height="225dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:background="@drawable/gradient_agreeableness"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_description"
             tools:layout_marginHorizontal="@dimen/margin_small" />
 
         <LinearLayout
             android:id="@+id/indicatorLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/padding_medium"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_small"
             android:gravity="center"
             android:orientation="horizontal"
+            android:paddingVertical="@dimen/padding_medium"
             app:layout_constraintEnd_toEndOf="@+id/viewPager"
             app:layout_constraintStart_toStartOf="@+id/viewPager"
             app:layout_constraintTop_toBottomOf="@+id/viewPager">
@@ -125,76 +135,265 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_recommendation_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:height="36dp"
+            android:text="@string/my_personality_card"
+            android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indicatorLayout" />
+
+        <TextView
+            android:id="@+id/tv_recommendation_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/my_personality_card"
+            android:textAppearance="@style/Theme.StudyPath.Text.Regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recommendation_title" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_get_recommendation"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="@dimen/margin_large"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/md_theme_primary"
+            app:cardCornerRadius="@dimen/corner_radius_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recommendation_description">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_button_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="24dp"
+                    android:gravity="center"
+                    android:text="@string/get_study_recommendation"
+                    android:textAppearance="@style/Theme.StudyPath.Text.Button"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_heading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_button_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/dummy_wait"
+                    android:textAppearance="@style/Theme.StudyPath.Text.Light"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_button_title" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
         <LinearLayout
-            android:id="@+id/lin_recommendation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indicatorLayout">
+            app:layout_constraintTop_toBottomOf="@+id/card_get_recommendation">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_get_recommendation"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_show_openness"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_small"
-                android:layout_marginVertical="@dimen/margin_small"
-                android:background="@drawable/gradient_gemini"
-                android:text="@string/get_study_recommendation"
-                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-                android:textColor="@android:color/white"
-                app:backgroundTint="@null" />
+                android:layout_height="110dp"
+                android:layout_marginTop="@dimen/margin_large"
+                app:cardBackgroundColor="@color/md_theme_secondary"
+                app:cardCornerRadius="@dimen/corner_radius_large">
 
-            <TextView
-                android:id="@+id/tv_wait"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/padding_small"
-                android:text="@string/dummy_wait"
-                android:textAppearance="@style/Theme.StudyPath.Text.Light"
-                android:visibility="gone"
-                tools:visibility="visible" />
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_medium"
-            app:cardBackgroundColor="@color/gemini_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lin_recommendation"
-            tools:cardCornerRadius="@dimen/padding_large">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_large"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/image_gemini" />
-
-                <TextView
-                    android:id="@+id/tv_recommendation"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingHorizontal="@dimen/padding_medium"
-                    android:letterSpacing="0.05"
-                    android:text="@string/example_recomendation"
-                    android:textAppearance="@style/Theme.StudyPath.Text.Light"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="@dimen/padding_large"
+                        android:layout_weight="2"
+                        android:importantForAccessibility="no"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_keterbukaan" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/click_to_view"
+                        android:textAppearance="@style/Theme.StudyPath.Text.ButtonRecommendation"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_show_agreeableness"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:cardBackgroundColor="@color/md_theme_secondary"
+                app:cardCornerRadius="@dimen/corner_radius_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="@dimen/padding_large"
+                        android:layout_weight="2"
+                        android:importantForAccessibility="no"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_kesepakatan_2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/click_to_view"
+                        android:textAppearance="@style/Theme.StudyPath.Text.ButtonRecommendation"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_show_neurotism"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:cardBackgroundColor="@color/md_theme_secondary"
+                app:cardCornerRadius="@dimen/corner_radius_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="@dimen/padding_large"
+                        android:layout_weight="2"
+                        android:importantForAccessibility="no"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_kestabilan" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/click_to_view"
+                        android:textAppearance="@style/Theme.StudyPath.Text.ButtonRecommendation"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_show_conscientiousness"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:cardBackgroundColor="@color/md_theme_secondary"
+                app:cardCornerRadius="@dimen/corner_radius_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="@dimen/padding_large"
+                        android:layout_weight="2"
+                        android:importantForAccessibility="no"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_ketelitian" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/click_to_view"
+                        android:textAppearance="@style/Theme.StudyPath.Text.ButtonRecommendation"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_show_extraversion"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:cardBackgroundColor="@color/md_theme_secondary"
+                app:cardCornerRadius="@dimen/corner_radius_large">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="@dimen/padding_large"
+                        android:layout_weight="2"
+                        android:importantForAccessibility="no"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_sosial" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/click_to_view"
+                        android:textAppearance="@style/Theme.StudyPath.Text.ButtonRecommendation"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

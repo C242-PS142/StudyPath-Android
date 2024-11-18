@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
+    android:scrollbars="none"
+    android:fillViewport="true"
     android:paddingHorizontal="@dimen/padding_large"
-    tools:context=".ui.fragment.SettingsFragment"
-    android:fillViewport="true">
+    tools:context=".ui.fragment.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -97,10 +98,10 @@
             android:id="@+id/switch_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:thumbTint="@color/md_theme_primary"
             app:layout_constraintBottom_toBottomOf="@+id/theme_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/theme_subtitle" />
+            app:layout_constraintTop_toTopOf="@+id/theme_subtitle"
+            app:thumbTint="@color/md_theme_primary" />
 
         <!-- Preferensi Test Setting   -->
         <TextView
@@ -164,13 +165,13 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/md_theme_error"
             android:text="@string/logout_text_btn"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            app:cornerRadius="@dimen/corner_radius_large"
             android:textColor="@android:color/white"
+            app:cornerRadius="@dimen/corner_radius_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
