@@ -11,31 +11,22 @@ fun initializePersonalityCard(
     viewPager2: ViewPager2,
     indicatorLayout: LinearLayout,
 ) {
-    val gradients =
+    val personalityTitle =
         listOf(
-            R.drawable.gradient_openness,
-            R.drawable.gradient_agreeableness,
-            R.drawable.gradient_conscientiousness,
-            R.drawable.gradient_extraversion,
-            R.drawable.gradient_neuroticism,
-        )
-
-    val personalityData =
-        mapOf(
-            "Openness" to "Keterbukaan",
-            "Agreeableness" to "Kesesuaian atau\nKebersamaan",
-            "Extraversion" to "Interaksi\nSosial",
-            "Conscientiousness" to "Ketekunan atau\nKehati-hatian",
-            "Neuroticism" to "Kestabilan Emosi",
+            R.string.openness,
+            R.string.agreeableness,
+            R.string.neuroticism,
+            R.string.conscientiousness,
+            R.string.extroversion,
         )
 
     val illustrations =
         listOf(
-            R.drawable.undraw_shared_goals,
-            R.drawable.undraw_business_deal,
-            R.drawable.undraw_solution_mindset,
-            R.drawable.undraw_visionary_technology,
-            R.drawable.undraw_meditation,
+            R.drawable.icon_keterbukaan,
+            R.drawable.icon_kesepakatan,
+            R.drawable.icon_kestabilan,
+            R.drawable.icon_ketelitian,
+            R.drawable.icon_sosial,
         )
 
     val dummyPercentages =
@@ -50,8 +41,7 @@ fun initializePersonalityCard(
     val adapter =
         PersonalityCardAdapter(
             context,
-            gradients,
-            personalityData,
+            personalityTitle,
             illustrations,
             dummyPercentages,
         )

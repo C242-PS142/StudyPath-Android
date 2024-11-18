@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,16 +30,15 @@
                 android:layout_marginVertical="@dimen/margin_large"
                 android:layout_marginTop="@dimen/margin_large"
                 android:gravity="center"
-                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold"
+                android:textAppearance="@style/Theme.StudyPath.Text.Heading"
                 tools:text="@string/has_data" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="225dp"
+                android:layout_height="270dp"
                 android:layout_gravity="center"
                 android:visibility="gone"
-                tools:background="@drawable/gradient_agreeableness"
                 tools:visibility="visible" />
 
             <LinearLayout
@@ -86,18 +86,18 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_confirmation_quiz"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
+                android:layout_height="60dp"
+                android:textAppearance="@style/Theme.StudyPath.Text.Button"
                 app:cornerRadius="@dimen/corner_radius_large"
                 tools:text="@string/load_data" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_refresh_data"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginBottom="@dimen/margin_large"
                 android:text="@string/refresh_data"
-                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
+                android:textAppearance="@style/Theme.StudyPath.Text.OutlineButton"
                 android:textColor="@color/md_theme_primary"
                 android:visibility="gone"
                 app:backgroundTint="@android:color/transparent"
