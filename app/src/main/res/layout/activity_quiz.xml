@@ -89,6 +89,6 @@
             android:layout_marginHorizontal="20dp"
             android:text="Next"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            app:cornerRadius="@dimen/corner_radius_medium" />
+            app:cornerRadius="@dimen/corner_radius_large" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
