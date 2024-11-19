@@ -75,4 +75,8 @@
     <string name="minus_2">-2</string>
     <string name="plus_1">+1</string>
     <string name="plus_2">+2</string>
+    <string name="diagram_pie">Diagram Pie</string>
+    <string name="explain_pie">Penyajian Dalam Bentuk Bagian Lingkaran</string>
+    <string name="diagram_bar">Diagram Bar</string>
+    <string name="explain_bar">Penyajian Dalam Bentuk Balok</string>
 </resources>
