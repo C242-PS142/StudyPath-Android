@@ -33,9 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:height="30dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/username"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textColor="@color/md_theme_primary"
+            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/profile_pict"
@@ -79,8 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/theme_title"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textColor="@color/md_theme_primary"
+            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +91,6 @@
             android:id="@+id/theme_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/theme_subtitle"
             android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toStartOf="@+id/switch_theme"
@@ -105,7 +105,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/theme_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/theme_subtitle"
-            app:thumbTint="@color/md_theme_primary" />
+            app:thumbTint="@color/md_theme_primary"
+            app:trackTint="@color/md_theme_surfaceVariant" />
 
         <!-- Preferensi Test Setting   -->
         <TextView
@@ -114,8 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/preference_title"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textColor="@color/md_theme_primary"
+            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,6 @@
             android:id="@+id/preference_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/preference_subtitle"
             android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toStartOf="@+id/switch_preference"
@@ -140,7 +139,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/preference_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/preference_subtitle"
-            app:thumbTint="@color/md_theme_primary" />
+            app:thumbTint="@color/md_theme_primary"
+            app:trackTint="@color/md_theme_surfaceVariant" />
 
         <!-- About App   -->
         <TextView
@@ -149,8 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/about_our_app_title"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textColor="@color/md_theme_primary"
+            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +159,6 @@
             android:id="@+id/about_app_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/about_our_app_subtitle"
             android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toEndOf="parent"
