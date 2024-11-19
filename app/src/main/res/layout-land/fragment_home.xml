@@ -198,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/dummy_wait"
-                    android:textAppearance="@style/Theme.StudyPath.Text.Light"
+                    android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
                     android:textColor="@android:color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

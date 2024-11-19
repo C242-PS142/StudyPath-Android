@@ -45,28 +45,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pie_chart_title"></com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
-
-        <TextView
-            android:id="@+id/radar_chart_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Your Stats Big Five"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textColor="@color/md_theme_primary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/big_five_pie_charts" />
-
-        <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
-            android:id="@+id/big_five_radar_charts"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radar_chart_title">
-
-        </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -94,8 +94,12 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
         <item name="android:textSize">@dimen/text_size_body</item>
     </style>
+    <style name="Theme.StudyPath.Text.LightBody" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+    </style>
 
-    <style name="Theme.StudyPath.Text.Light" parent="TextAppearance.AppCompat.Medium">
+    <style name="Theme.StudyPath.Text.LightSmall" parent="TextAppearance.AppCompat.Medium">
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
