@@ -32,15 +32,15 @@ class HomeFragment : Fragment() {
         initializePersonalityCard(requireContext(), binding.viewPager, binding.indicatorLayout)
 
         binding.apply {
-            btnGetRecommendation.setOnClickListener {
-                if (tvWait.visibility == View.GONE) {
-                    tvRecommendation.visibility = View.VISIBLE
-                    tvWait.visibility = View.VISIBLE
-                } else {
-                    tvRecommendation.visibility = View.GONE
-                    tvWait.visibility = View.GONE
-                }
-            }
+//            btnGetRecommendation.setOnClickListener {
+//                if (tvWait.visibility == View.GONE) {
+//                    tvRecommendation.visibility = View.VISIBLE
+//                    tvWait.visibility = View.VISIBLE
+//                } else {
+//                    tvRecommendation.visibility = View.GONE
+//                    tvWait.visibility = View.GONE
+//                }
+//            }
         }
     }
 

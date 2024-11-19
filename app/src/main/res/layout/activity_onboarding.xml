@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,16 +25,16 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
-                android:layout_marginTop="@dimen/margin_large"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large" />
 
             <LinearLayout
                 android:id="@+id/indicatorLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginVertical="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_xlarge"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -71,10 +72,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_onboarding"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/Theme.StudyPath.Text.Button"
-                app:cornerRadius="@dimen/corner_radius_medium"
+                android:layout_height="60dp"
                 android:layout_marginBottom="@dimen/margin_large"
+                android:textAppearance="@style/Theme.StudyPath.Text.Button"
+                app:cornerRadius="@dimen/corner_radius_large"
                 tools:text="@string/start" />
         </LinearLayout>
     </ScrollView>

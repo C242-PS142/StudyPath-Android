@@ -25,12 +25,11 @@
 
             <ImageView
                 android:id="@+id/login_illustration"
-
                 android:layout_width="wrap_content"
-                android:layout_height="240dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="@dimen/margin_large"
                 android:contentDescription="@string/image_illustration_for_login"
-                android:src="@drawable/undraw_login_access_account" />
+                android:src="@drawable/icon_login" />
 
             <TextView
                 android:id="@+id/title_login"
@@ -46,19 +45,20 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
                 android:text="@string/login_description"
                 android:textAlignment="center" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="@dimen/margin_large"
                 android:paddingVertical="10dp"
                 android:text="@string/login_with_google"
                 android:textAppearance="@style/Theme.StudyPath.Text.Button"
-                app:cornerRadius="@dimen/corner_radius_medium"
+                app:cornerRadius="@dimen/corner_radius_large"
                 app:iconGravity="textStart"
                 app:iconSize="32dp"
                 app:iconTint="@null"

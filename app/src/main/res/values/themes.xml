@@ -36,6 +36,12 @@
         <item name="textFillColor">@color/md_theme_onPrimary</item>
     </style>
 
+    <style name="Theme.StudyPath.Text.ButtonRecommendation" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/poppins_semibold  </item>
+        <item name="android:textSize">@dimen/text_size_subheading</item>
+        <item name="textFillColor">@android:color/white</item>
+    </style>
+
     <style name="Theme.StudyPath.Text.OutlineButton" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">@dimen/text_size_body</item>
@@ -43,9 +49,17 @@
         <item name="textFillColor">@color/md_theme_primary</item>
     </style>
 
+    <style name="Theme.StudyPath.Text.PersonalityTitle" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="textFillColor">@android:color/white</item>
+    </style>
+
     <style name="Theme.StudyPath.Text.Black" parent="TextAppearance.AppCompat.Large">
         <item name="android:fontFamily">@font/poppins_black</item>
-        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textSize">@dimen/text_size_display</item>
+        <item name="android:letterSpacing">-0.05</item>
     </style>
 
     <style name="Theme.StudyPath.Text.Heading" parent="TextAppearance.AppCompat">
@@ -59,6 +73,11 @@
     <style name="Theme.StudyPath.Text.Bold" parent="TextAppearance.AppCompat.Medium">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">@dimen/text_size_heading</item>
+    </style>
+
+    <style name="Theme.StudyPath.Text.BoldHeading" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/text_size_xtitle</item>
     </style>
 
     <style name="Theme.StudyPath.Text.SemiBold" parent="TextAppearance.AppCompat.Medium">
@@ -75,8 +94,12 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
         <item name="android:textSize">@dimen/text_size_body</item>
     </style>
+    <style name="Theme.StudyPath.Text.LightBody" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/poppins_light</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+    </style>
 
-    <style name="Theme.StudyPath.Text.Light" parent="TextAppearance.AppCompat.Medium">
+    <style name="Theme.StudyPath.Text.LightSmall" parent="TextAppearance.AppCompat.Medium">
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>

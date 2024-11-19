@@ -6,10 +6,11 @@
 
     <string name="welcome_message">Halo! Selamat Datang,</string>
     <string name="my_personality_card">Kartu Kepribadian Saya</string>
-    <string name="get_study_recommendation">Temukan Tips Belajar untuk Kamu!</string>
+    <string name="my_personality_description_card">Kepribadian Big Five</string>
+    <string name="get_study_recommendation">TANYA REKOMENDASI HARI INI</string>
     <string name="waiting_time_format">Tunggu %1$d:%2$02d:%3$02d</string>
     <string name="example_recomendation">Dengan profil kepribadian yang menunjukkan kecenderungan tinggi dalam keterbukaan terhadap pengalaman baru dan kesadaran diri yang kuat, serta kecenderungan rendah dalam ekstroversi, kamu sangat cocok dengan gaya belajar yang mandiri dan mendalam. Manfaatkan kreativitasmu untuk membuat materi pelajaran menjadi lebih menarik, misalnya dengan membuat mind map atau cerita pendek. Disiplin dan tanggung jawab yang tinggi akan membantumu tetap fokus pada tujuan belajar. Meskipun kamu lebih suka belajar sendiri, jangan ragu untuk mencari kelompok belajar kecil untuk mendiskusikan materi yang sulit. Kelola stres dengan baik agar kamu bisa selalu optimal dalam belajar.</string>
-    <string name="dummy_wait">Tunggu 01:40:00</string>
+    <string name="dummy_wait">Terakhir Diperbarui: 1 Hari Lalu</string>
 
     <!-- Onboarding Screen Contents -->
     <string name="onboarding_title_1">Selamat Datang di StudyPath!</string>
@@ -51,7 +52,31 @@
     <string name="about_our_app_subtitle">Aplikasi Ini Mempersonalisasi Strategi Belajar Berdasarkan Kepribadian Unik Dan Gaya Belajar Siswa, Menggunakan Wawasan Big Five Untuk Meningkatkan Efektivitas Pembelajaran Dan Memenuhi Kebutuhan Dukungan Pendidikan Yang Dipersonalisasi.</string>
     <string name="logout_text_btn">Keluar</string>
     <string name="your_name">Nama Anda</string>
-    <string name="enter_your_name">Masukkan nama Anda…</string>
+    <string name="enter_your_name">Masukkan Nama Anda</string>
     <string name="save">Simpan</string>
     <string name="chart_base_on_big_five">Diagram Berdasarkan Big Five</string>
+
+    <string name="openness">KETERBUKAAN TERHADAP PENGALAMAN</string>
+    <string name="neuroticism">KESTABILAN EMOSI</string>
+    <string name="extroversion">KETERBUKAAN SOSIAL, ENERGI DAN ANTUSIASME</string>
+    <string name="conscientiousness">KETELITIAN</string>
+    <string name="agreeableness">KESEPAKATAN</string>
+    <string name="click_to_view">Klik Untuk Membaca Rekomendasi</string>
+    <string name="current_grade">Jenjang Saat Ini</string>
+    <string name="current_education">Jenjang Sekolah Anda Saat Ini</string>
+    <string name="current_age">Rentang Usia Kamu</string>
+    <string name="your_age_range">Rentang Usia Anda Saat Ini</string>
+    <string name="next_stage">LANJUT KE TAHAP SELANJUTNYA</string>
+    <string name="celebrate_progress_quiz">HORE! KAMU SUDAH MENYELESAIKAN TES %1$s</string>
+    <string name="quiz_progress">%1$d/5</string>
+    <string name="quiz_question">%1$d/10</string>
+    <string name="neutral">Netral</string>
+    <string name="minus_1">-1</string>
+    <string name="minus_2">-2</string>
+    <string name="plus_1">+1</string>
+    <string name="plus_2">+2</string>
+    <string name="diagram_pie">Diagram Pie</string>
+    <string name="explain_pie">Penyajian Dalam Bentuk Bagian Lingkaran</string>
+    <string name="diagram_bar">Diagram Bar</string>
+    <string name="explain_bar">Penyajian Dalam Bentuk Balok</string>
 </resources>

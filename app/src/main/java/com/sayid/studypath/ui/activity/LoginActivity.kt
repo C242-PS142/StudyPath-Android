@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
             val token = "sample_access_token"
             loginViewModel.saveAccessToken(token)
 
-            startActivity(Intent(this, QuizConfirmationActivity::class.java))
+            startActivity(Intent(this, NewUserDataActivity::class.java))
             finish()
         }
     }

@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.sayid.studypath.R
 
 class PersonalityCardAdapter(
     private val context: Context,
-    private val gradients: List<Int>,
-    private val personalityData: Map<String, String>,
+    private val title: List<Int>,
     private val illustrations: List<Int>,
     private val percentages: List<Int>,
 ) : RecyclerView.Adapter<PersonalityCardAdapter.CarouselViewHolder>() {
@@ -35,25 +35,18 @@ class PersonalityCardAdapter(
         holder: CarouselViewHolder,
         position: Int,
     ) {
-        val cardView = holder.itemView.findViewById<CardView>(R.id.cv_personality)
-        cardView.setBackgroundResource(gradients[position])
-
         val personalityTitle = holder.itemView.findViewById<TextView>(R.id.tv_personality_title)
-        personalityTitle.text = personalityData.keys.elementAt(position)
-
-        val personalityDescription =
-            holder.itemView.findViewById<TextView>(R.id.tv_personality_description)
-        personalityDescription.text = personalityData.values.elementAt(position)
+        personalityTitle.text = getString(context, title[position])
 
         val personalityPercentage =
-            holder.itemView.findViewById<TextView>(R.id.tv_personality_percentage)
+            holder.itemView.findViewById<TextView>(R.id.tv_percentage)
 
         @SuppressLint("SetTextI18n")
         personalityPercentage.text = "${percentages[position]}%"
 
         val personalityIllustration = holder.itemView.findViewById<ImageView>(R.id.iv_illustration)
-        personalityIllustration.setImageResource(illustrations[position])
+        personalityIllustration.setImageDrawable(getDrawable(context, illustrations[position]))
     }
 
-    override fun getItemCount(): Int = gradients.size
+    override fun getItemCount(): Int = title.size
 }
