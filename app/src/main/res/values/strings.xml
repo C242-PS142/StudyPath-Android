@@ -66,4 +66,13 @@
     <string name="current_education">Jenjang Sekolah Anda Saat Ini</string>
     <string name="current_age">Rentang Usia Kamu</string>
     <string name="your_age_range">Rentang Usia Anda Saat Ini</string>
+    <string name="next_stage">LANJUT KE TAHAP SELANJUTNYA</string>
+    <string name="celebrate_progress_quiz">HORE! KAMU SUDAH MENYELESAIKAN TES %1$s</string>
+    <string name="quiz_progress">%1$d/5</string>
+    <string name="quiz_question">%1$d/10</string>
+    <string name="neutral">Netral</string>
+    <string name="minus_1">-1</string>
+    <string name="minus_2">-2</string>
+    <string name="plus_1">+1</string>
+    <string name="plus_2">+2</string>
 </resources>

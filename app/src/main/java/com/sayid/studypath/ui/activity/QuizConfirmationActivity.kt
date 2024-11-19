@@ -3,7 +3,6 @@ package com.sayid.studypath.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.ActivityQuizConfirmationBinding
@@ -56,12 +55,9 @@ class QuizConfirmationActivity : AppCompatActivity() {
             btnConfirmationQuiz.text = getString(R.string.take_test)
 
             btnConfirmationQuiz.setOnClickListener {
-                Toast
-                    .makeText(
-                        this@QuizConfirmationActivity,
-                        getString(R.string.take_test),
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                val intent = Intent(this@QuizConfirmationActivity, QuizActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }

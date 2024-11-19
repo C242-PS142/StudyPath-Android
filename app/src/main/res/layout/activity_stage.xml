@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/padding_large"
+    tools:context=".ui.activity.OnboardingActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_stage_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+                android:textColor="@color/md_theme_primary"
+                android:textSize="@dimen/text_size_display"
+                tools:text="1/5" />
+
+            <TextView
+                android:id="@+id/tv_stage_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_xlarge"
+                android:gravity="center"
+                android:textAppearance="@style/Theme.StudyPath.Text.Heading"
+                tools:text="HORE! KAMU SUDAH MENYELESAIKAN TES KETERBUKAAN TERHADAP PENGALAMAN" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next_stage"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:text="@string/next_stage"
+                android:textAppearance="@style/Theme.StudyPath.Text.Button"
+                app:cornerRadius="@dimen/corner_radius_large" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
