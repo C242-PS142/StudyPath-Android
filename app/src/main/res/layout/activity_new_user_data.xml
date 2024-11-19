@@ -68,7 +68,8 @@
                 android:id="@+id/edt_name"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/bg_edit_text"
+                android:background="@drawable/bg_radius_medium"
+                android:backgroundTint="@color/md_theme_outlineVariant"
                 android:focusable="true"
                 android:hint="@string/enter_your_name"
                 android:inputType="text"
@@ -90,7 +91,7 @@
                 android:id="@+id/layout_grade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient_personality"
+                android:background="@drawable/bg_radius_medium"
                 android:backgroundTint="@color/md_theme_outlineVariant"
                 android:textColorHint="@color/md_theme_onSurfaceVariant">
 
@@ -123,7 +124,7 @@
                     android:id="@+id/spinner_age"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:paddingHorizontal="@dimen/padding_small"
+                    android:paddingHorizontal="@dimen/padding_medium"
                     android:paddingVertical="@dimen/padding_large"
                     android:spinnerMode="dropdown" />
             </com.google.android.material.textfield.TextInputLayout>

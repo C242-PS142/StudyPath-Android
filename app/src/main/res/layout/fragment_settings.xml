@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:scrollbars="none"
     android:fillViewport="true"
     android:paddingHorizontal="@dimen/padding_large"
+    android:scrollbars="none"
     tools:context=".ui.fragment.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,14 +57,17 @@
         <!-- Theme Settings   -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_edit_profile"
-            android:layout_width="80dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:padding="0dp"
+            android:layout_marginTop="@dimen/margin_large"
+            android:paddingHorizontal="@dimen/padding_small"
             android:text="@string/text_edit_profile_btn"
-            android:textAppearance="@style/Theme.StudyPath.Text.Regular"
-            android:textSize="12sp"
+            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_small"
             app:cornerRadius="@dimen/corner_radius_small"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_pict"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/profile_pict"
@@ -72,9 +75,9 @@
 
         <TextView
             android:id="@+id/theme_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/margin_large"
             android:text="@string/theme_title"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"
             android:textColor="@color/md_theme_primary"
@@ -85,10 +88,11 @@
 
         <TextView
             android:id="@+id/theme_subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/theme_subtitle"
-            android:textAppearance="@style/Theme.StudyPath.Text.Light"
+            android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toStartOf="@+id/switch_theme"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,9 +110,9 @@
         <!-- Preferensi Test Setting   -->
         <TextView
             android:id="@+id/preference_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_large"
             android:text="@string/preference_title"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"
             android:textColor="@color/md_theme_primary"
@@ -119,10 +123,11 @@
 
         <TextView
             android:id="@+id/preference_subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/preference_subtitle"
-            android:textAppearance="@style/Theme.StudyPath.Text.Light"
+            android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toStartOf="@+id/switch_preference"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,9 +145,9 @@
         <!-- About App   -->
         <TextView
             android:id="@+id/about_app_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/margin_large"
             android:text="@string/about_our_app_title"
             android:textAppearance="@style/Theme.StudyPath.Text.Medium"
             android:textColor="@color/md_theme_primary"
@@ -153,10 +158,11 @@
 
         <TextView
             android:id="@+id/about_app_subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/about_our_app_subtitle"
-            android:textAppearance="@style/Theme.StudyPath.Text.Light"
+            android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/about_app_title" />
@@ -166,7 +172,7 @@
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="@dimen/margin_xlarge"
             android:backgroundTint="@color/md_theme_error"
             android:text="@string/logout_text_btn"
             android:textAppearance="@style/Theme.StudyPath.Text.Button"
@@ -175,7 +181,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_app_subtitle"
-            app:layout_constraintVertical_bias="0.834" />
+            app:layout_constraintVertical_bias="1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:lines="4"
-        android:textAppearance="@style/Theme.StudyPath.Text.Light"
+        android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
         tools:text="@string/onboarding_desc_1" />
 </LinearLayout>
