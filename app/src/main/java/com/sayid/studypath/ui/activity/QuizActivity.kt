@@ -1,12 +1,10 @@
 package com.sayid.studypath.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.ActivityQuizBinding
-import com.sayid.studypath.ui.adapter.QuizAnswerAdapter
-import kotlin.math.abs
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuizBinding
@@ -16,29 +14,33 @@ class QuizActivity : AppCompatActivity() {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewPager: ViewPager2 = binding.quizAnswerViewpager
+        binding.apply {
+            val currentProgress = 10
+            val progressText = getString(R.string.quiz_question, currentProgress)
+            tvTestHeader.text = progressText
+            tvTestQuestion.text =
+                "KAMU MERASA LEBIH BERSEMANGAT DENGAN IDE-IDE BARU DAN KOMPLEKS DIBANDINGKAN DENGAN HAL-HAL YANG SEDERHANA DAN JELAS"
 
-        // Daftar item untuk ViewPager
-        val items =
-            listOf(
-                listOf("Agree", R.color.md_theme_primary),
-                listOf("Neutral", R.color.md_theme_tertiary),
-                listOf("Disagree", R.color.md_theme_error),
-            )
-
-        // Set adapter ke ViewPager2
-        val adapter = QuizAnswerAdapter(items)
-        viewPager.adapter = adapter
-
-        viewPager.setPageTransformer { page, position ->
-            val pageTranslationX = 40 * position
-            page.translationX = -pageTranslationX
-            // Optional: Set scale for a centered effect
-            page.scaleY = 1 - (0.15f * abs(position))
+            btnAgree.setOnClickListener {
+                nextStage()
+            }
+            btnDisagree.setOnClickListener {
+                nextStage()
+            }
+            btnVeryAgree.setOnClickListener {
+                nextStage()
+            }
+            btnVeryDisagree.setOnClickListener {
+                nextStage()
+            }
+            btnNeutral.setOnClickListener {
+                nextStage()
+            }
         }
+    }
 
-        viewPager.setOffscreenPageLimit(1)
-        val middleItemIndex = items.size / 2
-        viewPager.setCurrentItem(middleItemIndex, false)
+    private fun nextStage() {
+        startActivity(Intent(this@QuizActivity, StageActivity::class.java))
+        finish()
     }
 }

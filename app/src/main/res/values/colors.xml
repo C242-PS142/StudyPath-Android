@@ -54,4 +54,9 @@
 
     <!-- Gemini Background (for branding) -->
     <color name="gemini_background">#ffffff</color>
+    <color name="very_agree">#2B70C9</color>
+    <color name="agree">#1CB0F6</color>
+    <color name="neutral">#777777</color>
+    <color name="disagree">#FF9600</color>
+    <color name="very_disagree">#FF4B4B</color>
 </resources>

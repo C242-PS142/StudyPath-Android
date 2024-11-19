@@ -2,93 +2,144 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/quiz_activity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.activity.QuizActivity">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:paddingHorizontal="@dimen/padding_large"
+    tools:context=".ui.activity.LoginActivity">
 
-    <!-- Progress Indicator -->
-    <LinearLayout
-        android:id="@+id/quiz_indicator"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="4dp"
-            android:layout_weight="1"
-            android:background="@color/md_theme_primary" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:background="@color/md_theme_onSurfaceVariant" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:background="@color/md_theme_onSurfaceVariant" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:background="@color/md_theme_onSurfaceVariant" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quiz_indicator"
-        app:layout_constraintVertical_bias="0.3">
-
-        <!-- Quiz Text -->
-        <TextView
-            android:id="@+id/quiz_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
-            android:text="I often forget to put things back in their proper place."
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium" />
+            android:orientation="vertical">
 
-        <!-- Response Buttons -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/quiz_answer_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5" />
+            <TextView
+                android:id="@+id/tv_test_header"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+                android:textColor="@color/md_theme_primary"
+                android:textSize="@dimen/text_size_display"
+                tools:text="1/10" />
 
-        <!-- Next Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_next_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="20dp"
-            android:text="Next"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            app:cornerRadius="@dimen/corner_radius_large" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_test_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold"
+                android:textSize="24sp"
+                tools:text="KAMU MERASA LEBIH BERSEMANGAT DENGAN IDE-IDE BARU DAN KOMPLEKS DIBANDINGKAN DENGAN HAL-HAL YANG SEDERHANA DAN JELAS" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xlarge">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_quiz_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!-- Button 1 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_very_disagree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:backgroundTint="@color/very_disagree"
+                        android:letterSpacing="0"
+                        android:text="@string/minus_2"
+                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_subheading"
+                        app:cornerRadius="@dimen/corner_radius_large"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Button 2 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_disagree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:backgroundTint="@color/disagree"
+                        android:text="@string/minus_1"
+                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_subheading"
+                        app:cornerRadius="@dimen/corner_radius_large"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toEndOf="@id/btn_very_disagree"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Button 3 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_agree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:backgroundTint="@color/agree"
+                        android:text="@string/plus_1"
+                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_subheading"
+                        app:cornerRadius="@dimen/corner_radius_large"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toEndOf="@id/btn_disagree"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_very_agree"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:backgroundTint="@color/very_agree"
+                        android:text="@string/plus_2"
+                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_subheading"
+                        app:cornerRadius="@dimen/corner_radius_large"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toEndOf="@id/btn_agree"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_neutral"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="@dimen/margin_large"
+                    android:backgroundTint="@color/neutral"
+                    android:paddingVertical="10dp"
+                    android:text="@string/neutral"
+                    android:textAppearance="@style/Theme.StudyPath.Text.Button"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="@dimen/corner_radius_large"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/btn_quiz_group"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_quiz_group" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

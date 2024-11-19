@@ -56,7 +56,9 @@ class NewUserDataActivity : AppCompatActivity() {
 
         binding.apply {
             btnSave.setOnClickListener {
-                startActivity(Intent(this@NewUserDataActivity, MainActivity::class.java))
+                val intent = Intent(this@NewUserDataActivity, QuizConfirmationActivity::class.java)
+                intent.putExtra(QuizConfirmationActivity.HAS_DATA, false)
+                startActivity(intent)
                 finish()
             }
             spinnerGrade.adapter = gradeAdapter
