@@ -53,4 +53,8 @@ dependencies {
     implementation(libs.androidx.security.crypto)
 
     implementation(libs.aachartcore.kotlin)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 }

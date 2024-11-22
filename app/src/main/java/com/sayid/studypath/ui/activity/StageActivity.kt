@@ -17,8 +17,8 @@ class StageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
-            val currentProgress = 5
-            val progressText = getString(R.string.quiz_progress, currentProgress)
+            var stage = intent.getIntExtra(CURRENTSTAGE, 1)
+            val progressText = getString(R.string.quiz_progress, stage)
             tvStageHeader.text = progressText
 
             val quizName = "KETERBUKAAN TERHADAP PENGALAMAN"
@@ -26,10 +26,21 @@ class StageActivity : AppCompatActivity() {
             tvStageDescription.text = message
 
             btnNextStage.setOnClickListener {
-                val intent = Intent(this@StageActivity, MainActivity::class.java)
-                startActivity(intent)
+                stage += 1
+                if (stage <= 5){
+                    val intent = Intent(this@StageActivity, QuizActivity::class.java)
+                    intent.putExtra(QuizActivity.STAGE, stage)
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(this@StageActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }
                 finish()
             }
         }
+    }
+
+    companion object{
+        var CURRENTSTAGE = "current_stage"
     }
 }
