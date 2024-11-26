@@ -29,9 +29,7 @@ class AuthRepository(
         }
 
     suspend fun getIdToken(): String? =
-        FirebaseAuth
-            .getInstance()
-            .currentUser
+        firebaseAuth.currentUser
             ?.getIdToken(true)
             ?.await()
             ?.token

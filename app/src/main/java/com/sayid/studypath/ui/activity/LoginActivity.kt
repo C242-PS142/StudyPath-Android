@@ -3,6 +3,7 @@ package com.sayid.studypath.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -55,39 +56,50 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToHome() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun navigateToNextScreen() {
+        val hasRegistered = false // Dummy Simulation
+
+        if (hasRegistered) {
+            startActivity(Intent(this, MainActivity::class.java))
+        } else {
+            startActivity(Intent(this, NewUserDataActivity::class.java))
+        }
         finish()
     }
 
     private fun observeViewModel() {
         loginViewModel.idToken.observe(this) { idToken ->
+            loggingIn(true)
             when (idToken) {
                 null -> {
                     if (loginViewModel.getCurrentUser() != null) {
                         Log.d(TAG, "Force Logout!")
                         loginViewModel.signOut()
                     }
+                    loggingIn(false)
                 }
 
                 else -> {
-                    navigateToHome()
+                    navigateToNextScreen()
+                    loggingIn(true)
                     Log.d(TAG, "Token: $idToken")
                 }
             }
         }
         loginViewModel.authResult.observe(this) { result ->
+            loggingIn(true)
             Log.d(TAG, "AuthResult: $result")
             when (result) {
                 null -> {
                     Log.d(TAG, "Is Loading")
+                    loggingIn(true)
                 }
 
                 else -> {
                     result
                         .onSuccess {
                             Log.d(TAG, "observeViewModel: Login successful")
-                            navigateToHome()
+                            navigateToNextScreen()
                         }.onFailure { exception ->
                             Log.e(
                                 TAG,
@@ -95,8 +107,16 @@ class LoginActivity : AppCompatActivity() {
                                 exception,
                             )
                         }
+                    loggingIn(false)
                 }
             }
+        }
+    }
+
+    private fun loggingIn(active: Boolean) {
+        binding.apply {
+            loading.visibility = if (active) View.VISIBLE else View.GONE
+            btnLogin.isClickable = !active
         }
     }
 
