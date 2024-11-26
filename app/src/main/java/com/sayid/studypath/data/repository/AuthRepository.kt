@@ -28,7 +28,13 @@ class AuthRepository(
             Result.failure(e)
         }
 
-    fun isLoggedIn(): Boolean = firebaseAuth.currentUser != null
+    suspend fun getIdToken(): String? =
+        FirebaseAuth
+            .getInstance()
+            .currentUser
+            ?.getIdToken(true)
+            ?.await()
+            ?.token
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
