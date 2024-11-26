@@ -10,14 +10,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sayid.studypath.R
 import com.sayid.studypath.data.repository.AuthRepository
 import com.sayid.studypath.viewmodel.LoginViewModel
+import com.sayid.studypath.viewmodel.NewUserDataViewModel
 
 class ViewModelFactory private constructor(
-    private val authRepository: AuthRepository?,
+    private val authRepository: AuthRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return authRepository?.let { LoginViewModel(it) } as T
+            return LoginViewModel(authRepository) as T
+        } else if (modelClass.isAssignableFrom(NewUserDataViewModel::class.java)) {
+            return NewUserDataViewModel(authRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -35,7 +38,7 @@ class ViewModelFactory private constructor(
                             context,
                             GoogleSignInOptions
                                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                                .requestIdToken(getString(context, R.string.default_web_client_id))
+                                .requestIdToken(context.getString(R.string.default_web_client_id))
                                 .requestEmail()
                                 .build(),
                         ),
