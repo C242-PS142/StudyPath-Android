@@ -91,26 +91,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToNextScreen(animation: Boolean = true) {
-        val hasRegistered = true
-        val intentMain = Intent(this, MainActivity::class.java)
-        val intentNewUserData = Intent(this, NewUserDataActivity::class.java)
-
-        if (hasRegistered) {
-            if (animation) startActivity(intentMain) else startActivityNoAnimation(intentMain)
-        } else {
-            if (animation) {
-                startActivity(intentNewUserData)
-            } else {
-                startActivityNoAnimation(
-                    intentNewUserData,
-                )
+    private fun hasLogin() {
+        loginViewModel.accessToken.observe(
+            this,
+        ) { token ->
+            if (token != null && !isNewLogin) {
+                startActivity(Intent(this, QuizActivity::class.java))
+                finish()
             }
         }
-        finish()
-    }
-
-    private fun observeViewModel() {
         loginViewModel.authResult.observe(this) { result ->
             loggingIn(true)
             Log.d(TAG, "AuthResult: $result")

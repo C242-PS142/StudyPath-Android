@@ -2,14 +2,19 @@ package com.sayid.studypath.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sayid.studypath.R
+import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.databinding.ActivityStageBinding
+import com.sayid.studypath.viewmodel.QuizActivityViewModel
 
 class StageActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: ActivityStageBinding? = null
     private val binding get() = _binding!!
+    private val quizActivityViewModel: QuizActivityViewModel by viewModels<QuizActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,7 @@ class StageActivity : AppCompatActivity() {
                     intent.putExtra(QuizActivity.STAGE, stage)
                     startActivity(intent)
                 }else{
+//                    quizActivityViewModel.postQuizAnswers(QuizAnswerRequest(quizActivityViewModel.listQuizAnswer))
                     val intent = Intent(this@StageActivity, MainActivity::class.java)
                     startActivity(intent)
                 }

@@ -36,7 +36,7 @@ data class QuizAnswer(
 
 data class QuizAnswerRequest(
     @field:SerializedName("answers")
-    val answers: List<QuizAnswer>
+    val answers: MutableList<QuizAnswer>?
 )
 
 data class QuizAnswerResponse(

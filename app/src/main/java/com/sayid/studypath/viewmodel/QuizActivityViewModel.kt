@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sayid.studypath.data.remote.api.ApiConfig
+import com.sayid.studypath.data.remote.response.QuizAnswer
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizItem
@@ -32,8 +33,19 @@ class QuizActivityViewModel: ViewModel() {
     private val _quizStage5 = MutableLiveData<List<QuizItem>>()
     val quizStage5: LiveData<List<QuizItem>> = _quizStage5
 
+    private val _listQuizAnswer = MutableLiveData<MutableList<QuizAnswer>>()
+    var listQuizAnswer: LiveData<MutableList<QuizAnswer>> = _listQuizAnswer
+
     init {
         getListQuiz()
+    }
+
+    // Fungsi untuk menambah item ke daftar
+    fun addQuizAnswer(quizAnswer: QuizAnswer) {
+        _listQuizAnswer.value?.let {
+            it.add(quizAnswer)
+            _listQuizAnswer.value = it
+        }
     }
 
     fun divideIntoStages(answers: List<QuizItem>): List<List<QuizItem>> {
@@ -84,11 +96,6 @@ class QuizActivityViewModel: ViewModel() {
     }
 
     fun postQuizAnswers(listAnswers: QuizAnswerRequest){
-//        val quizAnswers = QuizAnswerRequest(
-//            answers = listOf(
-//                QuizAnswer("EXT1",  4),
-//            )
-//        )
         val client = ApiConfig.getApiService().submitQuizAnswers(listAnswers)
 
         client.enqueue(object: Callback<QuizAnswerResponse>{

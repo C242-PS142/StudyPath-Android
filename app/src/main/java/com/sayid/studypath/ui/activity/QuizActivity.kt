@@ -1,11 +1,13 @@
 package com.sayid.studypath.ui.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import com.sayid.studypath.R
+import com.sayid.studypath.data.remote.response.QuizAnswer
 import com.sayid.studypath.data.remote.response.QuizItem
 import com.sayid.studypath.databinding.ActivityQuizBinding
 import com.sayid.studypath.viewmodel.QuizActivityViewModel
@@ -44,6 +46,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun showQuiz(quizs: List<QuizItem>) {
         var currentProgress = 1
+        var currentQuizCode = ""
 
         fun updateQuiz() {
             if (currentProgress <= quizs.size) {
@@ -51,6 +54,7 @@ class QuizActivity : AppCompatActivity() {
                     val progressQuiz = getString(R.string.quiz_question, currentProgress)
                     tvTestHeader.text = progressQuiz
                     tvTestQuestion.text = quizs[currentProgress - 1].questionText
+                    currentQuizCode = quizs[currentProgress - 1].questionCode
                 }
             } else {
                 // Logika jika kuis selesai, misalnya navigasi ke hasil
@@ -66,11 +70,26 @@ class QuizActivity : AppCompatActivity() {
             }
 
             // Atur semua tombol menggunakan fungsi listener yang sama
-            btnAgree.setOnClickListener { onAnswerSelected() }
-            btnDisagree.setOnClickListener { onAnswerSelected() }
-            btnVeryAgree.setOnClickListener { onAnswerSelected() }
-            btnVeryDisagree.setOnClickListener { onAnswerSelected() }
-            btnNeutral.setOnClickListener { onAnswerSelected() }
+            btnVeryAgree.setOnClickListener {
+                onAnswerSelected()
+                quizActivityViewModel.addQuizAnswer(QuizAnswer(currentQuizCode, 5))
+            }
+            btnAgree.setOnClickListener {
+                onAnswerSelected()
+                quizActivityViewModel.addQuizAnswer(QuizAnswer(currentQuizCode, 4))
+            }
+            btnNeutral.setOnClickListener {
+                onAnswerSelected()
+                quizActivityViewModel.addQuizAnswer(QuizAnswer(currentQuizCode, 3))
+            }
+            btnDisagree.setOnClickListener {
+                onAnswerSelected()
+                quizActivityViewModel.addQuizAnswer(QuizAnswer(currentQuizCode, 2))
+            }
+            btnVeryDisagree.setOnClickListener {
+                onAnswerSelected()
+                quizActivityViewModel.addQuizAnswer(QuizAnswer(currentQuizCode, 1))
+            }
         }
 
         // Tampilkan pertanyaan pertama
