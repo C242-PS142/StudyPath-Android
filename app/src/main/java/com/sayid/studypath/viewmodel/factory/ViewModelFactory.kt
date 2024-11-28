@@ -11,14 +11,17 @@ import com.sayid.studypath.R
 import com.sayid.studypath.data.model.LocalPreferences
 import com.sayid.studypath.data.model.dataStore
 import com.sayid.studypath.data.repository.AuthRepository
+import com.sayid.studypath.data.repository.QuizRepository
 import com.sayid.studypath.viewmodel.LoginViewModel
 import com.sayid.studypath.viewmodel.MainViewModel
 import com.sayid.studypath.viewmodel.NewUserDataViewModel
 import com.sayid.studypath.viewmodel.OnboardingViewModel
+import com.sayid.studypath.viewmodel.QuizActivityViewModel
 import com.sayid.studypath.viewmodel.SettingsViewModel
 
 class ViewModelFactory private constructor(
     private val authRepository: AuthRepository,
+    private val quizRepository: QuizRepository,
     private val localPreferences: LocalPreferences,
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -33,6 +36,9 @@ class ViewModelFactory private constructor(
             return OnboardingViewModel(localPreferences) as T
         } else if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(localPreferences) as T
+        }
+        if(modelClass.isAssignableFrom(QuizActivityViewModel::class.java)){
+            return QuizActivityViewModel(quizRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -55,6 +61,7 @@ class ViewModelFactory private constructor(
                                 .build(),
                         ),
                     ),
+                    QuizRepository(),
                     LocalPreferences(context.dataStore),
                 )
             }.also { instance = it }
