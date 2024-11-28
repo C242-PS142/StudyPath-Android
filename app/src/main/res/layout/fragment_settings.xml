@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:fillViewport="true"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/padding_large"
     android:scrollbars="none"
     tools:context=".ui.fragment.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/settings_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large">
+        android:layout_marginTop="@dimen/margin_large"
+        android:alpha="0"
+        tools:alpha="1">
 
         <!--  Header Settings  -->
         <ImageView
@@ -169,15 +171,15 @@
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginBottom="@dimen/margin_xlarge"
+            android:layout_marginTop="64dp"
             android:backgroundTint="@color/md_theme_error"
             android:text="@string/logout_text_btn"
             android:textAppearance="@style/Theme.StudyPath.Text.Button"
+            android:textColor="@android:color/white"
             app:cornerRadius="@dimen/corner_radius_large"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="1" />
+            app:layout_constraintTop_toBottomOf="@+id/about_app_subtitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

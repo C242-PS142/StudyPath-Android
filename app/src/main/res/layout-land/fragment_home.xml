@@ -9,6 +9,9 @@
     tools:context=".ui.fragment.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_layout"
+        android:alpha="0"
+        tools:alpha="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_large">

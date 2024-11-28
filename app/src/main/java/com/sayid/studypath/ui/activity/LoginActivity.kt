@@ -1,5 +1,7 @@
 package com.sayid.studypath.ui.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,10 +9,13 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.sayid.studypath.databinding.ActivityLoginBinding
+import com.sayid.studypath.utils.startActivityNoAnimation
 import com.sayid.studypath.viewmodel.LoginViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
@@ -41,12 +46,42 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        lifecycleScope.launch {
+            loginViewModel.idToken.observe(this@LoginActivity) { idToken ->
+                loggingIn(true)
+                when (idToken) {
+                    null -> {
+                        loggingIn(false)
+                        if (loginViewModel.getCurrentUser() != null) {
+                            loginViewModel.signOut()
+                        }
+                        playAnimation()
+                        setListener()
+                        observeViewModel()
+                    }
 
-        setListener()
-        observeViewModel()
+                    else -> {
+                        navigateToNextScreen(false)
+                        loggingIn(true)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun playAnimation() {
+        val containerAlpha =
+            ObjectAnimator.ofFloat(binding.scrollView2, View.ALPHA, 0f, 1f).setDuration(1000)
+        val containerMove =
+            ObjectAnimator
+                .ofFloat(binding.scrollView2, View.TRANSLATION_Y, 100f, 0f)
+                .setDuration(1000)
+        AnimatorSet().apply {
+            playTogether(containerAlpha, containerMove)
+            start()
+        }
     }
 
     private fun setListener() {
@@ -56,36 +91,26 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToNextScreen() {
-        val hasRegistered = false // Dummy Simulation
+    private fun navigateToNextScreen(animation: Boolean = true) {
+        val hasRegistered = true
+        val intentMain = Intent(this, MainActivity::class.java)
+        val intentNewUserData = Intent(this, NewUserDataActivity::class.java)
 
         if (hasRegistered) {
-            startActivity(Intent(this, MainActivity::class.java))
+            if (animation) startActivity(intentMain) else startActivityNoAnimation(intentMain)
         } else {
-            startActivity(Intent(this, NewUserDataActivity::class.java))
+            if (animation) {
+                startActivity(intentNewUserData)
+            } else {
+                startActivityNoAnimation(
+                    intentNewUserData,
+                )
+            }
         }
         finish()
     }
 
     private fun observeViewModel() {
-        loginViewModel.idToken.observe(this) { idToken ->
-            loggingIn(true)
-            when (idToken) {
-                null -> {
-                    if (loginViewModel.getCurrentUser() != null) {
-                        Log.d(TAG, "Force Logout!")
-                        loginViewModel.signOut()
-                    }
-                    loggingIn(false)
-                }
-
-                else -> {
-                    navigateToNextScreen()
-                    loggingIn(true)
-                    Log.d(TAG, "Token: $idToken")
-                }
-            }
-        }
         loginViewModel.authResult.observe(this) { result ->
             loggingIn(true)
             Log.d(TAG, "AuthResult: $result")

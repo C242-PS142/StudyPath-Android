@@ -1,5 +1,7 @@
 package com.sayid.studypath.ui.fragment
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ class HomeFragment : Fragment() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var hasAnimated = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,25 +30,44 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-
+        savedInstanceState?.getBoolean(HAS_ANIMATED)?.let {
+            hasAnimated = it
+        }
+        playAnimation()
         binding.tvUsername.text = "Sayid Achmad Maulana"
         initializePersonalityCard(requireContext(), binding.viewPager, binding.indicatorLayout)
+    }
 
-        binding.apply {
-//            btnGetRecommendation.setOnClickListener {
-//                if (tvWait.visibility == View.GONE) {
-//                    tvRecommendation.visibility = View.VISIBLE
-//                    tvWait.visibility = View.VISIBLE
-//                } else {
-//                    tvRecommendation.visibility = View.GONE
-//                    tvWait.visibility = View.GONE
-//                }
-//            }
+    private fun playAnimation() {
+        if (hasAnimated) {
+            binding.homeLayout.alpha = 1.0f
+            return
+        } else {
+            hasAnimated = true
+            val containerAlpha =
+                ObjectAnimator.ofFloat(binding.homeLayout, View.ALPHA, 0f, 1f).setDuration(750)
+            val containerMove =
+                ObjectAnimator
+                    .ofFloat(binding.homeLayout, View.TRANSLATION_Y, 250f, 0f)
+                    .setDuration(750)
+            AnimatorSet().apply {
+                playTogether(containerAlpha, containerMove)
+                start()
+            }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(HAS_ANIMATED, hasAnimated)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val HAS_ANIMATED = "has_animated"
     }
 }

@@ -1,5 +1,7 @@
 package com.sayid.studypath.ui.fragment
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,9 @@ class StatisticsFragment : Fragment() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentStatisticsBinding? = null
     private val binding get() = _binding!!
+    private lateinit var pieChartOptions: AAOptions
+    private lateinit var horizontalBarChartOptions: AAOptions
+    private var hasAnimated = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +44,12 @@ class StatisticsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        savedInstanceState?.getBoolean(HAS_ANIMATED)?.let {
+            hasAnimated = it
+            binding.statisticsLayout.alpha = 1.0f
+        }
+        playAnimation()
+
         lifecycleScope.launch(Dispatchers.IO) {
             val categories =
                 arrayOf(
@@ -51,7 +62,8 @@ class StatisticsFragment : Fragment() {
 
             val dataValues: Array<Any> = arrayOf(56, 71, 64, 36, 59)
 
-            val colorsTheme: Array<Any> = arrayOf("#ffc800", "#1cb0f6", "#ff4b4b", "#ff9600", "#2b70c9")
+            val colorsTheme: Array<Any> =
+                arrayOf("#ffc800", "#1cb0f6", "#ff4b4b", "#ff9600", "#2b70c9")
 
 // Pie Chart Model
             val bigFivePieChartsModel: AAChartModel =
@@ -69,14 +81,17 @@ class StatisticsFragment : Fragment() {
                                 .name("Persentase")
                                 .size("70%")
                                 .data(
-                                    categories.zip(dataValues).map { arrayOf(it.first, it.second) }.toTypedArray(),
+                                    categories
+                                        .zip(dataValues)
+                                        .map { arrayOf(it.first, it.second) }
+                                        .toTypedArray(),
                                 ),
                         ),
                     )
 
-            val aaOptions: AAOptions = bigFivePieChartsModel.aa_toAAOptions()
+            pieChartOptions = bigFivePieChartsModel.aa_toAAOptions()
 
-            aaOptions.plotOptions?.pie(
+            pieChartOptions.plotOptions?.pie(
                 AAPie()
                     .allowPointSelect(true)
                     .cursor("pointer")
@@ -116,21 +131,46 @@ class StatisticsFragment : Fragment() {
                         ),
                     )
 
-            val horizontalBarChartOptions: AAOptions = horizontalBarChartModel.aa_toAAOptions()
-
+            horizontalBarChartOptions = horizontalBarChartModel.aa_toAAOptions()
             horizontalBarChartOptions.plotOptions?.bar?.borderRadius(4f)
 
-// Draw the chart
-
             withContext(Dispatchers.Main) {
-                binding.bigFivePieCharts.aa_drawChartWithChartOptions(aaOptions)
+                binding.bigFivePieCharts.aa_drawChartWithChartOptions(pieChartOptions)
                 binding.bigFiveBarCharts.aa_drawChartWithChartOptions(horizontalBarChartOptions)
             }
         }
     }
 
+    private fun playAnimation() {
+        if (hasAnimated) {
+            binding.statisticsLayout.alpha = 1.0f
+            return
+        } else {
+            hasAnimated = true
+            val containerAlpha =
+                ObjectAnimator.ofFloat(binding.statisticsLayout, View.ALPHA, 0f, 1f).setDuration(750)
+            val containerMove =
+                ObjectAnimator
+                    .ofFloat(binding.statisticsLayout, View.TRANSLATION_Y, 250f, 0f)
+                    .setDuration(750)
+            AnimatorSet().apply {
+                playTogether(containerAlpha, containerMove)
+                start()
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(HAS_ANIMATED, hasAnimated)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val HAS_ANIMATED = "has_animated"
     }
 }
