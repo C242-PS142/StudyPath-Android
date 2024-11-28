@@ -1,25 +1,25 @@
 package com.sayid.studypath.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.sayid.studypath.data.model.OnboardingPreference
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.sayid.studypath.data.model.LocalPreferences
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class OnboardingViewModel(
-    application: Application,
-) : AndroidViewModel(application) {
-    private val onboardingPreference = OnboardingPreference(application)
+    private val localPreferences: LocalPreferences,
+) : ViewModel() {
+    val isOnboardingCompleted: LiveData<Boolean> = localPreferences.isOnboardingCompleted.asLiveData()
 
-    private val _onboardingCompleted = MutableLiveData<Boolean>()
-    val onboardingCompleted: LiveData<Boolean> get() = _onboardingCompleted
+    suspend fun isOnboardingCompleted(): Boolean = localPreferences.isOnboardingCompleted.first()
 
-    init {
-        _onboardingCompleted.value = onboardingPreference.isOnboardingCompleted()
-    }
+    suspend fun isDarkTheme(): Boolean = localPreferences.isDarkTheme.first()
 
     fun completeOnboarding() {
-        onboardingPreference.setOnboardingCompleted(true)
-        _onboardingCompleted.value = true
+        viewModelScope.launch {
+            localPreferences.setOnboardingCompleted(true)
+        }
     }
 }

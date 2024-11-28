@@ -9,6 +9,8 @@
     tools:context=".ui.activity.LoginActivity">
 
     <ScrollView
+        android:alpha="0"
+        tools:alpha="1"
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

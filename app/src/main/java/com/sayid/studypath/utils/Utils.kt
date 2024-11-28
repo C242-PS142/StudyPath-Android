@@ -1,11 +1,13 @@
 package com.sayid.studypath.utils
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.datepicker.CalendarConstraints
@@ -27,6 +29,11 @@ private val timeStamp: String =
         .SimpleDateFormat(FILENAME_FORMAT, Locale.US)
         .format(Date())
 private const val MAXIMAL_SIZE = 1000000
+
+fun Context.startActivityNoAnimation(intent: Intent) {
+    val options = ActivityOptionsCompat.makeCustomAnimation(this, 0, 0)
+    startActivity(intent, options.toBundle())
+}
 
 fun showDatePicker(
     fragmentManager: FragmentManager,

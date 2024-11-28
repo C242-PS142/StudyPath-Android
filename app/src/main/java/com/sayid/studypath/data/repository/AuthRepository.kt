@@ -36,7 +36,8 @@ class AuthRepository(
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
-    fun signOut() {
+    fun signOut()  {
         firebaseAuth.signOut()
+        googleSignInClient.signOut()
     }
 }

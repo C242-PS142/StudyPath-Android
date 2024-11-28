@@ -1,31 +1,74 @@
 package com.sayid.studypath.ui.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.ActivityOnboardingBinding
 import com.sayid.studypath.ui.adapter.OnboardingPageAdapter
+import com.sayid.studypath.utils.startActivityNoAnimation
 import com.sayid.studypath.utils.updateIndicator
 import com.sayid.studypath.viewmodel.OnboardingViewModel
+import com.sayid.studypath.viewmodel.factory.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OnboardingActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: ActivityOnboardingBinding? = null
     private val binding get() = _binding!!
-    private val onboardingViewModel: OnboardingViewModel by viewModels()
+    private val factory: ViewModelFactory by lazy {
+        ViewModelFactory.getInstance(this@OnboardingActivity)
+    }
+
+    private val onboardingViewModel: OnboardingViewModel by viewModels {
+        factory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        hasOnboardingCompleted()
-        initializeOnboardingPage()
-        setListener()
+        CoroutineScope(Dispatchers.IO).launch {
+            val isCompleted = onboardingViewModel.isOnboardingCompleted()
+            val isDarkTheme = onboardingViewModel.isDarkTheme()
+
+            withContext(Dispatchers.Main) {
+                when (isDarkTheme) {
+                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+
+                when (isCompleted) {
+                    true -> navigateToLoginScreen(false)
+                    false -> {
+                        playAnimation()
+                        initializeOnboardingPage()
+                        hasOnboardingCompleted()
+                        setListener()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun playAnimation() {
+        val linearLayout =
+            ObjectAnimator.ofFloat(binding.linearLayout, View.ALPHA, 1f).setDuration(500)
+        AnimatorSet().apply {
+            playTogether(linearLayout)
+            start()
+        }
     }
 
     private fun setListener() {
@@ -36,7 +79,7 @@ class OnboardingActivity : AppCompatActivity() {
                             ?: 0
                     ) - 1
                 ) {
-                    binding.viewPager.currentItem += 1
+                    binding.viewPager.setCurrentItem(binding.viewPager.currentItem + 1, true)
                 } else {
                     onboardingViewModel.completeOnboarding()
                 }
@@ -45,15 +88,16 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun hasOnboardingCompleted() {
-        onboardingViewModel.onboardingCompleted.observe(this) { completed ->
+        onboardingViewModel.isOnboardingCompleted.observe(this) { completed ->
             if (completed) {
-                navigateToLoginScreen()
+                navigateToLoginScreen(true)
             }
         }
     }
 
-    private fun navigateToLoginScreen() {
-        startActivity(Intent(this, LoginActivity::class.java))
+    private fun navigateToLoginScreen(animation: Boolean) {
+        val intent = Intent(this, LoginActivity::class.java)
+        if (animation) startActivity(intent) else startActivityNoAnimation(intent)
         finish()
     }
 
