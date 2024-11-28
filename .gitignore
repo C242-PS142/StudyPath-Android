@@ -4,7 +4,6 @@ build/
 
 # Local configuration file (e.g., SDK path, local paths)
 local.properties
-key.properties
 
 # Log files and OS-specific files
 *.log

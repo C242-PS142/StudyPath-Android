@@ -1,17 +1,8 @@
-import java.io.FileInputStream
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
 }
-
-val keyPropertiesFile = rootProject.file("key.properties")
-val keyProperties =
-    Properties().apply {
-        load(FileInputStream(keyPropertiesFile))
-    }
 
 android {
     namespace = "com.sayid.studypath"
@@ -26,19 +17,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    signingConfigs {
-        create("release") {
-            storeFile = file(keyProperties["storeFile"] as String)
-            storePassword = keyProperties["storePassword"] as String
-            keyAlias = keyProperties["keyAlias"] as String
-            keyPassword = keyProperties["keyPassword"] as String
-        }
-    }
     buildTypes {
-        getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
+        release {
             isMinifyEnabled = false
-            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
     compileOptions {
