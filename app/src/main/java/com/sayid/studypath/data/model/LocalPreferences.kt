@@ -20,9 +20,9 @@ class LocalPreferences(
             preferences[isOnboardingCompletedKey] ?: false
         }
 
-    val isDarkTheme: Flow<Boolean> =
+    val isDarkTheme: Flow<Boolean?> =
         dataStore.data.map { preferences ->
-            preferences[isDarkThemeKey] ?: false
+            preferences[isDarkThemeKey]
         }
 
     suspend fun setOnboardingCompleted(completed: Boolean) {

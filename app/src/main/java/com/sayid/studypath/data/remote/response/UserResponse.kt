@@ -7,24 +7,31 @@ data class LoginRequest(
     val accessToken: String,
 )
 
-data class UserResponse(
+data class UserLoginResponse(
     @field:SerializedName("data")
-    val data: NewUserData,
+    val data: LoginData,
     @field:SerializedName("message")
     val message: String,
     @field:SerializedName("status")
     val status: String,
 )
 
-data class NewUserData(
+data class LoginData(
+    @field:SerializedName("isRegister")
+    val isRegister: Boolean,
+    @field:SerializedName("result")
+    val result: List<UserLoginData>,
+)
+
+data class UserLoginData(
     @field:SerializedName("uid")
     val uid: String,
     @field:SerializedName("name")
     val name: String,
-    @field:SerializedName("avatar")
-    val avatar: String,
     @field:SerializedName("email")
     val email: String,
+    @field:SerializedName("picture")
+    val picture: String,
 )
 
 data class RegisterResponse(

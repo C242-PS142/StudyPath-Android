@@ -15,7 +15,7 @@ class OnboardingViewModel(
 
     suspend fun isOnboardingCompleted(): Boolean = localPreferences.isOnboardingCompleted.first()
 
-    suspend fun isDarkTheme(): Boolean = localPreferences.isDarkTheme.first()
+    suspend fun isDarkTheme(): Boolean? = localPreferences.isDarkTheme.first()
 
     fun completeOnboarding() {
         viewModelScope.launch {

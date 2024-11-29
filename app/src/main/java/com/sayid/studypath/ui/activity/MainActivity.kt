@@ -31,13 +31,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mainViewModel.isDarkTheme.observe(this) { isDarkTheme ->
-            val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-            val desiredMode = if (isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            if (isDarkTheme != null) {
+                val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                val desiredMode =
+                    if (isDarkTheme ==
+                        true
+                    ) {
+                        AppCompatDelegate.MODE_NIGHT_YES
+                    } else {
+                        AppCompatDelegate.MODE_NIGHT_NO
+                    }
 
-            if ((isDarkTheme && currentNightMode != Configuration.UI_MODE_NIGHT_YES) ||
-                (!isDarkTheme && currentNightMode != Configuration.UI_MODE_NIGHT_NO)
-            ) {
-                AppCompatDelegate.setDefaultNightMode(desiredMode)
+                if ((isDarkTheme && currentNightMode != Configuration.UI_MODE_NIGHT_YES) ||
+                    (!isDarkTheme && currentNightMode != Configuration.UI_MODE_NIGHT_NO)
+                ) {
+                    AppCompatDelegate.setDefaultNightMode(desiredMode)
+                }
             }
         }
 

@@ -2,26 +2,25 @@ package com.sayid.studypath.ui.activity
 
 //noinspection SuspiciousImport
 import android.R
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.transition.Transition
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.databinding.ActivityNewUserDataBinding
 import com.sayid.studypath.utils.reduceFileImage
-import com.sayid.studypath.utils.saveBitmapToCache
 import com.sayid.studypath.utils.showDatePicker
 import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.utils.uriToFile
@@ -32,7 +31,7 @@ class NewUserDataActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: ActivityNewUserDataBinding? = null
     private val binding get() = _binding!!
-    private lateinit var currentImageUri: Uri
+    private var currentImageUri: Uri? = null
     private val factory: ViewModelFactory by lazy {
         ViewModelFactory.getInstance(this)
     }
@@ -55,14 +54,59 @@ class NewUserDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityNewUserDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
+
+        supportActionBar?.apply {
+            title = ""
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+        }
+
         savedInstanceState?.getString(KEY_CURRENT_IMAGE_URI)?.let { uriString ->
             currentImageUri = Uri.parse(uriString)
             showImage()
         }
+
+        if (currentImageUri == null) {
+            val uri = intent.getStringExtra(USER_URI)
+            val name = intent.getStringExtra(USER_NAME)
+
+            uri?.let { currentImageUri = Uri.parse(it) }
+            name?.let { binding.edtName.setText(it) }
+
+            showImage()
+        }
+        playAnimation()
         initializeForm()
         viewModelObserve()
         setListener()
     }
+
+    private fun playAnimation() {
+        val main =
+            ObjectAnimator.ofFloat(binding.main, View.ALPHA, 1f).setDuration(500).also {
+                ObjectAnimator.ofFloat(binding.main, View.SCALE_X, 1f).setDuration(500).start()
+                ObjectAnimator.ofFloat(binding.main, View.SCALE_Y, 1f).setDuration(500).start()
+            }
+        AnimatorSet().apply {
+            playTogether(main)
+            start()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            R.id.home -> {
+                newUserDataViewModel.signOut()
+                startActivity(
+                    Intent(this@NewUserDataActivity, LoginActivity::class.java),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle(),
+                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -84,54 +128,6 @@ class NewUserDataActivity : AppCompatActivity() {
     }
 
     private fun viewModelObserve() {
-        newUserDataViewModel.userResponse.observe(this) { result ->
-            binding.apply {
-                if (result != null) {
-                    when (result) {
-                        is Result.Loading -> {
-                            isLoading(true)
-                        }
-
-                        is Result.Success -> {
-                            val response = result.data.data
-                            isLoading(false)
-                            Glide
-                                .with(this@NewUserDataActivity)
-                                .asBitmap()
-                                .load(response.avatar)
-                                .into(
-                                    object : CustomTarget<Bitmap>() {
-                                        override fun onResourceReady(
-                                            resource: Bitmap,
-                                            transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?,
-                                        ) {
-                                            try {
-                                                val uri =
-                                                    saveBitmapToCache(
-                                                        this@NewUserDataActivity,
-                                                        resource,
-                                                    )
-                                                currentImageUri = uri
-                                                showImage()
-                                            } catch (e: Exception) {
-                                                Log.d(TAG, e.message.toString())
-                                            }
-                                        }
-
-                                        override fun onLoadCleared(drawable: Drawable?) {}
-                                    },
-                                )
-                            edtName.setText(response.name)
-                        }
-
-                        is Result.Error -> {
-                            isLoading(false)
-                            Log.d(TAG, result.error)
-                        }
-                    }
-                }
-            }
-        }
         newUserDataViewModel.registerResponse.observe(this) { result ->
             if (result != null) {
                 when (result) {
@@ -169,7 +165,7 @@ class NewUserDataActivity : AppCompatActivity() {
                         .toString()
                         .first()
                         .toString()
-                val avatar = uriToFile(currentImageUri, this@NewUserDataActivity).reduceFileImage()
+                val avatar = currentImageUri?.let { uri -> uriToFile(uri, this@NewUserDataActivity).reduceFileImage() }
 
                 if (name.isEmpty()) {
                     edtName.error = "Lengkapi Nama Kamu!"
@@ -194,12 +190,14 @@ class NewUserDataActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                newUserDataViewModel.register(
-                    name = name,
-                    dateBirth = dateBirth,
-                    gender = gender,
-                    avatar = avatar,
-                )
+                if (avatar != null) {
+                    newUserDataViewModel.register(
+                        name = name,
+                        dateBirth = dateBirth,
+                        gender = gender,
+                        avatar = avatar,
+                    )
+                }
             }
             ibEdit.setOnClickListener {
                 startGallery()
@@ -270,5 +268,7 @@ class NewUserDataActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "NewUserDataActivity"
         private const val KEY_CURRENT_IMAGE_URI = "current_image_uri"
+        const val USER_NAME = "user_name"
+        const val USER_URI = "user_uri"
     }
 }
