@@ -8,5 +8,5 @@ import com.sayid.studypath.data.model.LocalPreferences
 class MainViewModel(
     private val localPreferences: LocalPreferences,
 ) : ViewModel() {
-    val isDarkTheme: LiveData<Boolean> = localPreferences.isDarkTheme.asLiveData()
+    val isDarkTheme: LiveData<Boolean?> = localPreferences.isDarkTheme.asLiveData()
 }

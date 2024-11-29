@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -44,11 +45,13 @@ class OnboardingActivity : AppCompatActivity() {
             val isDarkTheme = onboardingViewModel.isDarkTheme()
 
             withContext(Dispatchers.Main) {
-                when (isDarkTheme) {
-                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                if (isDarkTheme != null) {
+                    when (isDarkTheme) {
+                        true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
                 }
-
+                Log.d("PREFERENCE", "IS NIGHT: $isDarkTheme")
                 when (isCompleted) {
                     true -> navigateToLoginScreen(false)
                     false -> {

@@ -27,6 +27,10 @@
         <item name="colorSurfaceInverse">@color/md_theme_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@android:transition/slide_top</item>
+        <item name="android:windowExitTransition">@android:transition/slide_top</item>
     </style>
 
     <style name="Theme.StudyPath.Text.Button" parent="TextAppearance.AppCompat">

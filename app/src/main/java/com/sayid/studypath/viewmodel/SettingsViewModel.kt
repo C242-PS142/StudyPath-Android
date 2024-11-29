@@ -12,7 +12,7 @@ class SettingsViewModel(
     private val authRepository: AuthRepository,
     private val localPreferences: LocalPreferences,
 ) : ViewModel() {
-    val isDarkTheme: LiveData<Boolean> = localPreferences.isDarkTheme.asLiveData()
+    val isDarkTheme: LiveData<Boolean?> = localPreferences.isDarkTheme.asLiveData()
 
     fun setDarkTheme(active: Boolean) {
         viewModelScope.launch {

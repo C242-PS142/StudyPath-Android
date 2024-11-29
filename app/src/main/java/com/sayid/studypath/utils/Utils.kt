@@ -77,6 +77,18 @@ fun showToast(
     Toast.makeText(context, message, if (isShort) Toast.LENGTH_SHORT else Toast.LENGTH_LONG).show()
 }
 
+fun saveBitmapToFixedCache(
+    context: Context,
+    bitmap: Bitmap,
+): Uri {
+    val fileName = "cached_image.png"
+    val file = File(context.cacheDir, fileName)
+    FileOutputStream(file).use { fos ->
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+    }
+    return Uri.fromFile(file)
+}
+
 fun saveBitmapToCache(
     context: Context,
     bitmap: Bitmap,

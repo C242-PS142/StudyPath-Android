@@ -48,7 +48,7 @@ class SettingsFragment : Fragment() {
             binding.settingsLayout.alpha = 1.0f
         }
         settingsViewModel.isDarkTheme.observe(viewLifecycleOwner) { isDarkTheme ->
-            binding.switchTheme.isChecked = isDarkTheme
+            if (isDarkTheme != null) binding.switchTheme.isChecked = isDarkTheme
         }
 
         binding.apply {

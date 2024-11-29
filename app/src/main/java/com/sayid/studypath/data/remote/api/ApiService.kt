@@ -5,10 +5,9 @@ import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizResponse
 import com.sayid.studypath.data.remote.response.RegisterResponse
-import com.sayid.studypath.data.remote.response.UserResponse
+import com.sayid.studypath.data.remote.response.UserLoginResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -32,7 +31,7 @@ interface ApiService {
     @POST("auth/login")
     suspend fun login(
         @Body request: LoginRequest,
-    ): UserResponse
+    ): UserLoginResponse
 
     // Register to the server
     @Multipart
