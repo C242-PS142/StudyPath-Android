@@ -13,6 +13,7 @@ import com.sayid.studypath.data.remote.response.QuizItem
 import com.sayid.studypath.data.remote.response.QuizResponse
 import com.sayid.studypath.data.repository.QuizRepository
 import com.sayid.studypath.ui.activity.MainActivity
+import com.sayid.studypath.utils.PredictionResultSingleton
 import kotlinx.coroutines.launch
 
 class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewModel() {
@@ -20,9 +21,6 @@ class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewMo
 
     private val _listQuizAnswerResponse = MutableLiveData<Result<QuizAnswerResponse>>()
     val listQuizAnswerResponse: LiveData<Result<QuizAnswerResponse>> = _listQuizAnswerResponse
-
-    private val _listPrediction = MutableLiveData<Prediction>()
-    val listPrediction: LiveData<Prediction> = _listPrediction
 
     private val _quizStage1 = MutableLiveData<List<QuizItem>>()
     val quizStage1: LiveData<List<QuizItem>> = _quizStage1
@@ -91,7 +89,7 @@ class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewMo
                 response.getOrNull()?.let { data ->
                     if(data.status == "success"){
                         Log.d("Result Prediction", data.data.prediction.toString())
-                        _listPrediction.value = data.data.prediction
+                        PredictionResultSingleton.updatePrediction(data.data.prediction)
                     }
                 }
             } catch (e: Exception) {
