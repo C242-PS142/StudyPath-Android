@@ -1,10 +1,12 @@
 package com.sayid.studypath.data.repository
 
 import android.content.Intent
+import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository(
@@ -28,15 +30,31 @@ class AuthRepository(
             Result.failure(e)
         }
 
-    suspend fun getIdToken(): String? =
-        firebaseAuth.currentUser
-            ?.getIdToken(true)
-            ?.await()
-            ?.token
+    suspend fun getIdToken(): String? {
+        var attempt = 0
+        while (attempt < 3) {
+            try {
+                val token =
+                    firebaseAuth.currentUser
+                        ?.getIdToken(true)
+                        ?.await()
+                        ?.token
+                return token
+            } catch (e: Exception) {
+                attempt++
+                if (attempt == 3) {
+                    Log.e("AuthRepository", "Failed to get ID token: ${e.message}")
+                    return null
+                }
+                delay(1000)
+            }
+        }
+        return null
+    }
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
-    fun signOut()  {
+    fun signOut() {
         firebaseAuth.signOut()
         googleSignInClient.signOut()
     }

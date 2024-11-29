@@ -18,6 +18,7 @@ import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.response.LoginData
 import com.sayid.studypath.databinding.ActivityLoginBinding
 import com.sayid.studypath.utils.saveBitmapToFixedCache
+import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.utils.startActivityNoAnimation
 import com.sayid.studypath.viewmodel.LoginViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
@@ -91,9 +92,6 @@ class LoginActivity : AppCompatActivity() {
             when (idToken) {
                 null -> {
                     loggingIn(false)
-                    if (loginViewModel.getCurrentUser() != null) {
-                        loginViewModel.signOut()
-                    }
                     playAnimation()
                     setListener()
                     observeAuthResult()
@@ -202,12 +200,8 @@ class LoginActivity : AppCompatActivity() {
                             newLogin = true
                             loginViewModel.login()
                             loggingIn(true)
-                        }.onFailure { exception ->
-                            Log.e(
-                                TAG,
-                                "observeViewModel: Login failed - ${exception.message}",
-                                exception,
-                            )
+                        }.onFailure {
+                            showToast(this@LoginActivity, "Network Error")
                             loggingIn(false)
                         }
                 }
