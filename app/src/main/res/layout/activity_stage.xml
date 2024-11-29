@@ -41,6 +41,15 @@
                 android:textAppearance="@style/Theme.StudyPath.Text.Heading"
                 tools:text="HORE! KAMU SUDAH MENYELESAIKAN TES KETERBUKAAN TERHADAP PENGALAMAN" />
 
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                tools:visibility="visible" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next_stage"
                 android:layout_width="match_parent"
@@ -51,6 +60,4 @@
                 app:cornerRadius="@dimen/corner_radius_large" />
         </LinearLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,12 +3,17 @@ package com.sayid.studypath.ui.fragment
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.sayid.studypath.databinding.FragmentHomeBinding
+import com.sayid.studypath.utils.PredictionResultSingleton
 import com.sayid.studypath.utils.initializePersonalityCard
+import com.sayid.studypath.viewmodel.QuizActivityViewModel
+import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
 class HomeFragment : Fragment() {
     @Suppress("ktlint:standard:backing-property-naming")
@@ -35,7 +40,18 @@ class HomeFragment : Fragment() {
         }
         playAnimation()
         binding.tvUsername.text = "Sayid Achmad Maulana"
-        initializePersonalityCard(requireContext(), binding.viewPager, binding.indicatorLayout)
+
+        PredictionResultSingleton.listPrediction.observe(viewLifecycleOwner) { prediction ->
+            prediction?.let {
+                initializePersonalityCard(
+                    requireContext(),
+                    binding.viewPager,
+                    binding.indicatorLayout,
+                    it
+                )
+            }
+        }
+
     }
 
     private fun playAnimation() {

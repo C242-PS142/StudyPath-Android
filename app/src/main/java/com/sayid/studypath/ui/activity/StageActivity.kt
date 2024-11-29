@@ -2,7 +2,7 @@ package com.sayid.studypath.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sayid.studypath.R
@@ -46,7 +46,8 @@ class StageActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Log.d("Last Quiz", "The last section")
+                    isLoading(true)
+                    btnNextStage.text = "Lihat Hasil Tes!"
                     loginViewModel.idToken.observe(this@StageActivity) { idToken ->
                         QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
                             quizActivityViewModel.postQuizAnswers(
@@ -56,11 +57,19 @@ class StageActivity : AppCompatActivity() {
                         }
 
                         quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
-                            result.getOrNull()?.let { data ->
-                                if(data.status == "success"){
-                                    val intent = Intent(this@StageActivity, MainActivity::class.java)
-                                    startActivity(intent)
-                                    finish()
+                            if (result != null) {
+                                if (result.isSuccess) {
+                                    result.getOrNull()?.let { data ->
+                                        if (data.status == "success") {
+                                            isLoading(false)
+                                            val intent =
+                                                Intent(this@StageActivity, MainActivity::class.java)
+                                            startActivity(intent)
+                                            finish()
+                                        }
+                                    }
+                                } else {
+                                    isLoading(false)
                                 }
                             }
                         }
@@ -68,6 +77,10 @@ class StageActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun isLoading(active: Boolean) {
+        binding.loading.visibility = if (active) View.VISIBLE else View.GONE
     }
 
     companion object {

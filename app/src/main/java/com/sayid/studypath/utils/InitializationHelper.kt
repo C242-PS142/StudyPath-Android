@@ -4,12 +4,14 @@ import android.content.Context
 import android.widget.LinearLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.sayid.studypath.R
+import com.sayid.studypath.data.remote.response.Prediction
 import com.sayid.studypath.ui.adapter.PersonalityCardAdapter
 
 fun initializePersonalityCard(
     context: Context,
     viewPager2: ViewPager2,
     indicatorLayout: LinearLayout,
+    prediction: Prediction,
 ) {
     val personalityTitle =
         listOf(
@@ -31,11 +33,11 @@ fun initializePersonalityCard(
 
     val dummyPercentages =
         listOf(
-            20,
-            60,
-            90,
-            75,
-            40,
+            (prediction.keterbukaanTerhadapPengalaman * 100).toInt(),
+            (prediction.kesepakatan * 100).toInt(),
+            (prediction.kestabilanEmosi * 100).toInt(),
+            (prediction.ketelitian * 100).toInt(),
+            (prediction.keterbukaanSosialEnergiDanAntusiasme * 100).toInt(),
         )
 
     val adapter =

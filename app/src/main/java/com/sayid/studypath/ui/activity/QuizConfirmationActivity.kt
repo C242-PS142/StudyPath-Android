@@ -2,11 +2,17 @@ package com.sayid.studypath.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.ActivityQuizConfirmationBinding
+import com.sayid.studypath.utils.PredictionResultSingleton
 import com.sayid.studypath.utils.initializePersonalityCard
+import com.sayid.studypath.viewmodel.QuizActivityViewModel
+import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
 class QuizConfirmationActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
@@ -21,7 +27,16 @@ class QuizConfirmationActivity : AppCompatActivity() {
         val hasData = intent.getBooleanExtra(HAS_DATA, true)
 
         if (hasData) {
-            initializePersonalityCard(this, binding.viewPager, binding.indicatorLayout)
+            PredictionResultSingleton.listPrediction.observe(this) { prediction ->
+                prediction?.let {
+                    initializePersonalityCard(
+                        this,
+                        binding.viewPager,
+                        binding.indicatorLayout,
+                        it
+                    )
+                }
+            }
             enableHasDataView()
         } else {
             enableHasNoDataView()
