@@ -12,6 +12,7 @@ import com.sayid.studypath.data.model.LocalPreferences
 import com.sayid.studypath.data.model.dataStore
 import com.sayid.studypath.data.repository.AuthRepository
 import com.sayid.studypath.data.repository.QuizRepository
+import com.sayid.studypath.viewmodel.EditProfileViewModel
 import com.sayid.studypath.viewmodel.LoginViewModel
 import com.sayid.studypath.viewmodel.MainViewModel
 import com.sayid.studypath.viewmodel.NewUserDataViewModel
@@ -25,23 +26,31 @@ class ViewModelFactory private constructor(
     private val localPreferences: LocalPreferences,
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(authRepository) as T
-        } else if (modelClass.isAssignableFrom(NewUserDataViewModel::class.java)) {
-            return NewUserDataViewModel(authRepository) as T
-        } else if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
-            return SettingsViewModel(authRepository, localPreferences) as T
-        } else if (modelClass.isAssignableFrom(OnboardingViewModel::class.java)) {
-            return OnboardingViewModel(localPreferences) as T
-        } else if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(localPreferences) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T =
+        when {
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(authRepository) as T
+            }
+            modelClass.isAssignableFrom(NewUserDataViewModel::class.java) -> {
+                NewUserDataViewModel(authRepository) as T
+            }
+            modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
+                SettingsViewModel(authRepository, localPreferences) as T
+            }
+            modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> {
+                OnboardingViewModel(localPreferences) as T
+            }
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(localPreferences) as T
+            }
+            modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
+                EditProfileViewModel(authRepository) as T
+            }
+            modelClass.isAssignableFrom(QuizActivityViewModel::class.java) -> {
+                QuizActivityViewModel(quizRepository) as T
+            }
+            else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
-        if(modelClass.isAssignableFrom(QuizActivityViewModel::class.java)){
-            return QuizActivityViewModel(quizRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
-    }
 
     companion object {
         @Volatile

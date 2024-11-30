@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -73,6 +72,8 @@ class SettingsFragment : Fragment() {
                             username.text = userData.name
                             emailUser.text = userData.email
                             loading.visibility = View.GONE
+
+                            editProfile(userData.name, userData.avatar)
                         }
 
                         is Result.Error -> {
@@ -102,6 +103,29 @@ class SettingsFragment : Fragment() {
         }
 
         playAnimation()
+    }
+
+    private fun editProfile(
+        name: String,
+        avatar: String,
+    ) {
+        binding.btnEditProfile.setOnClickListener {
+            it.isEnabled = false
+            val dialog =
+                EditProfileDialogFragment.showDialog(
+                    name = name,
+                    avatarUrl = avatar,
+                )
+            parentFragmentManager.setFragmentResultListener(
+                "edit_profile_result",
+                viewLifecycleOwner,
+            ) { _, bundle ->
+                val isUpdate = bundle.getBoolean("update", false)
+                if (isUpdate) settingsViewModel.getUserData()
+            }
+            dialog.show(parentFragmentManager, "EditProfileDialog")
+            it.postDelayed({ it.isEnabled = true }, 1000)
+        }
     }
 
     private fun playAnimation() {

@@ -13,6 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 
 interface ApiService {
@@ -44,4 +45,20 @@ interface ApiService {
         @Part("gender") gender: RequestBody,
         @Part avatar: MultipartBody.Part,
     ): RegisterResponse
+
+    @Multipart
+    @PUT("auth/edit")
+    suspend fun editProfile(
+        @Header("Authorization") token: String,
+        @Part("name") name: RequestBody,
+        @Part avatar: MultipartBody.Part,
+    ): UserLoginResponse
+
+    @Multipart
+    @PUT("auth/edit")
+    suspend fun editProfile(
+        @Header("Authorization") token: String,
+        @Part("name") name: RequestBody,
+        @Part("avatar") avatar: RequestBody,
+    ): UserLoginResponse
 }
