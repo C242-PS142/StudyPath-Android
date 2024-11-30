@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/margin_large"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/margin_large"
+                android:layout_marginTop="@dimen/padding_large">
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:importantForAccessibility="no"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/undraw_male_avatar" />
+
+                <ImageButton
+                    android:id="@+id/ib_edit"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/shape_circle_solid"
+                    android:importantForAccessibility="no"
+                    android:padding="@dimen/padding_medium"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_edit_24"
+                    app:tint="@android:color/white" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:height="34dp"
+                android:text="@string/name"
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />
+
+            <com.sayid.studypath.ui.customview.CustomEditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/bg_radius_medium"
+                android:backgroundTint="@color/md_theme_outlineVariant"
+                android:focusable="true"
+                android:hint="@string/enter_your_name"
+                android:inputType="text"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/padding_large"
+                android:paddingVertical="@dimen/margin_large"
+                android:textColorHint="@color/md_theme_onSurfaceVariant" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
