@@ -18,63 +18,84 @@
         tools:alpha="1">
 
         <!--  Header Settings  -->
-        <ImageView
-            android:id="@+id/profile_pict"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_data"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/undraw_male_avatar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:height="30dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/username"
-            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/profile_pict"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/profile_pict"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/undraw_male_avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/email_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:text="@string/email_user"
-            android:textAppearance="@style/Theme.StudyPath.Text.Medium"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/profile_pict"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:height="30dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/username"
+                android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/profile_pict"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Theme Settings   -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_large"
-            android:paddingHorizontal="@dimen/padding_small"
-            android:text="@string/text_edit_profile_btn"
-            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_small"
-            app:cornerRadius="@dimen/corner_radius_small"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_pict"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/profile_pict"
-            app:layout_constraintTop_toBottomOf="@+id/email_user" />
+            <TextView
+                android:id="@+id/email_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:text="@string/email_user"
+                android:textAppearance="@style/Theme.StudyPath.Text.Medium"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/profile_pict"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
+            <!-- Theme Settings   -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:paddingHorizontal="@dimen/padding_small"
+                android:text="@string/text_edit_profile_btn"
+                android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_small"
+                app:cornerRadius="@dimen/corner_radius_small"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_pict"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/profile_pict"
+                app:layout_constraintTop_toBottomOf="@+id/email_user" />
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
             android:id="@+id/theme_title"
@@ -86,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/user_data" />
 
         <TextView
             android:id="@+id/theme_subtitle"
@@ -181,5 +202,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/about_app_subtitle" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

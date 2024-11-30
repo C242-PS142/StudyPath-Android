@@ -24,14 +24,20 @@ data class LoginData(
 )
 
 data class UserLoginData(
-    @field:SerializedName("uid")
-    val uid: String,
+    @field:SerializedName("id")
+    val id: String,
     @field:SerializedName("name")
     val name: String,
     @field:SerializedName("email")
     val email: String,
-    @field:SerializedName("picture")
-    val picture: String,
+    @field:SerializedName("date_birth")
+    val dateOfBirth: String,
+    @field:SerializedName("gender")
+    val gender: String,
+    @field:SerializedName("avatar")
+    val avatar: String,
+    @field:SerializedName("created_at")
+    val createdAt: String,
 )
 
 data class RegisterResponse(
