@@ -3,21 +3,16 @@ package com.sayid.studypath.ui.activity
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.response.LoginData
 import com.sayid.studypath.databinding.ActivityLoginBinding
-import com.sayid.studypath.utils.saveBitmapToFixedCache
 import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.utils.startActivityNoAnimation
 import com.sayid.studypath.viewmodel.LoginViewModel
@@ -129,59 +124,20 @@ class LoginActivity : AppCompatActivity() {
         val hasRegistered = loginData.isRegister
         val intentMain = Intent(this, MainActivity::class.java)
         val intentNewUserData = Intent(this, NewUserDataActivity::class.java)
+        intentNewUserData.putExtra(NewUserDataActivity.USER_NAME, loginData.result[0].name)
 
         if (hasRegistered) {
+            if (newLogin) startActivity(intentMain) else startActivityNoAnimation(intentMain)
+        } else {
             if (newLogin) {
-                startActivity(intentMain)
+                startActivity(intentNewUserData)
             } else {
                 startActivityNoAnimation(
-                    intentMain,
+                    intentNewUserData,
                 )
             }
-            finish()
-        } else {
-            Glide
-                .with(this@LoginActivity)
-                .asBitmap()
-                .load(loginData.result[0].picture)
-                .into(
-                    object : CustomTarget<Bitmap>() {
-                        override fun onResourceReady(
-                            resource: Bitmap,
-                            transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?,
-                        ) {
-                            var uri = ""
-                            try {
-                                uri =
-                                    saveBitmapToFixedCache(
-                                        this@LoginActivity,
-                                        resource,
-                                    ).toString()
-                            } catch (e: Exception) {
-                                Log.d(TAG, e.message.toString())
-                            }
-
-                            intentNewUserData.putExtra(
-                                NewUserDataActivity.USER_NAME,
-                                loginData.result[0].name,
-                            )
-                            intentNewUserData.putExtra(NewUserDataActivity.USER_URI, uri)
-
-                            if (newLogin) {
-                                startActivity(intentNewUserData)
-                            } else {
-                                startActivityNoAnimation(
-                                    intentNewUserData,
-                                )
-                            }
-
-                            finish()
-                        }
-
-                        override fun onLoadCleared(drawable: Drawable?) {}
-                    },
-                )
         }
+        finish()
     }
 
     private fun observeAuthResult() {

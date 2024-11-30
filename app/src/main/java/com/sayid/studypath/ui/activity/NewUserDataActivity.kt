@@ -20,6 +20,7 @@ import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.databinding.ActivityNewUserDataBinding
+import com.sayid.studypath.utils.drawableToCacheUri
 import com.sayid.studypath.utils.reduceFileImage
 import com.sayid.studypath.utils.showDatePicker
 import com.sayid.studypath.utils.showToast
@@ -69,10 +70,12 @@ class NewUserDataActivity : AppCompatActivity() {
         }
 
         if (currentImageUri == null) {
-            val uri = intent.getStringExtra(USER_URI)
             val name = intent.getStringExtra(USER_NAME)
-
-            uri?.let { currentImageUri = Uri.parse(it) }
+            currentImageUri =
+                drawableToCacheUri(
+                    this@NewUserDataActivity,
+                    com.sayid.studypath.R.drawable.icon_avatar,
+                )
             name?.let { binding.edtName.setText(it) }
 
             showImage()
@@ -81,6 +84,8 @@ class NewUserDataActivity : AppCompatActivity() {
         initializeForm()
         viewModelObserve()
         setListener()
+
+        showImage()
     }
 
     private fun playAnimation() {
@@ -105,6 +110,7 @@ class NewUserDataActivity : AppCompatActivity() {
                 )
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
 
@@ -165,7 +171,13 @@ class NewUserDataActivity : AppCompatActivity() {
                         .toString()
                         .first()
                         .toString()
-                val avatar = currentImageUri?.let { uri -> uriToFile(uri, this@NewUserDataActivity).reduceFileImage() }
+                val avatar =
+                    currentImageUri?.let { uri ->
+                        uriToFile(
+                            uri,
+                            this@NewUserDataActivity,
+                        ).reduceFileImage()
+                    }
 
                 if (name.isEmpty()) {
                     edtName.error = "Lengkapi Nama Kamu!"
@@ -269,6 +281,5 @@ class NewUserDataActivity : AppCompatActivity() {
         private const val TAG = "NewUserDataActivity"
         private const val KEY_CURRENT_IMAGE_URI = "current_image_uri"
         const val USER_NAME = "user_name"
-        const val USER_URI = "user_uri"
     }
 }
