@@ -71,6 +71,11 @@ class EditProfileDialogFragment : DialogFragment() {
 
                 edtName.setText(name)
 
+                savedInstanceState?.getString(KEY_CURRENT_IMAGE_URI)?.let { uriString ->
+                    currentImageUri = Uri.parse(uriString)
+                    showImage()
+                }
+
                 val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
                 positiveButton.setOnClickListener {
                     if (onPressed) return@setOnClickListener
@@ -160,9 +165,15 @@ class EditProfileDialogFragment : DialogFragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (currentImageUri != null) outState.putString(KEY_CURRENT_IMAGE_URI, currentImageUri.toString())
+    }
+
     companion object {
         private const val ARG_NAME = "name"
         private const val ARG_AVATAR_URL = "avatar_url"
+        private const val KEY_CURRENT_IMAGE_URI = "current_image_uri"
 
         fun showDialog(
             name: String,
