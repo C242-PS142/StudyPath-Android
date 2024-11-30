@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.datepicker.CalendarConstraints
@@ -108,6 +111,27 @@ fun saveBitmapToCache(
 fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
     return File.createTempFile(timeStamp, ".jpg", filesDir)
+}
+
+fun drawableToCacheUri(
+    context: Context,
+    drawableRes: Int,
+): Uri? {
+    val drawable = ContextCompat.getDrawable(context, drawableRes) ?: return null
+    val bitmap =
+        if (drawable is BitmapDrawable) {
+            drawable.bitmap
+        } else {
+            val width = drawable.intrinsicWidth.takeIf { it > 0 } ?: 1
+            val height = drawable.intrinsicHeight.takeIf { it > 0 } ?: 1
+            Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888).apply {
+                val canvas = Canvas(this)
+                drawable.setBounds(0, 0, width, height)
+                drawable.draw(canvas)
+            }
+        }
+
+    return saveBitmapToCache(context, bitmap)
 }
 
 fun uriToFile(
