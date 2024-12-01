@@ -2,12 +2,13 @@ package com.sayid.studypath.ui.fragment
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartAnimationType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
@@ -18,9 +19,8 @@ import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAPie
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
 import com.sayid.studypath.databinding.FragmentStatisticsBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.sayid.studypath.ui.activity.QuizActivity
+import com.sayid.studypath.utils.PredictionResultSingleton
 
 class StatisticsFragment : Fragment() {
     @Suppress("ktlint:standard:backing-property-naming")
@@ -50,47 +50,55 @@ class StatisticsFragment : Fragment() {
         }
         playAnimation()
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            val categories =
-                arrayOf(
-                    "Keterbukaan Terhadap Pengalaman",
-                    "Ketelitian",
-                    "Kestabilan Emosi",
-                    "Keterbukaan Sosial, Energi dan Antusiasme",
-                    "Kesepakatan",
+        binding.btnReQuiz.setOnClickListener {
+            showReQuizConfirmationDialog()
+        }
+
+        val categories = arrayOf(
+            "Keterbukaan Terhadap Pengalaman",
+            "Ketelitian",
+            "Kestabilan Emosi",
+            "Keterbukaan Sosial, Energi dan Antusiasme",
+            "Kesepakatan"
+        )
+
+        val colorsTheme: Array<Any> = arrayOf(
+            "#ffc800", "#1cb0f6", "#ff4b4b", "#ff9600", "#2b70c9"
+        )
+
+        PredictionResultSingleton.listPrediction.observe(viewLifecycleOwner) { prediction ->
+            val dataValues = listOf(
+                (prediction.keterbukaanTerhadapPengalaman * 100).toInt(),
+                (prediction.ketelitian * 100).toInt(),
+                (prediction.kestabilanEmosi * 100).toInt(),
+                (prediction.keterbukaanSosialEnergiDanAntusiasme * 100).toInt(),
+                (prediction.kesepakatan * 100).toInt(),
+            )
+
+            // Build Pie Chart Model
+            val bigFivePieChartsModel = AAChartModel()
+                .chartType(AAChartType.Pie)
+                .backgroundColor("#00000000")
+                .axesTextColor("#FFFFFF")
+                .legendEnabled(false)
+                .animationType(AAChartAnimationType.SwingTo)
+                .animationDuration(1500)
+                .colorsTheme(colorsTheme)
+                .series(
+                    arrayOf(
+                        AASeriesElement()
+                            .name("Persentase")
+                            .size("70%")
+                            .data(
+                                categories
+                                    .zip(dataValues)
+                                    .map { arrayOf(it.first, it.second) }
+                                    .toTypedArray()
+                            )
+                    )
                 )
 
-            val dataValues: Array<Any> = arrayOf(56, 71, 64, 36, 59)
-
-            val colorsTheme: Array<Any> =
-                arrayOf("#ffc800", "#1cb0f6", "#ff4b4b", "#ff9600", "#2b70c9")
-
-// Pie Chart Model
-            val bigFivePieChartsModel: AAChartModel =
-                AAChartModel()
-                    .chartType(AAChartType.Pie)
-                    .backgroundColor("#00000000")
-                    .axesTextColor("#FFFFFF")
-                    .legendEnabled(false)
-                    .animationType(AAChartAnimationType.SwingTo)
-                    .animationDuration(1500)
-                    .colorsTheme(colorsTheme)
-                    .series(
-                        arrayOf(
-                            AASeriesElement()
-                                .name("Persentase")
-                                .size("70%")
-                                .data(
-                                    categories
-                                        .zip(dataValues)
-                                        .map { arrayOf(it.first, it.second) }
-                                        .toTypedArray(),
-                                ),
-                        ),
-                    )
-
-            pieChartOptions = bigFivePieChartsModel.aa_toAAOptions()
-
+            val pieChartOptions = bigFivePieChartsModel.aa_toAAOptions()
             pieChartOptions.plotOptions?.pie(
                 AAPie()
                     .allowPointSelect(true)
@@ -102,43 +110,53 @@ class StatisticsFragment : Fragment() {
                             .style(
                                 AAStyle()
                                     .color("#FFFFFF")
-                                    .fontSize(16f),
-                            ).distance(15),
-                    ),
+                                    .fontSize(16f)
+                            )
+                            .distance(15)
+                    )
             )
 
-            val horizontalBarChartModel: AAChartModel =
-                AAChartModel()
-                    .chartType(AAChartType.Bar)
-                    .backgroundColor("#00000000")
-                    .animationType(AAChartAnimationType.SwingTo)
-                    .animationDuration(1500)
-                    .categories(categories)
-                    .colorsTheme(colorsTheme)
-                    .series(
-                        arrayOf(
-                            AASeriesElement()
-                                .name("Persentase")
-                                .data(
-                                    arrayOf(
-                                        mapOf("y" to 56, "color" to "#1cb0f6"),
-                                        mapOf("y" to 71, "color" to "#ff4b4b"),
-                                        mapOf("y" to 64, "color" to "#ffc800"),
-                                        mapOf("y" to 36, "color" to "#ff9600"),
-                                        mapOf("y" to 59, "color" to "#2b70c9"),
-                                    ),
-                                ),
-                        ),
+            // Build Bar Chart Model
+            val horizontalBarChartModel = AAChartModel()
+                .chartType(AAChartType.Bar)
+                .backgroundColor("#00000000")
+                .animationType(AAChartAnimationType.SwingTo)
+                .animationDuration(1500)
+                .categories(categories)
+                .colorsTheme(colorsTheme)
+                .series(
+                    arrayOf(
+                        AASeriesElement()
+                            .name("Persentase")
+                            .data(
+                                dataValues.mapIndexed { index, value ->
+                                    mapOf("y" to value, "color" to colorsTheme[index])
+                                }.toTypedArray()
+                            )
                     )
+                )
 
-            horizontalBarChartOptions = horizontalBarChartModel.aa_toAAOptions()
+            val horizontalBarChartOptions = horizontalBarChartModel.aa_toAAOptions()
             horizontalBarChartOptions.plotOptions?.bar?.borderRadius(4f)
 
-            withContext(Dispatchers.Main) {
-                binding.bigFivePieCharts.aa_drawChartWithChartOptions(pieChartOptions)
-                binding.bigFiveBarCharts.aa_drawChartWithChartOptions(horizontalBarChartOptions)
-            }
+            // Draw charts
+            binding.bigFivePieCharts.aa_drawChartWithChartOptions(pieChartOptions)
+            binding.bigFiveBarCharts.aa_drawChartWithChartOptions(horizontalBarChartOptions)
         }
+    }
+
+    private fun showReQuizConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Konfirmasi Ulangi Kuis")
+            .setMessage("Apakah Kamu yakin ingin memulai ulang kuis?\nData saat ini akan hilang.")
+            .setPositiveButton("Ya") { _, _ ->
+                startActivity(Intent(requireActivity(), QuizActivity::class.java))
+            }
+            .setNegativeButton("Tidak") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
     private fun playAnimation() {
@@ -148,7 +166,8 @@ class StatisticsFragment : Fragment() {
         } else {
             hasAnimated = true
             val containerAlpha =
-                ObjectAnimator.ofFloat(binding.statisticsLayout, View.ALPHA, 0f, 1f).setDuration(750)
+                ObjectAnimator.ofFloat(binding.statisticsLayout, View.ALPHA, 0f, 1f)
+                    .setDuration(750)
             val containerMove =
                 ObjectAnimator
                     .ofFloat(binding.statisticsLayout, View.TRANSLATION_Y, 250f, 0f)
