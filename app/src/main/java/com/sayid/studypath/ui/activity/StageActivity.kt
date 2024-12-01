@@ -1,6 +1,11 @@
 package com.sayid.studypath.ui.activity
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -17,7 +22,8 @@ class StageActivity : AppCompatActivity() {
     @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: ActivityStageBinding? = null
     private val binding get() = _binding!!
-
+    private var mediaPlayer: MediaPlayer? = null
+    private var isPlayed = false
     private val factory: ViewModelFactory by lazy {
         ViewModelFactory.getInstance(this)
     }
@@ -28,13 +34,29 @@ class StageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityStageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var stage = intent.getIntExtra(CURRENTSTAGE, 1)
+        val progressText = getString(R.string.quiz_progress, stage)
+
+        savedInstanceState?.getBoolean(KEY_IS_PLAYED)?.let {
+            isPlayed = it
+        }
+        if (!isPlayed) {
+            isPlayed = true
+            playSound(if (stage == 5) R.raw.finish_all_stage else R.raw.finish_stage)
+        } else {
+            playAnimation()
+        }
 
         binding.apply {
-            var stage = intent.getIntExtra(CURRENTSTAGE, 1)
-            val progressText = getString(R.string.quiz_progress, stage)
             tvStageHeader.text = progressText
-
-            val quizName = "KETERBUKAAN TERHADAP PENGALAMAN"
+            val quizName: String =
+                when (stage) {
+                    1 -> getString(R.string.extroversion)
+                    2 -> getString(R.string.neuroticism)
+                    3 -> getString(R.string.agreeableness)
+                    4 -> getString(R.string.conscientiousness)
+                    else -> getString(R.string.openness)
+                }
             val message = getString(R.string.celebrate_progress_quiz, quizName)
             tvStageDescription.text = message
 
@@ -52,7 +74,7 @@ class StageActivity : AppCompatActivity() {
                         QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
                             quizActivityViewModel.postQuizAnswers(
                                 idToken!!,
-                                QuizAnswerRequest(answer)
+                                QuizAnswerRequest(answer),
                             )
                         }
 
@@ -79,11 +101,61 @@ class StageActivity : AppCompatActivity() {
         }
     }
 
+    private fun playSound(resourceId: Int) {
+        mediaPlayer?.release()
+
+        mediaPlayer =
+            MediaPlayer.create(this, resourceId).apply {
+                setOnPreparedListener {
+                    start()
+                    playAnimation()
+                }
+
+                setOnCompletionListener {
+                    release()
+                    mediaPlayer = null
+                }
+
+                setOnErrorListener { _, _, _ ->
+                    mediaPlayer?.release()
+                    mediaPlayer = null
+                    false
+                }
+            }
+    }
+
+    private fun playAnimation() {
+        val main =
+            ObjectAnimator.ofFloat(binding.scrollView, View.ALPHA, 1f).setDuration(500).also {
+                ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_X, 1f).setDuration(500).start()
+                ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_Y, 1f).setDuration(500).start()
+            }
+        AnimatorSet().apply {
+            playTogether(main)
+            start()
+
+            addListener(
+                object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        super.onAnimationEnd(animation)
+                        binding.btnNextStage.isEnabled = true
+                    }
+                },
+            )
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_IS_PLAYED, isPlayed)
+    }
+
     private fun isLoading(active: Boolean) {
         binding.loading.visibility = if (active) View.VISIBLE else View.GONE
     }
 
     companion object {
-        var CURRENTSTAGE = "current_stage"
+        const val CURRENTSTAGE = "current_stage"
+        private const val KEY_IS_PLAYED = "is_played"
     }
 }
