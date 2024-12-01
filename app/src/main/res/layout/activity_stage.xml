@@ -9,13 +9,20 @@
     tools:context=".ui.activity.OnboardingActivity">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:alpha="0"
+        android:scaleX="0.25"
+        android:scaleY="0.25"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:alpha="1"
+        tools:scaleX="1"
+        tools:scaleY="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,12 +52,14 @@
                 android:id="@+id/loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginBottom="40dp"
                 android:visibility="gone"
-                android:layout_gravity="center"
                 tools:visibility="visible" />
 
             <com.google.android.material.button.MaterialButton
+                android:enabled="false"
+                tools:enabled="true"
                 android:id="@+id/btn_next_stage"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
