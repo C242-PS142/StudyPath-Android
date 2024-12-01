@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:alpha="0"
+    tools:alpha="1"
+    android:scaleX="0.8"
+    android:scaleY="0.8"
+    tools:scaleX="1"
+    tools:scaleY="1"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    tools:context=".ui.activity.QuizConfirmationActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/padding_large"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/padding_large">
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:importantForAccessibility="no"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/undraw_male_avatar" />
+
+                <ImageButton
+                    android:id="@+id/ib_edit"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/shape_circle_solid"
+                    android:importantForAccessibility="no"
+                    android:padding="@dimen/padding_medium"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/baseline_edit_24"
+                    app:tint="@android:color/white" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:height="34dp"
+                android:text="@string/your_name"
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />
+
+            <com.sayid.studypath.ui.customview.CustomEditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_radius_medium"
+                android:backgroundTint="@color/md_theme_outlineVariant"
+                android:focusable="true"
+                android:hint="@string/enter_your_name"
+                android:inputType="text"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/padding_large"
+                android:paddingVertical="@dimen/margin_large"
+                android:textColorHint="@color/md_theme_onSurfaceVariant" />
+
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="@dimen/margin_large"-->
+            <!--                android:height="36dp"-->
+            <!--                android:text="@string/current_level"-->
+            <!--                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />-->
+
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/layout_level"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@drawable/bg_radius_medium"-->
+            <!--                android:backgroundTint="@color/md_theme_outlineVariant"-->
+            <!--                android:textColorHint="@color/md_theme_onSurfaceVariant">-->
+
+            <!--                <Spinner-->
+            <!--                    android:id="@+id/spinner_level"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="60dp"-->
+            <!--                    android:paddingHorizontal="@dimen/padding_medium"-->
+            <!--                    android:paddingVertical="@dimen/padding_large"-->
+            <!--                    android:spinnerMode="dropdown" />-->
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:height="36dp"
+                android:text="@string/your_birth_date"
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />
+
+            <com.sayid.studypath.ui.customview.CustomEditText
+                android:id="@+id/edt_date_birth"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_radius_medium"
+                android:backgroundTint="@color/md_theme_outlineVariant"
+                android:focusable="false"
+                android:hint="@string/enter_your_birth_date"
+                android:inputType="none"
+                android:paddingHorizontal="@dimen/padding_large"
+                android:paddingVertical="@dimen/margin_large"
+                android:textColorHint="@color/md_theme_onSurfaceVariant" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:height="36dp"
+                android:text="@string/your_gender"
+                android:textAppearance="@style/Theme.StudyPath.Text.SemiBold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_personality"
+                android:backgroundTint="@color/md_theme_outlineVariant"
+                android:textColorHint="@color/md_theme_onSurfaceVariant">
+
+                <Spinner
+                    android:id="@+id/spinner_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingHorizontal="@dimen/padding_medium"
+                    android:paddingVertical="@dimen/padding_large"
+                    android:spinnerMode="dropdown" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginVertical="@dimen/padding_large"
+                android:text="@string/save"
+                android:textAppearance="@style/Theme.StudyPath.Text.Button"
+                app:cornerRadius="@dimen/corner_radius_large" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

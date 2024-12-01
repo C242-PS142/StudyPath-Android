@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Core Brand Colors -->
+    <color name="md_theme_primary">#58cc02</color> <!-- Feather Green -->
+    <color name="md_theme_onPrimary">#ffffff</color>
+    <color name="md_theme_primaryContainer">#89e219</color> <!-- Mask Green -->
+    <color name="md_theme_onPrimaryContainer">#002800</color> <!-- Darker contrast -->
+
+    <!-- Secondary Colors -->
+    <color name="md_theme_secondary">#1cb0f6</color> <!-- Macaw -->
+    <color name="md_theme_onSecondary">#ffffff</color>
+    <color name="md_theme_secondaryContainer">#bee6ff</color> <!-- Lightened Macaw -->
+    <color name="md_theme_onSecondaryContainer">#00294a</color> <!-- Dark Macaw -->
+
+    <!-- Tertiary Colors -->
+    <color name="md_theme_tertiary">#ce82ff</color> <!-- Beetle -->
+    <color name="md_theme_onTertiary">#ffffff</color>
+    <color name="md_theme_tertiaryContainer">#f3daff</color> <!-- Light Beetle -->
+    <color name="md_theme_onTertiaryContainer">#430059</color> <!-- Dark Beetle -->
+
+    <!-- Error Colors -->
+    <color name="md_theme_error">#ff4b4b</color> <!-- Cardinal -->
+    <color name="md_theme_onError">#ffffff</color>
+    <color name="md_theme_errorContainer">#ffd7d7</color> <!-- Light Cardinal -->
+    <color name="md_theme_onErrorContainer">#5a0000</color> <!-- Dark Cardinal -->
+
+    <!-- Background and Surface -->
+    <color name="md_theme_background">#f7f7f7</color> <!-- Polar -->
+    <color name="md_theme_onBackground">#4b4b4b</color> <!-- Eel -->
+    <color name="md_theme_surface">#ffffff</color> <!-- Snow -->
+    <color name="md_theme_onSurface">#4b4b4b</color> <!-- Eel -->
+    <color name="md_theme_surfaceVariant">#e5e5e5</color> <!-- Swan -->
+    <color name="md_theme_onSurfaceVariant">#777777</color> <!-- Wolf -->
+
+    <!-- Outline and Variants -->
+    <color name="md_theme_outline">#afafaf</color> <!-- Hare -->
+    <color name="md_theme_outlineVariant">#e5e5e5</color> <!-- Swan -->
+
+    <!-- Scrim/Inverse -->
+    <color name="md_theme_scrim">#000000</color>
+    <color name="md_theme_inverseSurface">#2b70c9</color> <!-- Humpback -->
+    <color name="md_theme_inverseOnSurface">#ffffff</color>
+    <color name="md_theme_inversePrimary">#43c000</color> <!-- Wing Overlay -->
+
+    <!-- Optional Variants (for higher contrast themes) -->
+    <color name="md_theme_primary_highContrast">#43c000</color> <!-- Wing Overlay -->
+    <color name="md_theme_onPrimary_highContrast">#ffffff</color>
+    <color name="md_theme_primaryContainer_highContrast">#58cc02</color> <!-- Feather Green -->
+    <color name="md_theme_onPrimaryContainer_highContrast">#002800</color>
+    <color name="md_theme_secondary_highContrast">#1cb0f6</color> <!-- Macaw -->
+    <color name="md_theme_onSecondary_highContrast">#ffffff</color>
+    <color name="md_theme_tertiary_highContrast">#ff9600</color> <!-- Fox -->
+    <color name="md_theme_onTertiary_highContrast">#ffffff</color>
+
+    <!-- Gemini Background (for branding) -->
+    <color name="gemini_background">#ffffff</color>
+    <color name="very_agree">#2B70C9</color>
+    <color name="agree">#1CB0F6</color>
+    <color name="neutral">#777777</color>
+    <color name="disagree">#FF9600</color>
+    <color name="very_disagree">#FF4B4B</color>
 </resources>

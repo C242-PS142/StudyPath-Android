@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Core Brand Colors -->
+    <color name="md_theme_primary">#58cc02</color> <!-- Feather Green -->
+    <color name="md_theme_onPrimary">#003500</color> <!-- Dark Green for text -->
+    <color name="md_theme_primaryContainer">#004c00</color> <!-- Darker Mask Green -->
+    <color name="md_theme_onPrimaryContainer">#a8f983</color> <!-- Light Feather Green -->
+
+    <!-- Secondary Colors -->
+    <color name="md_theme_secondary">#1cb0f6</color> <!-- Macaw -->
+    <color name="md_theme_onSecondary">#003c66</color> <!-- Dark Blue for text -->
+    <color name="md_theme_secondaryContainer">#004c7d</color> <!-- Darkened Macaw -->
+    <color name="md_theme_onSecondaryContainer">#bee6ff</color> <!-- Lightened Macaw -->
+
+    <!-- Tertiary Colors -->
+    <color name="md_theme_tertiary">#ce82ff</color> <!-- Beetle -->
+    <color name="md_theme_onTertiary">#4e0059</color> <!-- Deep Beetle -->
+    <color name="md_theme_tertiaryContainer">#6c2d8b</color> <!-- Dark Beetle -->
+    <color name="md_theme_onTertiaryContainer">#f3daff</color> <!-- Light Beetle -->
+
+    <!-- Error Colors -->
+    <color name="md_theme_error">#ff4b4b</color> <!-- Cardinal -->
+    <color name="md_theme_onError">#5a0000</color> <!-- Dark Cardinal -->
+    <color name="md_theme_errorContainer">#8e1e1e</color> <!-- Darkened Cardinal -->
+    <color name="md_theme_onErrorContainer">#ffd7d7</color> <!-- Light Cardinal -->
+
+    <!-- Background and Surface -->
+    <color name="md_theme_background">#121212</color> <!-- Dark background -->
+    <color name="md_theme_onBackground">#e5e5e5</color> <!-- Swan -->
+    <color name="md_theme_surface">#1d1d1d</color> <!-- Slightly lighter for contrast -->
+    <color name="md_theme_onSurface">#e5e5e5</color> <!-- Swan -->
+    <color name="md_theme_surfaceVariant">#292929</color> <!-- Darker Swan -->
+    <color name="md_theme_onSurfaceVariant">#afafaf</color> <!-- Hare -->
+
+    <!-- Outline and Variants -->
+    <color name="md_theme_outline">#444444</color> <!-- Wolf -->
+    <color name="md_theme_outlineVariant">#666666</color> <!-- Lightened Wolf -->
+
+    <!-- Scrim/Inverse -->
+    <color name="md_theme_scrim">#000000</color>
+    <color name="md_theme_inverseSurface">#e5e5e5</color> <!-- Swan -->
+    <color name="md_theme_inverseOnSurface">#121212</color> <!-- Dark background -->
+    <color name="md_theme_inversePrimary">#a8f983</color> <!-- Feather Green Lightened -->
+
+    <!-- Optional Variants (for higher contrast themes) -->
+    <color name="md_theme_primary_highContrast">#43c000</color> <!-- Wing Overlay -->
+    <color name="md_theme_onPrimary_highContrast">#ffffff</color>
+    <color name="md_theme_primaryContainer_highContrast">#58cc02</color> <!-- Feather Green -->
+    <color name="md_theme_onPrimaryContainer_highContrast">#004c00</color>
+    <color name="md_theme_secondary_highContrast">#1cb0f6</color> <!-- Macaw -->
+    <color name="md_theme_onSecondary_highContrast">#003c66</color>
+    <color name="md_theme_tertiary_highContrast">#ff9600</color> <!-- Fox -->
+    <color name="md_theme_onTertiary_highContrast">#4e2a00</color> <!-- Deep Fox -->
+
+    <!-- Gemini Background (for branding) -->
+    <color name="gemini_background">#121212</color>
+</resources>

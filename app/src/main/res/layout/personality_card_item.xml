@@ -1,0 +1,62 @@
+<!-- personality_card_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_small"
+    tools:backgroundTint="@android:color/transparent"
+    tools:cardCornerRadius="@dimen/padding_large"
+    tools:layout_height="270dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/gradient_personality"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/md_theme_secondary" />
+
+        <ImageView
+            android:id="@+id/iv_illustration"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/icon_kesepakatan" />
+
+        <TextView
+            android:id="@+id/tv_percentage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:height="38dp"
+            android:gravity="top|center"
+            android:lines="1"
+            android:textAppearance="@style/Theme.StudyPath.Text.Black"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_illustration"
+            tools:text="36%" />
+
+        <TextView
+            android:id="@+id/tv_personality_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="top|center"
+            android:textAppearance="@style/Theme.StudyPath.Text.PersonalityTitle"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_percentage"
+            tools:text="KETERBUKAAN TERHADAP PENGALAMAN" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
