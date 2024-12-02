@@ -1,22 +1,21 @@
 package com.sayid.studypath.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sayid.studypath.data.Result
+import com.sayid.studypath.data.remote.api.ApiConfig
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizItem
 import com.sayid.studypath.data.remote.response.QuizResponse
 import com.sayid.studypath.data.repository.AuthRepository
-import com.sayid.studypath.data.repository.QuizRepository
 import com.sayid.studypath.utils.PredictionResultSingleton
 import kotlinx.coroutines.launch
 
 class QuizActivityViewModel(
     private val authRepository: AuthRepository,
-    private val quizRepository: QuizRepository,
 ) : ViewModel() {
     @Suppress("ktlint:standard:backing-property-naming")
     private val _listQuiz = MutableLiveData<Result<QuizResponse>>()
@@ -64,11 +63,12 @@ class QuizActivityViewModel(
 
     private fun getListQuiz() {
         viewModelScope.launch {
+            _listQuiz.value = Result.Loading
             try {
-                val response: Result<QuizResponse> = quizRepository.getListQuiz()
-                _listQuiz.value = response
+                val response = ApiConfig.getApiService().getListQuiz()
+                _listQuiz.value = Result.Success(response)
 
-                response.getOrNull()?.let { quizResponse ->
+                response.let { quizResponse ->
                     val stages: List<List<QuizItem>> = divideIntoStages(quizResponse.data.quiz)
                     _quizStage1.value = stages[0]
                     _quizStage2.value = stages[1]
@@ -77,7 +77,7 @@ class QuizActivityViewModel(
                     _quizStage5.value = stages[4]
                 }
             } catch (e: Exception) {
-                _listQuiz.value = Result.failure(e)
+                _listQuiz.value = Result.Error("Gagal: ${e.message}")
             }
         }
     }
@@ -87,18 +87,14 @@ class QuizActivityViewModel(
             val idToken = authRepository.getIdToken()
             try {
                 if (idToken == null) throw NullPointerException("Value is null")
-                val response = quizRepository.postQuizAnswers(idToken, listAnswers)
+                val response =
+                    ApiConfig.getApiService().submitQuizAnswers("Bearer $idToken", listAnswers)
 
-                _listQuizAnswerResponse.value = response
+                PredictionResultSingleton.updatePrediction(response.data.prediction)
 
-                response.getOrNull()?.let { data ->
-                    if (data.status == "success") {
-                        Log.d("Result Prediction", data.data.prediction.toString())
-                        PredictionResultSingleton.updatePrediction(data.data.prediction)
-                    }
-                }
+                _listQuizAnswerResponse.value = Result.Success(response)
             } catch (e: Exception) {
-                _listQuizAnswerResponse.value = Result.failure(e)
+                _listQuizAnswerResponse.value = Result.Error("Gagal: ${e.message}")
             }
         }
     }

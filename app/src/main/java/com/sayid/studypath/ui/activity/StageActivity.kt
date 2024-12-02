@@ -7,10 +7,12 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sayid.studypath.R
+import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.databinding.ActivityStageBinding
 import com.sayid.studypath.utils.QuizAnswerSingleton
@@ -49,18 +51,23 @@ class StageActivity : AppCompatActivity() {
 
         quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
             if (result != null) {
-                if (result.isSuccess) {
-                    result.getOrNull()?.let { data ->
-                        if (data.status == "success") {
-                            isLoading(false)
-                            val intent =
-                                Intent(this@StageActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }
+                when (result) {
+                    is Result.Loading -> {
+                        isLoading(true)
                     }
-                } else {
-                    isLoading(false)
+
+                    is Result.Success -> {
+                        isLoading(false)
+                        val intent =
+                            Intent(this@StageActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    is Result.Error -> {
+                        isLoading(false)
+                        Log.d(TAG, result.error)
+                    }
                 }
             }
         }
@@ -157,7 +164,13 @@ class StageActivity : AppCompatActivity() {
         binding.loading.visibility = if (active) View.VISIBLE else View.GONE
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
+        private const val TAG = "StageActivity"
         const val CURRENTSTAGE = "current_stage"
         private const val KEY_IS_PLAYED = "is_played"
     }

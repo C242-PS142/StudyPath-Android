@@ -6,6 +6,7 @@ import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizResponse
 import com.sayid.studypath.data.remote.response.RegisterResponse
 import com.sayid.studypath.data.remote.response.UserLoginResponse
+import com.sayid.studypath.data.remote.response.UserPredictionResult
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -61,4 +62,9 @@ interface ApiService {
         @Part("name") name: RequestBody,
         @Part("avatar") avatar: RequestBody,
     ): UserLoginResponse
+
+    @GET("api/predict")
+    suspend fun userPredictionData(
+        @Header("Authorization") token: String,
+    ): UserPredictionResult
 }

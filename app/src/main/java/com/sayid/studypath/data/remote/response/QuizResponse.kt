@@ -6,77 +6,78 @@ import com.google.gson.annotations.SerializedName
 data class QuizResponse(
     @field:SerializedName("data")
     val data: Data,
-
     @field:SerializedName("message")
     val message: String,
-
     @field:SerializedName("status")
-    val status: String
+    val status: String,
 )
 
 data class Data(
     @field:SerializedName("quiz")
-    val quiz: List<QuizItem>
+    val quiz: List<QuizItem>,
 )
 
 data class QuizItem(
     @field:SerializedName("question_text_id")
     val questionTextID: String,
-
     @field:SerializedName("question_text_en")
     val questionTextEN: String,
-
     @field:SerializedName("question_code")
-    val questionCode: String
+    val questionCode: String,
 )
 
 // POST QUIZ
 data class QuizAnswer(
     @field:SerializedName("question_code")
     val questionCode: String,
-
     @field:SerializedName("answer_value")
-    val answerValue: Int
+    val answerValue: Int,
 )
 
 data class QuizAnswerRequest(
     @field:SerializedName("answers")
-    val answers: MutableList<QuizAnswer>?
+    val answers: MutableList<QuizAnswer>?,
 )
 
 data class QuizAnswerResponse(
     @field:SerializedName("status")
     val status: String,
-
     @field:SerializedName("message")
     val message: String,
-
     @field:SerializedName("data")
     val data: DataResult,
 )
 
 data class DataResult(
-
     @field:SerializedName("prediction")
     val prediction: Prediction,
-
     @field:SerializedName("text")
-    val text: String
+    val text: String,
+)
+
+data class UserPredictionResult(
+    @field:SerializedName("status")
+    val status: String,
+    @field:SerializedName("message")
+    val message: String,
+    @field:SerializedName("data")
+    val data: Personality,
+)
+
+data class Personality(
+    @field:SerializedName("personality")
+    val personality: Prediction,
 )
 
 data class Prediction(
     @field:SerializedName("Ketelitian")
     val ketelitian: Float,
-
     @field:SerializedName("Kestabilan Emosi")
     val kestabilanEmosi: Float,
-
     @field:SerializedName("Keterbukaan terhadap Pengalaman")
     val keterbukaanTerhadapPengalaman: Float,
-
     @field:SerializedName("Kesepakatan")
     val kesepakatan: Float,
-
     @field:SerializedName("Keterbukaan Sosial, Energi, dan Antusiasme")
-    val keterbukaanSosialEnergiDanAntusiasme: Float
+    val keterbukaanSosialEnergiDanAntusiasme: Float,
 )
