@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:importantForAccessibility="no"
             android:src="@drawable/undraw_male_avatar"
             app:layout_constraintEnd_toEndOf="parent"
