@@ -148,20 +148,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/preference_subtitle"
+            android:layout_marginEnd="@dimen/margin_large"
             android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
-            app:layout_constraintEnd_toStartOf="@+id/switch_preference"
+            app:layout_constraintEnd_toStartOf="@+id/btn_reminder"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/preference_title" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_preference"
+        <ImageButton
+            android:id="@+id/btn_reminder"
+            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/preference_subtitle"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@drawable/bg_radius_medium"
+            android:backgroundTint="@color/md_theme_primary"
+            android:contentDescription="@string/set_reminder"
+            android:src="@drawable/baseline_access_time_filled_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/preference_subtitle"
             app:thumbTint="@color/md_theme_primary"
+            app:tint="@android:color/white"
             app:trackTint="@color/md_theme_surfaceVariant" />
 
         <!-- About App   -->
@@ -175,7 +182,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/preference_subtitle" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_reminder" />
 
         <TextView
             android:id="@+id/about_app_subtitle"

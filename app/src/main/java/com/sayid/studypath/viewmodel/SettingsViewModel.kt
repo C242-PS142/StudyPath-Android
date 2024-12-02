@@ -22,6 +22,8 @@ class SettingsViewModel(
 
     val isDarkTheme: LiveData<Boolean?> = localPreferences.isDarkTheme.asLiveData()
 
+    val isReminderSet: LiveData<Boolean> = localPreferences.isReminderSet.asLiveData()
+
     init {
         getUserData()
     }
@@ -46,6 +48,12 @@ class SettingsViewModel(
     fun setDarkTheme(active: Boolean) {
         viewModelScope.launch {
             localPreferences.setDarkTheme(active)
+        }
+    }
+
+    fun setReminder(active: Boolean) {
+        viewModelScope.launch {
+            localPreferences.setReminder(active)
         }
     }
 
