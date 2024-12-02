@@ -35,8 +35,7 @@ class SettingsViewModel(
             try {
                 if (idToken == null) throw NullPointerException("Value is null")
                 val response = ApiConfig.getApiService().login(LoginRequest(idToken))
-
-                _userResponse.value = Result.Success(response.data.result[0])
+                _userResponse.value = Result.Success(response.data.result)
             } catch (e: Exception) {
                 _userResponse.value =
                     Result

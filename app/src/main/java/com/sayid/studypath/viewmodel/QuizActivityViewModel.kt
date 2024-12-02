@@ -1,22 +1,24 @@
 package com.sayid.studypath.viewmodel
 
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sayid.studypath.data.remote.response.Prediction
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizItem
 import com.sayid.studypath.data.remote.response.QuizResponse
+import com.sayid.studypath.data.repository.AuthRepository
 import com.sayid.studypath.data.repository.QuizRepository
-import com.sayid.studypath.ui.activity.MainActivity
 import com.sayid.studypath.utils.PredictionResultSingleton
 import kotlinx.coroutines.launch
 
-class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewModel() {
+class QuizActivityViewModel(
+    private val authRepository: AuthRepository,
+    private val quizRepository: QuizRepository,
+) : ViewModel() {
+    @Suppress("ktlint:standard:backing-property-naming")
     private val _listQuiz = MutableLiveData<Result<QuizResponse>>()
 
     private val _listQuizAnswerResponse = MutableLiveData<Result<QuizAnswerResponse>>()
@@ -80,14 +82,17 @@ class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewMo
         }
     }
 
-    fun postQuizAnswers(idToken: String, listAnswers: QuizAnswerRequest) {
+    fun postQuizAnswers(listAnswers: QuizAnswerRequest) {
         viewModelScope.launch {
+            val idToken = authRepository.getIdToken()
             try {
+                if (idToken == null) throw NullPointerException("Value is null")
                 val response = quizRepository.postQuizAnswers(idToken, listAnswers)
+
                 _listQuizAnswerResponse.value = response
 
                 response.getOrNull()?.let { data ->
-                    if(data.status == "success"){
+                    if (data.status == "success") {
                         Log.d("Result Prediction", data.data.prediction.toString())
                         PredictionResultSingleton.updatePrediction(data.data.prediction)
                     }

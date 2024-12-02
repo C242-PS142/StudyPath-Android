@@ -8,19 +8,21 @@ data class LoginRequest(
 )
 
 data class UserLoginResponse(
-    @field:SerializedName("data")
-    val data: LoginData,
-    @field:SerializedName("message")
-    val message: String,
     @field:SerializedName("status")
     val status: String,
+    @field:SerializedName("message")
+    val message: String,
+    @field:SerializedName("data")
+    val data: LoginData,
 )
 
 data class LoginData(
     @field:SerializedName("isRegister")
     val isRegister: Boolean,
+    @field:SerializedName("isAnswerQuiz")
+    val isAnswerQuiz: Boolean,
     @field:SerializedName("result")
-    val result: List<UserLoginData>,
+    val result: UserLoginData,
 )
 
 data class UserLoginData(
