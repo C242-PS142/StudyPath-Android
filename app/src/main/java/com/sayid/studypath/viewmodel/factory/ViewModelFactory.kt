@@ -47,7 +47,7 @@ class ViewModelFactory private constructor(
                 EditProfileViewModel(authRepository) as T
             }
             modelClass.isAssignableFrom(QuizActivityViewModel::class.java) -> {
-                QuizActivityViewModel(quizRepository) as T
+                QuizActivityViewModel(authRepository, quizRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

@@ -105,6 +105,7 @@ class SettingsFragment : Fragment() {
                                 .placeholder(R.drawable.undraw_male_avatar)
                                 .circleCrop()
                                 .into(profilePict)
+
                             username.text = userData.name
                             emailUser.text = userData.email
                             loading.visibility = View.GONE

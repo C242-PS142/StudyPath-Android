@@ -47,6 +47,24 @@ class StageActivity : AppCompatActivity() {
             playAnimation()
         }
 
+        quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
+            if (result != null) {
+                if (result.isSuccess) {
+                    result.getOrNull()?.let { data ->
+                        if (data.status == "success") {
+                            isLoading(false)
+                            val intent =
+                                Intent(this@StageActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                } else {
+                    isLoading(false)
+                }
+            }
+        }
+
         binding.apply {
             tvStageHeader.text = progressText
             val quizName: String =
@@ -69,33 +87,12 @@ class StageActivity : AppCompatActivity() {
                     finish()
                 } else {
                     isLoading(true)
-                    btnNextStage.text = "Lihat Hasil Tes!"
-                    loginViewModel.idToken.observe(this@StageActivity) { idToken ->
-                        QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
-                            quizActivityViewModel.postQuizAnswers(
-                                idToken!!,
-                                QuizAnswerRequest(answer),
-                            )
-                        }
-
-                        quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
-                            if (result != null) {
-                                if (result.isSuccess) {
-                                    result.getOrNull()?.let { data ->
-                                        if (data.status == "success") {
-                                            isLoading(false)
-                                            val intent =
-                                                Intent(this@StageActivity, MainActivity::class.java)
-                                            startActivity(intent)
-                                            finish()
-                                        }
-                                    }
-                                } else {
-                                    isLoading(false)
-                                }
-                            }
-                        }
+                    QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
+                        quizActivityViewModel.postQuizAnswers(
+                            QuizAnswerRequest(answer),
+                        )
                     }
+                    btnNextStage.text = "Lihat Hasil Tes!"
                 }
             }
         }
@@ -127,8 +124,14 @@ class StageActivity : AppCompatActivity() {
     private fun playAnimation() {
         val main =
             ObjectAnimator.ofFloat(binding.scrollView, View.ALPHA, 1f).setDuration(500).also {
-                ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_X, 1f).setDuration(500).start()
-                ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_Y, 1f).setDuration(500).start()
+                ObjectAnimator
+                    .ofFloat(binding.scrollView, View.SCALE_X, 1f)
+                    .setDuration(500)
+                    .start()
+                ObjectAnimator
+                    .ofFloat(binding.scrollView, View.SCALE_Y, 1f)
+                    .setDuration(500)
+                    .start()
             }
         AnimatorSet().apply {
             playTogether(main)

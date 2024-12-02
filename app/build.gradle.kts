@@ -1,7 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+}
+
+val secretsFile = rootProject.file("local.properties")
+val secrets = Properties()
+
+if (secretsFile.exists()) {
+    secretsFile.inputStream().use { secrets.load(it) }
 }
 
 android {
@@ -24,6 +33,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            buildConfigField("String", "BASE_URL", "\"${secrets["BASE_URL"]}\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"${secrets["BASE_URL"]}\"")
         }
     }
     compileOptions {
