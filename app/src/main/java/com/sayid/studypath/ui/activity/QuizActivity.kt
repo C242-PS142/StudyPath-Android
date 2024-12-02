@@ -21,7 +21,9 @@ import com.sayid.studypath.viewmodel.QuizActivityViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityQuizBinding
+    @Suppress("ktlint:standard:backing-property-naming")
+    private var _binding: ActivityQuizBinding? = null
+    private val binding get() = _binding!!
     private var currentProgress = 1
     private lateinit var soundPool: SoundPool
     private var spLoaded = false
@@ -37,7 +39,7 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityQuizBinding.inflate(layoutInflater)
+        _binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         savedInstanceState?.getInt(KEY_CURRENT_PROGRESS)?.let {
@@ -318,6 +320,11 @@ class QuizActivity : AppCompatActivity() {
         NEUT,
         AGG,
         VAGG,
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {

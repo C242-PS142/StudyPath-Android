@@ -13,7 +13,7 @@ class ApiConfig {
             val clientBuilder =
                 OkHttpClient
                     .Builder()
-                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .connectTimeout(30, TimeUnit.SECONDS)
 
             if (BuildConfig.DEBUG) {
                 val loggingInterceptor =
