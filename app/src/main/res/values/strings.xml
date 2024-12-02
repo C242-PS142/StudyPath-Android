@@ -83,5 +83,10 @@
     <string name="your_birth_date">Kapan Tanggal Lahirmu?</string>
     <string name="enter_your_birth_date">Masukkan Tanggal Lahirmu</string>
     <string name="name">Nama</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_date">Pilih Tanggal</string>
+    <string name="choose_time">Pilih Jam</string>
+    <string name="set_reminder">Atur Pengingat</string>
     <string name="text_btn_ulangi_kuis">Ulangi Tes Big Five</string>
 </resources>

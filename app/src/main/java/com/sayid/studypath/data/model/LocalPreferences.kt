@@ -14,6 +14,7 @@ class LocalPreferences(
 ) {
     private val isOnboardingCompletedKey = booleanPreferencesKey(IS_ONBOARDING_COMPLETED_KEY)
     private val isDarkThemeKey = booleanPreferencesKey(IS_DARK_THEME_KEY)
+    private val isReminderSetKey = booleanPreferencesKey(IS_REMINDER_SET)
 
     val isOnboardingCompleted: Flow<Boolean> =
         dataStore.data.map { preferences ->
@@ -23,6 +24,11 @@ class LocalPreferences(
     val isDarkTheme: Flow<Boolean?> =
         dataStore.data.map { preferences ->
             preferences[isDarkThemeKey]
+        }
+
+    val isReminderSet: Flow<Boolean> =
+        dataStore.data.map { preferences ->
+            preferences[isReminderSetKey] ?: false
         }
 
     suspend fun setOnboardingCompleted(completed: Boolean) {
@@ -37,9 +43,16 @@ class LocalPreferences(
         }
     }
 
+    suspend fun setReminder(active: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[isReminderSetKey] = active
+        }
+    }
+
     companion object {
         private const val IS_ONBOARDING_COMPLETED_KEY = "is_onboarding_completed"
         private const val IS_DARK_THEME_KEY = "is_dark_theme_key"
+        private const val IS_REMINDER_SET = "is_reminder_set"
     }
 }
 
