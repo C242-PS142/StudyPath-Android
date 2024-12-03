@@ -44,7 +44,7 @@ class ViewModelFactory private constructor(
             }
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(localPreferences) as T
+                MainViewModel(localPreferences, authRepository) as T
             }
 
             modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
