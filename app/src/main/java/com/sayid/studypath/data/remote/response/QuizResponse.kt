@@ -51,8 +51,6 @@ data class QuizAnswerResponse(
 data class DataResult(
     @field:SerializedName("prediction")
     val prediction: Prediction,
-    @field:SerializedName("text")
-    val text: String,
 )
 
 data class UserPredictionResult(

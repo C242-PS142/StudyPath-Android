@@ -4,6 +4,7 @@ import com.sayid.studypath.data.remote.response.LoginRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizResponse
+import com.sayid.studypath.data.remote.response.RecommendationResponse
 import com.sayid.studypath.data.remote.response.RegisterResponse
 import com.sayid.studypath.data.remote.response.UserLoginResponse
 import com.sayid.studypath.data.remote.response.UserPredictionResult
@@ -67,4 +68,9 @@ interface ApiService {
     suspend fun userPredictionData(
         @Header("Authorization") token: String,
     ): UserPredictionResult
+
+    @GET("api/recommendation")
+    suspend fun getRecommendation(
+        @Header("Authorization") token: String,
+    ): RecommendationResponse
 }
