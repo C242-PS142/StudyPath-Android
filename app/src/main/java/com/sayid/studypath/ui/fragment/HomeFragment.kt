@@ -14,6 +14,7 @@ import com.sayid.studypath.R
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.databinding.FragmentHomeBinding
 import com.sayid.studypath.utils.PredictionResultSingleton
+import com.sayid.studypath.utils.UserLoginDataSingleton
 import com.sayid.studypath.utils.initializePersonalityCard
 import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.viewmodel.MainViewModel
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
                     requireContext(),
                     binding.viewPager,
                     binding.indicatorLayout,
-                    it
+                    it,
                 )
             }
         }
@@ -75,11 +76,11 @@ class HomeFragment : Fragment() {
 
         binding.apply {
             val msg = "Tanya dulu Rekomendasi Hari ini!"
-            btnShowOpenness.setOnClickListener {showToast(requireContext(), msg)}
-            btnShowAgreeableness.setOnClickListener {showToast(requireContext(), msg)}
-            btnShowNeurotism.setOnClickListener {showToast(requireContext(), msg)}
-            btnShowConscientiousness.setOnClickListener {showToast(requireContext(), msg)}
-            btnShowExtraversion.setOnClickListener {showToast(requireContext(), msg)}
+            btnShowOpenness.setOnClickListener { showToast(requireContext(), msg) }
+            btnShowAgreeableness.setOnClickListener { showToast(requireContext(), msg) }
+            btnShowNeurotism.setOnClickListener { showToast(requireContext(), msg) }
+            btnShowConscientiousness.setOnClickListener { showToast(requireContext(), msg) }
+            btnShowExtraversion.setOnClickListener { showToast(requireContext(), msg) }
         }
 
         mainViewModel.recommendationResponse.observe(viewLifecycleOwner) { result ->
@@ -101,7 +102,7 @@ class HomeFragment : Fragment() {
                                         data.openness.judul,
                                         data.openness.deskripsi,
                                         data.openness.rekomendasi,
-                                        R.drawable.icon_keterbukaan
+                                        R.drawable.icon_keterbukaan,
                                     )
 
                                 dialog.show(parentFragmentManager, "Recommendation")
@@ -113,7 +114,7 @@ class HomeFragment : Fragment() {
                                         data.agreeableness.judul,
                                         data.agreeableness.deskripsi,
                                         data.agreeableness.rekomendasi,
-                                        R.drawable.icon_kesepakatan_2
+                                        R.drawable.icon_kesepakatan_2,
                                     )
 
                                 dialog.show(parentFragmentManager, "Recommendation")
@@ -125,7 +126,7 @@ class HomeFragment : Fragment() {
                                         data.neuroticism.judul,
                                         data.neuroticism.deskripsi,
                                         data.neuroticism.rekomendasi,
-                                        R.drawable.icon_kestabilan
+                                        R.drawable.icon_kestabilan,
                                     )
 
                                 dialog.show(parentFragmentManager, "Recommendation")
@@ -137,7 +138,7 @@ class HomeFragment : Fragment() {
                                         data.conscientiousness.judul,
                                         data.conscientiousness.deskripsi,
                                         data.conscientiousness.rekomendasi,
-                                        R.drawable.icon_ketelitian
+                                        R.drawable.icon_ketelitian,
                                     )
 
                                 dialog.show(parentFragmentManager, "Recommendation")
@@ -149,7 +150,7 @@ class HomeFragment : Fragment() {
                                         data.extroversion.judul,
                                         data.extroversion.deskripsi,
                                         data.extroversion.rekomendasi,
-                                        R.drawable.icon_sosial
+                                        R.drawable.icon_sosial,
                                     )
 
                                 dialog.show(parentFragmentManager, "Recommendation")
@@ -170,7 +171,8 @@ class HomeFragment : Fragment() {
         }
 
         var fetchOnceMore = false
-        settingsViewModel.userResponse.observe(viewLifecycleOwner) { result ->
+
+        UserLoginDataSingleton.userLoginData.observe(viewLifecycleOwner) { result ->
             binding.apply {
                 if (result != null) {
                     when (result) {

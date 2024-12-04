@@ -20,6 +20,7 @@ import com.sayid.studypath.data.Result
 import com.sayid.studypath.databinding.FragmentSettingsBinding
 import com.sayid.studypath.service.QuizReminder
 import com.sayid.studypath.ui.activity.LoginActivity
+import com.sayid.studypath.utils.UserLoginDataSingleton
 import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.viewmodel.SettingsViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
@@ -91,7 +92,7 @@ class SettingsFragment : Fragment() {
         }
 
         var fetchOnceMore = false
-        settingsViewModel.userResponse.observe(viewLifecycleOwner) { result ->
+        UserLoginDataSingleton.userLoginData.observe(viewLifecycleOwner) { result ->
             binding.apply {
                 if (result != null) {
                     when (result) {
