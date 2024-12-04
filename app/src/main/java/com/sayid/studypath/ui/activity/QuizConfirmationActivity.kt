@@ -6,7 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import com.sayid.studypath.R
 import com.sayid.studypath.data.Result
@@ -40,6 +40,10 @@ class QuizConfirmationActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
+
+        val navIcon =
+            AppCompatResources.getDrawable(this, R.drawable.baseline_arrow_back_24)
+        supportActionBar?.setHomeAsUpIndicator(navIcon)
 
         quizConfirmationViewModel.userPredictionResult.observe(this) { result ->
             when (result) {
@@ -83,8 +87,8 @@ class QuizConfirmationActivity : AppCompatActivity() {
                 quizConfirmationViewModel.signOut()
                 startActivity(
                     Intent(this@QuizConfirmationActivity, LoginActivity::class.java),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle(),
                 )
+                finish()
                 true
             }
 
@@ -112,11 +116,13 @@ class QuizConfirmationActivity : AppCompatActivity() {
             btnConfirmationQuiz.setOnClickListener {
                 val intent = Intent(this@QuizConfirmationActivity, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }
 
             btnRefreshData.setOnClickListener {
                 val intent = Intent(this@QuizConfirmationActivity, QuizActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }

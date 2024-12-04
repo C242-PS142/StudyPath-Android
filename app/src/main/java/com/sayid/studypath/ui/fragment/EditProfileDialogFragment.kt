@@ -82,6 +82,10 @@ class EditProfileDialogFragment : DialogFragment() {
                     onPressed = true
 
                     val edtName = edtName.text.toString().trim()
+                    if (edtName.isEmpty() || (edtName == name && currentImageUri == null)) {
+                        dialog.dismiss()
+                        return@setOnClickListener
+                    }
 
                     if (currentImageUri == null) {
                         editProfileViewModel.editProfile(
