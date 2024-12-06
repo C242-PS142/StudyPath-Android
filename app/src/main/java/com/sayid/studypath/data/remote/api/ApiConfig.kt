@@ -13,7 +13,7 @@ class ApiConfig {
             val clientBuilder =
                 OkHttpClient
                     .Builder()
-                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .connectTimeout(30, TimeUnit.SECONDS)
 
             if (BuildConfig.DEBUG) {
                 val loggingInterceptor =
@@ -26,7 +26,7 @@ class ApiConfig {
             val retrofit =
                 Retrofit
                     .Builder()
-                    .baseUrl("http://192.168.100.86:3000/")
+                    .baseUrl(BuildConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

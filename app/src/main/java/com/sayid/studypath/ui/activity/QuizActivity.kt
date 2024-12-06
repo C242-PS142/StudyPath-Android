@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.media.SoundPool
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
@@ -20,7 +21,9 @@ import com.sayid.studypath.viewmodel.QuizActivityViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
 class QuizActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityQuizBinding
+    @Suppress("ktlint:standard:backing-property-naming")
+    private var _binding: ActivityQuizBinding? = null
+    private val binding get() = _binding!!
     private var currentProgress = 1
     private lateinit var soundPool: SoundPool
     private var spLoaded = false
@@ -36,14 +39,11 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityQuizBinding.inflate(layoutInflater)
+        _binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         savedInstanceState?.getInt(KEY_CURRENT_PROGRESS)?.let {
             currentProgress = it
-        }
-        savedInstanceState?.getBoolean(KEY_IS_ANIMATING)?.let {
-            isAnimating = it
         }
         playSfx()
         // Get List Quiz
@@ -104,6 +104,7 @@ class QuizActivity : AppCompatActivity() {
                     tvTestHeader.text = progressQuiz
                     tvTestQuestion.text = quizs[currentProgress - 1].questionTextID
                     currentQuizCode = quizs[currentProgress - 1].questionCode
+                    Log.d("QUIZ CURRENT PROGRESS", "CURRENT QUIZ CODE: $currentQuizCode")
                 }
             } else {
                 // Logika jika kuis selesai, misalnya navigasi ke hasil
@@ -112,6 +113,7 @@ class QuizActivity : AppCompatActivity() {
         }
 // Fungsi untuk berpindah ke pertanyaan berikutnya
         val onAnswerSelected = {
+            Log.d("QUIZ CURRENT PROGRESS", "PROGRESS QUIZ: $currentProgress")
             currentProgress++
             updateQuiz()
         }
@@ -126,22 +128,29 @@ class QuizActivity : AppCompatActivity() {
             view.getGlobalVisibleRect(rect)
             val isWithinBounds = rect.contains(event.rawX.toInt(), event.rawY.toInt())
             if (!isAnimating) {
-                soundPool.play(soundId, 1f, 1f, 0, 0, 1f)
                 isAnimating = true
-                animateButtons(buttonEnum) {
-                    if (isWithinBounds) {
-                        onAnswerSelected()
-                        QuizAnswerSingleton.addQuizAnswer(
-                            QuizAnswer(
-                                currentQuizCode,
-                                answerValue,
-                            ),
-                        )
+                animateButtons(
+                    selectedButton = buttonEnum,
+                    onComplete = {
+                        if (isWithinBounds) {
+                            QuizAnswerSingleton.addQuizAnswer(
+                                QuizAnswer(
+                                    currentQuizCode,
+                                    answerValue,
+                                ),
+                            )
+                            onAnswerSelected()
+                        }
                         animateButtons(buttonEnum, isRecover = true) {
                             isAnimating = false
                         }
-                    }
-                }
+                    },
+                    onStart = {
+                        if (isWithinBounds) {
+                            soundPool.play(soundId, 1f, 1f, 0, 0, 1f)
+                        }
+                    },
+                )
             }
         }
 
@@ -201,6 +210,7 @@ class QuizActivity : AppCompatActivity() {
         selectedButton: ButtonEnum,
         isRecover: Boolean = false,
         onComplete: () -> Unit = {},
+        onStart: () -> Unit = {},
     ) {
         val animations = mutableListOf<ObjectAnimator>()
         val alpha = if (isRecover) 1f else 0f
@@ -277,7 +287,9 @@ class QuizActivity : AppCompatActivity() {
 
             addListener(
                 object : Animator.AnimatorListener {
-                    override fun onAnimationStart(animation: Animator) {}
+                    override fun onAnimationStart(animation: Animator) {
+                        onStart()
+                    }
 
                     override fun onAnimationEnd(animation: Animator) {
                         onComplete()
@@ -308,6 +320,11 @@ class QuizActivity : AppCompatActivity() {
         NEUT,
         AGG,
         VAGG,
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {

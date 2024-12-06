@@ -15,7 +15,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityOptionsCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.sayid.studypath.data.Result
@@ -64,6 +64,10 @@ class NewUserDataActivity : AppCompatActivity() {
             setHomeButtonEnabled(true)
         }
 
+        val navIcon =
+            AppCompatResources.getDrawable(this, com.sayid.studypath.R.drawable.baseline_arrow_back_24)
+        supportActionBar?.setHomeAsUpIndicator(navIcon)
+
         savedInstanceState?.getString(KEY_CURRENT_IMAGE_URI)?.let { uriString ->
             currentImageUri = Uri.parse(uriString)
             showImage()
@@ -106,8 +110,8 @@ class NewUserDataActivity : AppCompatActivity() {
                 newUserDataViewModel.signOut()
                 startActivity(
                     Intent(this@NewUserDataActivity, LoginActivity::class.java),
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle(),
                 )
+                finish()
                 true
             }
 

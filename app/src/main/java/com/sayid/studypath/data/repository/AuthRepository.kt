@@ -6,6 +6,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.sayid.studypath.utils.PredictionResultSingleton
+import com.sayid.studypath.utils.UserLoginDataSingleton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.tasks.await
 
@@ -55,6 +57,8 @@ class AuthRepository(
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
     fun signOut() {
+        PredictionResultSingleton.clearPrediction()
+        UserLoginDataSingleton.clearLoginData()
         firebaseAuth.signOut()
         googleSignInClient.signOut()
     }

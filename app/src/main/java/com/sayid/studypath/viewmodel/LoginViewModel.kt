@@ -9,12 +9,14 @@ import com.sayid.studypath.data.remote.api.ApiConfig
 import com.sayid.studypath.data.remote.response.LoginRequest
 import com.sayid.studypath.data.remote.response.UserLoginResponse
 import com.sayid.studypath.data.repository.AuthRepository
+import com.sayid.studypath.utils.UserLoginDataSingleton
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val authRepository: AuthRepository,
 ) : ViewModel() {
-    private val _userResponse = MutableLiveData<com.sayid.studypath.data.Result<UserLoginResponse>>()
+    private val _userResponse =
+        MutableLiveData<com.sayid.studypath.data.Result<UserLoginResponse>>()
     val userResponse: LiveData<com.sayid.studypath.data.Result<UserLoginResponse>> get() = _userResponse
 
     private val _authResult = MutableLiveData<Result<FirebaseUser>?>()
@@ -38,6 +40,13 @@ class LoginViewModel(
                 _userResponse.value =
                     com.sayid.studypath.data.Result
                         .Success(response)
+
+                if (response.data.isRegister && response.data.isAnswerQuiz) {
+                    UserLoginDataSingleton.updateLoginData(
+                        com.sayid.studypath.data.Result
+                            .Success(response.data.result),
+                    )
+                }
             } catch (e: Exception) {
                 _userResponse.value =
                     com.sayid.studypath.data.Result
@@ -60,8 +69,6 @@ class LoginViewModel(
 
     fun getGoogleSignInIntent() = authRepository.getGoogleSignInIntent()
 
-    fun getCurrentUser(): FirebaseUser? = authRepository.getCurrentUser()
-
     private fun getIdToken() {
         viewModelScope.launch {
             val token = authRepository.getIdToken()
@@ -70,9 +77,5 @@ class LoginViewModel(
                 login()
             }
         }
-    }
-
-    fun signOut() {
-        authRepository.signOut()
     }
 }

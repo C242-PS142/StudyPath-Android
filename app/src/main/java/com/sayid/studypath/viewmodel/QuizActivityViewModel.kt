@@ -1,22 +1,26 @@
 package com.sayid.studypath.viewmodel
 
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sayid.studypath.data.remote.response.Prediction
+import com.sayid.studypath.data.Result
+import com.sayid.studypath.data.remote.api.ApiConfig
+import com.sayid.studypath.data.remote.response.LoginRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizItem
 import com.sayid.studypath.data.remote.response.QuizResponse
-import com.sayid.studypath.data.repository.QuizRepository
-import com.sayid.studypath.ui.activity.MainActivity
+import com.sayid.studypath.data.repository.AuthRepository
 import com.sayid.studypath.utils.PredictionResultSingleton
+import com.sayid.studypath.utils.UserLoginDataSingleton
 import kotlinx.coroutines.launch
 
-class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewModel() {
+class QuizActivityViewModel(
+    private val authRepository: AuthRepository,
+) : ViewModel() {
+    @Suppress("ktlint:standard:backing-property-naming")
     private val _listQuiz = MutableLiveData<Result<QuizResponse>>()
 
     private val _listQuizAnswerResponse = MutableLiveData<Result<QuizAnswerResponse>>()
@@ -62,11 +66,12 @@ class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewMo
 
     private fun getListQuiz() {
         viewModelScope.launch {
+            _listQuiz.value = Result.Loading
             try {
-                val response: Result<QuizResponse> = quizRepository.getListQuiz()
-                _listQuiz.value = response
+                val response = ApiConfig.getApiService().getListQuiz()
+                _listQuiz.value = Result.Success(response)
 
-                response.getOrNull()?.let { quizResponse ->
+                response.let { quizResponse ->
                     val stages: List<List<QuizItem>> = divideIntoStages(quizResponse.data.quiz)
                     _quizStage1.value = stages[0]
                     _quizStage2.value = stages[1]
@@ -75,25 +80,33 @@ class QuizActivityViewModel(private val quizRepository: QuizRepository) : ViewMo
                     _quizStage5.value = stages[4]
                 }
             } catch (e: Exception) {
-                _listQuiz.value = Result.failure(e)
+                _listQuiz.value = Result.Error("Gagal: ${e.message}")
             }
         }
     }
 
-    fun postQuizAnswers(idToken: String, listAnswers: QuizAnswerRequest) {
+    fun postQuizAnswers(listAnswers: QuizAnswerRequest) {
         viewModelScope.launch {
+            _listQuizAnswerResponse.value = Result.Loading
+            val idToken = authRepository.getIdToken()
             try {
-                val response = quizRepository.postQuizAnswers(idToken, listAnswers)
-                _listQuizAnswerResponse.value = response
+                if (idToken == null) throw NullPointerException("Value is null")
+                val response =
+                    ApiConfig.getApiService().submitQuizAnswers("Bearer $idToken", listAnswers)
 
-                response.getOrNull()?.let { data ->
-                    if(data.status == "success"){
-                        Log.d("Result Prediction", data.data.prediction.toString())
-                        PredictionResultSingleton.updatePrediction(data.data.prediction)
-                    }
+                PredictionResultSingleton.updatePrediction(response.data.prediction)
+                Log.d("POST QUIZ", response.toString())
+                _listQuizAnswerResponse.value = Result.Success(response)
+
+                val userLogin = ApiConfig.getApiService().login(LoginRequest(idToken))
+
+                if (userLogin.data.isRegister && userLogin.data.isAnswerQuiz) {
+                    UserLoginDataSingleton.updateLoginData(
+                        Result.Success(userLogin.data.result),
+                    )
                 }
             } catch (e: Exception) {
-                _listQuizAnswerResponse.value = Result.failure(e)
+                _listQuizAnswerResponse.value = Result.Error("Gagal: ${e.message}")
             }
         }
     }

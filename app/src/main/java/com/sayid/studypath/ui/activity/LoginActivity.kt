@@ -121,13 +121,33 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextScreen(loginData: LoginData) {
+        val hasTakenQuiz = loginData.isAnswerQuiz
         val hasRegistered = loginData.isRegister
+
         val intentMain = Intent(this, MainActivity::class.java)
+        val intentQuizConfirmation = Intent(this, QuizConfirmationActivity::class.java)
         val intentNewUserData = Intent(this, NewUserDataActivity::class.java)
-        intentNewUserData.putExtra(NewUserDataActivity.USER_NAME, loginData.result[0].name)
+
+        Log.e(TAG, hasTakenQuiz.toString())
+        Log.e(TAG, hasRegistered.toString())
+
+        intentNewUserData.putExtra(
+            NewUserDataActivity.USER_NAME,
+            loginData.result.name,
+        )
+
+        Log.e(TAG, loginData.result.name)
 
         if (hasRegistered) {
-            if (newLogin) startActivity(intentMain) else startActivityNoAnimation(intentMain)
+            if (newLogin) {
+                startActivity(intentQuizConfirmation)
+            } else {
+                if (hasTakenQuiz) {
+                    startActivityNoAnimation(intentMain)
+                } else {
+                    startActivityNoAnimation(intentQuizConfirmation)
+                }
+            }
         } else {
             if (newLogin) {
                 startActivity(intentNewUserData)

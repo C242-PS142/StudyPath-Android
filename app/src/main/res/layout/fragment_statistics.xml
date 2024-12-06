@@ -13,11 +13,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/statistics_layout"
-        android:alpha="0"
-        tools:alpha="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large">
+        android:layout_marginTop="@dimen/margin_large"
+        android:alpha="0"
+        tools:alpha="1">
 
         <TextView
             android:id="@+id/tv_header"
@@ -34,22 +34,22 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/md_theme_primary"
-
             android:text="@string/chart_base_on_big_five"
-            android:textSize="@dimen/text_size_heading"
+
             android:textAppearance="@style/Theme.StudyPath.Text.SemiBold"
+            android:textColor="@color/md_theme_primary"
+            android:textSize="@dimen/text_size_heading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_header" />
 
         <TextView
-            android:id="@+id/tv_pie_title"
+            android:id="@+id/tv_radar_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
             android:height="28dp"
-            android:text="@string/diagram_pie"
+            android:text="@string/diagram_radar"
             android:textAppearance="@style/Theme.StudyPath.Text.Bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -57,24 +57,23 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <TextView
-            android:id="@+id/tv_pie_subtitle"
+            android:id="@+id/tv_radar_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/explain_pie"
+            android:text="@string/explain_radar"
             android:textAppearance="@style/Theme.StudyPath.Text.LightBody"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pie_title" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tv_radar_title" />
 
         <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
-            android:id="@+id/big_five_pie_charts"
+            android:id="@+id/big_five_radar_charts"
             android:layout_width="0dp"
             android:layout_height="360dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_pie_subtitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_radar_subtitle" />
 
         <TextView
             android:id="@+id/tv_bar_title"
@@ -87,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/big_five_pie_charts" />
+            app:layout_constraintTop_toBottomOf="@+id/big_five_radar_charts" />
 
         <TextView
             android:id="@+id/tv_bar_subtitle"
@@ -100,7 +99,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_bar_title" />
 
-
         <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
             android:id="@+id/big_five_bar_charts"
             android:layout_width="match_parent"
@@ -109,7 +107,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_bar_subtitle" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_re_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:paddingHorizontal="@dimen/padding_small"
+            android:text="@string/text_btn_ulangi_kuis"
+            android:textAppearance="@style/Theme.StudyPath.Text.Bold"
+            android:textColor="@android:color/white"
+            app:cornerRadius="@dimen/corner_radius_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/big_five_bar_charts" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </ScrollView>

@@ -107,4 +107,15 @@
         <item name="android:fontFamily">@font/poppins_light</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
+
+    <style name="CustomDatePickerDialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="colorAccent">@color/md_theme_primary</item>
+        <item name="android:windowBackground">?attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="CustomTimePickerDialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="colorAccent">@color/md_theme_primary</item>
+        <item name="android:windowBackground">?attr/colorBackgroundFloating</item>
+    </style>
+
 </resources>

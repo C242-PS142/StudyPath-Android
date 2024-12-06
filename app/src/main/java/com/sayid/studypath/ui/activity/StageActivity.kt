@@ -7,14 +7,15 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sayid.studypath.R
+import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.databinding.ActivityStageBinding
 import com.sayid.studypath.utils.QuizAnswerSingleton
-import com.sayid.studypath.viewmodel.LoginViewModel
 import com.sayid.studypath.viewmodel.QuizActivityViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
@@ -28,7 +29,6 @@ class StageActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private val quizActivityViewModel: QuizActivityViewModel by viewModels<QuizActivityViewModel> { factory }
-    private val loginViewModel: LoginViewModel by viewModels<LoginViewModel> { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,29 @@ class StageActivity : AppCompatActivity() {
             playSound(if (stage == 5) R.raw.finish_all_stage else R.raw.finish_stage)
         } else {
             playAnimation()
+        }
+
+        quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        isLoading(true)
+                    }
+
+                    is Result.Success -> {
+                        isLoading(false)
+                        val intent =
+                            Intent(this@StageActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    is Result.Error -> {
+                        isLoading(false)
+                        Log.d(TAG, result.error)
+                    }
+                }
+            }
         }
 
         binding.apply {
@@ -68,34 +91,12 @@ class StageActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    isLoading(true)
-                    btnNextStage.text = "Lihat Hasil Tes!"
-                    loginViewModel.idToken.observe(this@StageActivity) { idToken ->
-                        QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
-                            quizActivityViewModel.postQuizAnswers(
-                                idToken!!,
-                                QuizAnswerRequest(answer),
-                            )
-                        }
-
-                        quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
-                            if (result != null) {
-                                if (result.isSuccess) {
-                                    result.getOrNull()?.let { data ->
-                                        if (data.status == "success") {
-                                            isLoading(false)
-                                            val intent =
-                                                Intent(this@StageActivity, MainActivity::class.java)
-                                            startActivity(intent)
-                                            finish()
-                                        }
-                                    }
-                                } else {
-                                    isLoading(false)
-                                }
-                            }
-                        }
+                    QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
+                        quizActivityViewModel.postQuizAnswers(
+                            QuizAnswerRequest(answer),
+                        )
                     }
+                    btnNextStage.text = "Lihat Hasil Tes!"
                 }
             }
         }
@@ -126,12 +127,40 @@ class StageActivity : AppCompatActivity() {
 
     private fun playAnimation() {
         val main =
-            ObjectAnimator.ofFloat(binding.scrollView, View.ALPHA, 1f).setDuration(500).also {
-                ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_X, 1f).setDuration(500).start()
-                ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_Y, 1f).setDuration(500).start()
+            ObjectAnimator.ofFloat(binding.scrollView, View.ALPHA, 1f).apply {
+                duration = 500
             }
+        val scaleX =
+            ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_X, 1f).apply {
+                duration = 500
+            }
+        val scaleY =
+            ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_Y, 1f).apply {
+                duration = 500
+            }
+        val bgAlphaTop =
+            ObjectAnimator.ofFloat(binding.ivBgTop, View.ALPHA, 0f, 0.25f).apply {
+                duration = 800
+            }
+        val bgTopMove =
+            ObjectAnimator.ofFloat(binding.ivBgTop, View.TRANSLATION_Y, -50f, 0f).apply {
+                duration = 1250
+                repeatCount = ObjectAnimator.INFINITE
+                repeatMode = ObjectAnimator.REVERSE
+            }
+        val bgAlphaBottom =
+            ObjectAnimator.ofFloat(binding.ivBgBottom, View.ALPHA, 0f, 0.25f).apply {
+                duration = 800
+            }
+        val bgBottomMove =
+            ObjectAnimator.ofFloat(binding.ivBgBottom, View.TRANSLATION_Y, 50f, 0f).apply {
+                duration = 1250
+                repeatCount = ObjectAnimator.INFINITE
+                repeatMode = ObjectAnimator.REVERSE
+            }
+
         AnimatorSet().apply {
-            playTogether(main)
+            playTogether(main, scaleX, scaleY, bgAlphaTop, bgAlphaBottom)
             start()
 
             addListener(
@@ -143,6 +172,11 @@ class StageActivity : AppCompatActivity() {
                 },
             )
         }
+
+        AnimatorSet().apply {
+            playTogether(bgTopMove, bgBottomMove)
+            start()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -151,10 +185,17 @@ class StageActivity : AppCompatActivity() {
     }
 
     private fun isLoading(active: Boolean) {
+        binding.btnNextStage.isEnabled = !active
         binding.loading.visibility = if (active) View.VISIBLE else View.GONE
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
+        private const val TAG = "StageActivity"
         const val CURRENTSTAGE = "current_stage"
         private const val KEY_IS_PLAYED = "is_played"
     }

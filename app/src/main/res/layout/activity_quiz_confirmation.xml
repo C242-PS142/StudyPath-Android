@@ -5,17 +5,30 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/padding_large"
     tools:context=".ui.activity.QuizConfirmationActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_large"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +44,9 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:gravity="center"
                 android:textAppearance="@style/Theme.StudyPath.Text.Heading"
-                tools:text="@string/has_data" />
+                android:visibility="gone"
+                tools:text="@string/has_data"
+                tools:visibility="visible" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
@@ -88,8 +103,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:textAppearance="@style/Theme.StudyPath.Text.Button"
+                android:visibility="gone"
                 app:cornerRadius="@dimen/corner_radius_large"
-                tools:text="@string/load_data" />
+                tools:text="@string/load_data"
+                tools:visibility="visible" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_refresh_data"
