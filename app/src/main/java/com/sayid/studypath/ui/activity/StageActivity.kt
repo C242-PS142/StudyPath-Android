@@ -16,7 +16,6 @@ import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.databinding.ActivityStageBinding
 import com.sayid.studypath.utils.QuizAnswerSingleton
-import com.sayid.studypath.viewmodel.LoginViewModel
 import com.sayid.studypath.viewmodel.QuizActivityViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
@@ -30,7 +29,6 @@ class StageActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private val quizActivityViewModel: QuizActivityViewModel by viewModels<QuizActivityViewModel> { factory }
-    private val loginViewModel: LoginViewModel by viewModels<LoginViewModel> { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +91,6 @@ class StageActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    isLoading(true)
                     QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
                         quizActivityViewModel.postQuizAnswers(
                             QuizAnswerRequest(answer),
@@ -130,18 +127,40 @@ class StageActivity : AppCompatActivity() {
 
     private fun playAnimation() {
         val main =
-            ObjectAnimator.ofFloat(binding.scrollView, View.ALPHA, 1f).setDuration(500).also {
-                ObjectAnimator
-                    .ofFloat(binding.scrollView, View.SCALE_X, 1f)
-                    .setDuration(500)
-                    .start()
-                ObjectAnimator
-                    .ofFloat(binding.scrollView, View.SCALE_Y, 1f)
-                    .setDuration(500)
-                    .start()
+            ObjectAnimator.ofFloat(binding.scrollView, View.ALPHA, 1f).apply {
+                duration = 500
             }
+        val scaleX =
+            ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_X, 1f).apply {
+                duration = 500
+            }
+        val scaleY =
+            ObjectAnimator.ofFloat(binding.scrollView, View.SCALE_Y, 1f).apply {
+                duration = 500
+            }
+        val bgAlphaTop =
+            ObjectAnimator.ofFloat(binding.ivBgTop, View.ALPHA, 0f, 0.25f).apply {
+                duration = 800
+            }
+        val bgTopMove =
+            ObjectAnimator.ofFloat(binding.ivBgTop, View.TRANSLATION_Y, -50f, 0f).apply {
+                duration = 1250
+                repeatCount = ObjectAnimator.INFINITE
+                repeatMode = ObjectAnimator.REVERSE
+            }
+        val bgAlphaBottom =
+            ObjectAnimator.ofFloat(binding.ivBgBottom, View.ALPHA, 0f, 0.25f).apply {
+                duration = 800
+            }
+        val bgBottomMove =
+            ObjectAnimator.ofFloat(binding.ivBgBottom, View.TRANSLATION_Y, 50f, 0f).apply {
+                duration = 1250
+                repeatCount = ObjectAnimator.INFINITE
+                repeatMode = ObjectAnimator.REVERSE
+            }
+
         AnimatorSet().apply {
-            playTogether(main)
+            playTogether(main, scaleX, scaleY, bgAlphaTop, bgAlphaBottom)
             start()
 
             addListener(
@@ -153,6 +172,11 @@ class StageActivity : AppCompatActivity() {
                 },
             )
         }
+
+        AnimatorSet().apply {
+            playTogether(bgTopMove, bgBottomMove)
+            start()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -161,6 +185,7 @@ class StageActivity : AppCompatActivity() {
     }
 
     private fun isLoading(active: Boolean) {
+        binding.btnNextStage.isEnabled = !active
         binding.loading.visibility = if (active) View.VISIBLE else View.GONE
     }
 

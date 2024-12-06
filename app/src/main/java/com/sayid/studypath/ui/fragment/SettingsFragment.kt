@@ -3,6 +3,7 @@ package com.sayid.studypath.ui.fragment
 import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +12,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -135,9 +138,30 @@ class SettingsFragment : Fragment() {
     private fun setListener() {
         binding.apply {
             btnLogout.setOnClickListener {
-                settingsViewModel.signOut()
-                startActivity(Intent(requireContext(), LoginActivity::class.java))
-                requireActivity().finish()
+                val dialog =
+                    AlertDialog
+                        .Builder(requireContext())
+                        .setTitle("Keluar")
+                        .setMessage("Apakah Kamu Yakin Ingin Keluar?")
+                        .setPositiveButton("Ya") { _, _ ->
+                            settingsViewModel.signOut()
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                            requireActivity().finish()
+                        }.setNegativeButton("Tidak") { dialog, _ ->
+                            dialog.dismiss()
+                        }.create()
+
+                dialog.window?.setBackgroundDrawableResource(R.drawable.bg_radius_xlarge)
+
+                dialog.setOnShowListener {
+                    val positiveButton = dialog.getButton(DatePickerDialog.BUTTON_POSITIVE)
+                    val negativeButton = dialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)
+
+                    positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_error))
+                    negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_onSurface))
+                }
+
+                dialog.show()
             }
             switchTheme.setOnCheckedChangeListener { _, isChecked ->
                 settingsViewModel.setDarkTheme(

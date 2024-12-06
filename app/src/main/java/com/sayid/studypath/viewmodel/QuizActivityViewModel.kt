@@ -1,17 +1,20 @@
 package com.sayid.studypath.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.api.ApiConfig
+import com.sayid.studypath.data.remote.response.LoginRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.data.remote.response.QuizAnswerResponse
 import com.sayid.studypath.data.remote.response.QuizItem
 import com.sayid.studypath.data.remote.response.QuizResponse
 import com.sayid.studypath.data.repository.AuthRepository
 import com.sayid.studypath.utils.PredictionResultSingleton
+import com.sayid.studypath.utils.UserLoginDataSingleton
 import kotlinx.coroutines.launch
 
 class QuizActivityViewModel(
@@ -84,6 +87,7 @@ class QuizActivityViewModel(
 
     fun postQuizAnswers(listAnswers: QuizAnswerRequest) {
         viewModelScope.launch {
+            _listQuizAnswerResponse.value = Result.Loading
             val idToken = authRepository.getIdToken()
             try {
                 if (idToken == null) throw NullPointerException("Value is null")
@@ -91,8 +95,16 @@ class QuizActivityViewModel(
                     ApiConfig.getApiService().submitQuizAnswers("Bearer $idToken", listAnswers)
 
                 PredictionResultSingleton.updatePrediction(response.data.prediction)
-
+                Log.d("POST QUIZ", response.toString())
                 _listQuizAnswerResponse.value = Result.Success(response)
+
+                val userLogin = ApiConfig.getApiService().login(LoginRequest(idToken))
+
+                if (userLogin.data.isRegister && userLogin.data.isAnswerQuiz) {
+                    UserLoginDataSingleton.updateLoginData(
+                        Result.Success(userLogin.data.result),
+                    )
+                }
             } catch (e: Exception) {
                 _listQuizAnswerResponse.value = Result.Error("Gagal: ${e.message}")
             }

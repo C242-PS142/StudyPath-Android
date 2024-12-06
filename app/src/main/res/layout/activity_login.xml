@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/login_description"
                 android:textAlignment="center"
+                android:textSize="@dimen/text_size_light_body"
                 android:textAppearance="@style/Theme.StudyPath.Text.LightBody" />
 
             <com.google.android.material.button.MaterialButton
