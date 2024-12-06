@@ -18,9 +18,11 @@ import com.github.aachartmodel.aainfographics.aachartcreator.aa_toAAOptions
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAPie
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
+import com.sayid.studypath.R
 import com.sayid.studypath.databinding.FragmentStatisticsBinding
 import com.sayid.studypath.ui.activity.QuizActivity
 import com.sayid.studypath.utils.PredictionResultSingleton
+import com.sayid.studypath.utils.QuizAnswerSingleton
 
 class StatisticsFragment : Fragment() {
     @Suppress("ktlint:standard:backing-property-naming")
@@ -97,7 +99,7 @@ class StatisticsFragment : Fragment() {
                             arrayOf(
                                 AASeriesElement()
                                     .name("Persentase")
-                                    .size("70%")
+                                    .size("100%")
                                     .data(
                                         categories
                                             .zip(dataValues)
@@ -119,8 +121,11 @@ class StatisticsFragment : Fragment() {
                                 .style(
                                     AAStyle()
                                         .color("#FFFFFF")
-                                        .fontSize(16f),
-                                ).distance(15),
+                                        .fontSize(16f)
+                                        .textOutline("none"),
+                                ).crop(false)
+                                .distance(-50)
+                                .overflow("allow"),
                         ),
                 )
 
@@ -128,6 +133,7 @@ class StatisticsFragment : Fragment() {
                 val horizontalBarChartModel =
                     AAChartModel()
                         .chartType(AAChartType.Bar)
+                        .legendEnabled(false)
                         .backgroundColor("#00000000")
                         .animationType(AAChartAnimationType.SwingTo)
                         .animationDuration(1500)
@@ -157,17 +163,21 @@ class StatisticsFragment : Fragment() {
     }
 
     private fun showReQuizConfirmationDialog() {
-        AlertDialog
-            .Builder(requireContext())
-            .setTitle("Konfirmasi Ulangi Kuis")
-            .setMessage("Apakah Kamu yakin ingin memulai ulang kuis?\nData saat ini akan hilang.")
-            .setPositiveButton("Ya") { _, _ ->
-                startActivity(Intent(requireActivity(), QuizActivity::class.java))
-                requireActivity().finish()
-            }.setNegativeButton("Tidak") { dialog, _ ->
-                dialog.dismiss()
-            }.create()
-            .show()
+        val dialog =
+            AlertDialog
+                .Builder(requireContext())
+                .setTitle("Konfirmasi Ulangi Kuis")
+                .setMessage("Apakah Kamu yakin ingin memulai ulang kuis?\nData saat ini akan hilang.")
+                .setPositiveButton("Ya") { _, _ ->
+                    startActivity(Intent(requireActivity(), QuizActivity::class.java))
+                    QuizAnswerSingleton.clearAllAnswers()
+                    requireActivity().finish()
+                }.setNegativeButton("Tidak") { dialog, _ ->
+                    dialog.dismiss()
+                }.create()
+
+        dialog.window?.setBackgroundDrawableResource(R.drawable.bg_radius_xlarge)
+        dialog.show()
     }
 
     private fun playAnimation() {

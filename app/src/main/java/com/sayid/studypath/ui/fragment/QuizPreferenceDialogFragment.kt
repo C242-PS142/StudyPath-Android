@@ -7,6 +7,7 @@ import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.FragmentQuizPreferenceDialogBinding
@@ -49,6 +50,7 @@ class QuizPreferenceDialogFragment : DialogFragment() {
                     val datePickerDialog =
                         DatePickerDialog(
                             requireContext(),
+                            R.style.CustomDatePickerDialog,
                             { _, selectedYear, selectedMonth, selectedDay ->
                                 onDateSet(selectedYear, selectedMonth, selectedDay)
                             },
@@ -56,6 +58,15 @@ class QuizPreferenceDialogFragment : DialogFragment() {
                             month,
                             day,
                         )
+
+                    datePickerDialog.setOnShowListener {
+                        val positiveButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE)
+                        val negativeButton = datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)
+
+                        positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_primary))
+                        negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_primary))
+                    }
+
                     datePickerDialog.show()
                 }
                 btnOnceTime.setOnClickListener {
@@ -66,6 +77,7 @@ class QuizPreferenceDialogFragment : DialogFragment() {
                     val timePickerDialog =
                         TimePickerDialog(
                             requireContext(),
+                            R.style.CustomTimePickerDialog,
                             { _, selectedHour, selectedMinute ->
                                 onTimeSet(selectedHour, selectedMinute)
                             },
@@ -73,6 +85,15 @@ class QuizPreferenceDialogFragment : DialogFragment() {
                             minute,
                             true,
                         )
+
+                    timePickerDialog.setOnShowListener {
+                        val positiveButton = timePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE)
+                        val negativeButton = timePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)
+
+                        positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_primary))
+                        negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_primary))
+                    }
+
                     timePickerDialog.show()
                 }
 

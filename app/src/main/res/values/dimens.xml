@@ -26,6 +26,7 @@
     <!--    Typography Sizing-->
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_light_body">15sp</dimen>
     <dimen name="text_size_subheading">18sp</dimen>
     <dimen name="text_size_heading">20sp</dimen>
     <dimen name="text_size_title">24sp</dimen>
