@@ -9,14 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartAlignType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartAnimationType
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartFontWeightType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAOptions
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.aachartmodel.aainfographics.aachartcreator.aa_toAAOptions
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AALabels
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAMarker
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAPie
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AASeries
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.FragmentStatisticsBinding
@@ -85,47 +90,84 @@ class StatisticsFragment : Fragment() {
                         (prediction.kesepakatan * 100).toInt(),
                     )
 
-                // Build Pie Chart Model
-                val bigFivePieChartsModel =
+                // Build Radar Chart Model
+                val bigFiveRadarChartsModel =
                     AAChartModel()
-                        .chartType(AAChartType.Pie)
+                        .chartType(AAChartType.Line)
                         .backgroundColor("#00000000")
-                        .axesTextColor("#FFFFFF")
+                        .axesTextColor("#58cc02")
                         .legendEnabled(false)
                         .animationType(AAChartAnimationType.SwingTo)
                         .animationDuration(1500)
+                        .categories(categories)
                         .colorsTheme(colorsTheme)
+                        .polar(true)
                         .series(
                             arrayOf(
                                 AASeriesElement()
                                     .name("Persentase")
-                                    .size("100%")
+                                    .color("#1cb0f6")
                                     .data(
-                                        categories
-                                            .zip(dataValues)
-                                            .map { arrayOf(it.first, it.second) }
-                                            .toTypedArray(),
+                                        dataValues
+                                            .mapIndexed { index, value ->
+                                                mapOf("y" to value, "color" to colorsTheme[index])
+                                            }.toTypedArray(),
+                                    )
+                                    .dataLabels(
+                                        AADataLabels()
+                                            .enabled(true)
+                                            .style(
+                                                AAStyle()
+                                                    .color("#58cc02")
+                                                    .fontSize(10f)
+                                                    .fontWeight(AAChartFontWeightType.Bold)
+                                                    .textOutline("none")
+                                            )
+                                            .format("{point.y}%")
+                                            .distance(-30)
                                     ),
                             ),
                         )
 
-                val pieChartOptions = bigFivePieChartsModel.aa_toAAOptions()
-                pieChartOptions.plotOptions?.pie(
-                    AAPie()
-                        .allowPointSelect(true)
-                        .cursor("pointer")
-                        .dataLabels(
-                            AADataLabels()
+                val radarChartOptions = bigFiveRadarChartsModel.aa_toAAOptions()
+
+                radarChartOptions.xAxis?.apply {
+                    labels(
+                        AALabels()
+                            .style(
+                                AAStyle()
+                                    .color("#58cc02")
+                                    .fontSize(10f)
+                                    .fontWeight(AAChartFontWeightType.Bold)
+                            )
+                            .align(AAChartAlignType.Center)
+                    )
+                    tickmarkPlacement("on")
+                }
+
+                radarChartOptions.yAxis?.apply {
+                    gridLineInterpolation("polygon")
+                    min(0)
+                    max(100)
+                    labels(
+                        AALabels()
+                            .style(
+                                AAStyle()
+                                    .color("#58cc02")
+                                    .fontSize(10f)
+                                    .fontWeight(AAChartFontWeightType.Bold)
+                            )
+                    )
+                }
+
+                radarChartOptions.tooltip?.valueSuffix("%")
+                radarChartOptions.plotOptions?.series(
+                    AASeries()
+                        .marker(
+                            AAMarker()
                                 .enabled(true)
-                                .format("{point.y:.1f}%")
-                                .style(
-                                    AAStyle()
-                                        .color("#FFFFFF")
-                                        .fontSize(16f)
-                                        .textOutline("none"),
-                                ).crop(false)
-                                .distance(-50)
-                                .overflow("allow"),
+                                .radius(6)
+                                .symbol("circle"),
                         ),
                 )
 
@@ -156,7 +198,7 @@ class StatisticsFragment : Fragment() {
                 horizontalBarChartOptions.plotOptions?.bar?.borderRadius(4f)
 
                 // Draw charts
-                binding.bigFivePieCharts.aa_drawChartWithChartOptions(pieChartOptions)
+                binding.bigFiveRadarCharts.aa_drawChartWithChartOptions(radarChartOptions)
                 binding.bigFiveBarCharts.aa_drawChartWithChartOptions(horizontalBarChartOptions)
             }
         }
