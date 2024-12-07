@@ -89,4 +89,5 @@
     <string name="choose_time">Pilih Jam</string>
     <string name="set_reminder">Atur Pengingat</string>
     <string name="text_btn_ulangi_kuis">Ulangi Tes Big Five</string>
+    <string name="answer_guide">Petunjuk: Pilih salah satu emoji di atas yang paling pas buat nunjukin perasaan kamu tentang situasi itu!</string>
 </resources>
