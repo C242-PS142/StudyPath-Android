@@ -65,7 +65,10 @@ class NewUserDataActivity : AppCompatActivity() {
         }
 
         val navIcon =
-            AppCompatResources.getDrawable(this, com.sayid.studypath.R.drawable.baseline_arrow_back_24)
+            AppCompatResources.getDrawable(
+                this,
+                com.sayid.studypath.R.drawable.baseline_arrow_back_24,
+            )
         supportActionBar?.setHomeAsUpIndicator(navIcon)
 
         savedInstanceState?.getString(KEY_CURRENT_IMAGE_URI)?.let { uriString ->
@@ -156,6 +159,7 @@ class NewUserDataActivity : AppCompatActivity() {
                     }
 
                     is Result.Error -> {
+                        showToast(this, "Masalah: ${result.error}, Silahkan coba lagi!")
                         isLoading(false)
                         Log.d(TAG, result.error)
                     }
