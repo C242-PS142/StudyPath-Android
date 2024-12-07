@@ -126,7 +126,24 @@ class QuizActivity : AppCompatActivity() {
         ) {
             val rect = android.graphics.Rect()
             view.getGlobalVisibleRect(rect)
-            val isWithinBounds = rect.contains(event.rawX.toInt(), event.rawY.toInt())
+
+            val location = IntArray(2)
+            view.getLocationOnScreen(location)
+
+            val viewLeft = location[0]
+            val viewTop = location[1]
+            val viewRight = viewLeft + view.width
+            val viewBottom = viewTop + view.height
+
+            val isWithinBounds =
+                event.rawX >= viewLeft &&
+                    event.rawX <= viewRight &&
+                    event.rawY >= viewTop &&
+                    event.rawY <= viewBottom
+
+            Log.d("QUIZ DEBUG", "is Animating: $isAnimating")
+            Log.d("QUIZ DEBUG", "is isWithinBounds: $isWithinBounds")
+
             if (!isAnimating) {
                 isAnimating = true
                 animateButtons(
@@ -279,6 +296,9 @@ class QuizActivity : AppCompatActivity() {
             )
             animations.add(
                 ObjectAnimator.ofFloat(tvTestQuestion, View.ALPHA, alpha).setDuration(duration),
+            )
+            animations.add(
+                ObjectAnimator.ofFloat(tvQuizGuide, View.ALPHA, alpha).setDuration(duration),
             )
         }
 
