@@ -7,12 +7,12 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.fragment.app.viewModels
 import com.sayid.studypath.R
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.databinding.ActivityQuizConfirmationBinding
 import com.sayid.studypath.utils.PredictionResultSingleton
 import com.sayid.studypath.utils.initializePersonalityCard
+import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.viewmodel.QuizConfirmationViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
@@ -76,6 +76,7 @@ class QuizConfirmationActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     loggingIn(false)
+                    showToast(this, "Masalah: ${result.error}")
                 }
             }
         }

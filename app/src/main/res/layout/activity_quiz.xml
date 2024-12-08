@@ -25,9 +25,9 @@
 
             <TextView
                 android:id="@+id/tv_test_header"
-                android:layout_marginTop="@dimen/margin_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
                 android:gravity="center"
                 android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
                 android:textColor="@color/md_theme_primary"
@@ -45,101 +45,97 @@
                 tools:text="KAMU MERASA LEBIH BERSEMANGAT DENGAN IDE-IDE BARU DAN KOMPLEKS DIBANDINGKAN DENGAN HAL-HAL YANG SEDERHANA DAN JELAS" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xlarge">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/btn_quiz_group"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="70dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <!-- Button 1 -->
-                    <com.google.android.material.button.MaterialButton
+                    <com.sayid.studypath.ui.customview.CustomImageButton
                         android:id="@+id/btn_very_disagree"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:backgroundTint="@color/very_disagree"
-                        android:letterSpacing="0"
-                        android:text="@string/minus_2"
-                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_subheading"
-                        app:cornerRadius="@dimen/corner_radius_large"
+                        android:background="@drawable/bg_radius_medium"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/answer_very_disagree"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_disagree"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!-- Button 2 -->
-                    <com.google.android.material.button.MaterialButton
+                    <com.sayid.studypath.ui.customview.CustomImageButton
                         android:id="@+id/btn_disagree"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="@dimen/margin_medium"
-                        android:backgroundTint="@color/disagree"
-                        android:text="@string/minus_1"
-                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_subheading"
-                        app:cornerRadius="@dimen/corner_radius_large"
+                        android:background="@drawable/bg_radius_medium"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/answer_disagree"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_neutral"
                         app:layout_constraintStart_toEndOf="@id/btn_very_disagree"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!-- Button 3 -->
-                    <com.google.android.material.button.MaterialButton
+                    <com.sayid.studypath.ui.customview.CustomImageButton
+                        android:id="@+id/btn_neutral"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:background="@drawable/bg_radius_medium"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/answer_neutral"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_agree"
+                        app:layout_constraintStart_toEndOf="@id/btn_disagree"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.sayid.studypath.ui.customview.CustomImageButton
                         android:id="@+id/btn_agree"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="@dimen/margin_medium"
-                        android:backgroundTint="@color/agree"
-                        android:text="@string/plus_1"
-                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_subheading"
-                        app:cornerRadius="@dimen/corner_radius_large"
+                        android:background="@drawable/bg_radius_medium"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/answer_agree"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintStart_toEndOf="@id/btn_disagree"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_very_agree"
+                        app:layout_constraintStart_toEndOf="@id/btn_neutral"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.button.MaterialButton
+                    <com.sayid.studypath.ui.customview.CustomImageButton
                         android:id="@+id/btn_very_agree"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="@dimen/margin_medium"
-                        android:backgroundTint="@color/very_agree"
-                        android:text="@string/plus_2"
-                        android:textAppearance="@style/Theme.StudyPath.Text.BoldHeading"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_subheading"
-                        app:cornerRadius="@dimen/corner_radius_large"
+                        android:background="@drawable/bg_radius_medium"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/answer_very_agree"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/btn_agree"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_neutral"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_marginBottom="@dimen/margin_large"
-                    android:backgroundTint="@color/neutral"
-                    android:paddingVertical="10dp"
-                    android:text="@string/neutral"
-                    android:textAppearance="@style/Theme.StudyPath.Text.Button"
-                    android:textColor="@android:color/white"
-                    app:cornerRadius="@dimen/corner_radius_large"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/btn_quiz_group"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_quiz_group" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_quiz_guide"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/margin_xlarge"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="@style/Theme.StudyPath.Text.LightSmall"
+                android:text="@string/answer_guide"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

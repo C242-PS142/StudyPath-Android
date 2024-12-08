@@ -132,6 +132,7 @@ class EditProfileDialogFragment : DialogFragment() {
 
                     is Result.Error -> {
                         loading.visibility = View.GONE
+                        showToast(requireContext(), "Masalah: ${result.error}")
                     }
                 }
             }

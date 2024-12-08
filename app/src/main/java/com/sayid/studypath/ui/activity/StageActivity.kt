@@ -16,6 +16,7 @@ import com.sayid.studypath.data.Result
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.databinding.ActivityStageBinding
 import com.sayid.studypath.utils.QuizAnswerSingleton
+import com.sayid.studypath.utils.showToast
 import com.sayid.studypath.viewmodel.QuizActivityViewModel
 import com.sayid.studypath.viewmodel.factory.ViewModelFactory
 
@@ -64,6 +65,7 @@ class StageActivity : AppCompatActivity() {
 
                     is Result.Error -> {
                         isLoading(false)
+                        showToast(this, "Masalah: ${result.error}, Silahkan coba lagi!")
                         Log.d(TAG, result.error)
                     }
                 }
