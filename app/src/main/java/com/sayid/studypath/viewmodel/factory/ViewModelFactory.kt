@@ -1,7 +1,6 @@
 package com.sayid.studypath.viewmodel.factory
 
 import android.content.Context
-import androidx.core.content.ContextCompat.getString
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn

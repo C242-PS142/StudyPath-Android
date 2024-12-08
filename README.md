@@ -6,12 +6,15 @@
 
 <br>
 
-## 📱 Features
-- 🌟 **Big Five Personality Quiz**: 50 engaging questions to assess personality traits.
-- 📊 **Personality Insights**: Visual representation of test results.
-- 🧠 **Personalized Recommendations**: Study methods tailored to your personality.
-- 📈 **Statistics Dashboard**: Displaying personalities by charts.
-- 🌙 **Dark Mode**: Comfortable viewing at any time.
+## 📱 Features  
+
+| Feature                        | Description                                                | Preview                                     |
+|--------------------------------|------------------------------------------------------------|---------------------------------------------|
+| 🌟 **Big Five Personality Quiz** | 50 engaging questions to assess personality traits.        | <img src="docs/images/quiz.jpg" alt="Quiz Preview" width="150"> |
+| 📊 **Personality Insights**     | Visual representation of test results.                    | <img src="docs/images/home.jpg" alt="Insights Preview" width="150"> |
+| 🧠 **Personalized Recommendations** | Study methods tailored to your personality.              | <img src="docs/images/recommendation.jpg" alt="Recommendations Preview" width="150"> |
+| 📈 **Statistics Dashboard**     | Displaying personalities by charts.                       | <img src="docs/images/statistic.jpg" alt="Statistics Preview" width="150"> |
+| 🌙 **Dark Mode**                | Comfortable viewing at any time.                          | <img src="docs/images/dark_mode.jpg" alt="Dark Mode Preview" width="150"> |
 
 <br>
 
