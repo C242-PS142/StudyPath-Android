@@ -159,7 +159,7 @@ class NewUserDataActivity : AppCompatActivity() {
                     }
 
                     is Result.Error -> {
-                        showToast(this, "Masalah: ${result.error}, Silahkan coba lagi!")
+                        showToast(this, "${result.error}, Silahkan coba lagi!")
                         isLoading(false)
                         Log.d(TAG, result.error)
                     }

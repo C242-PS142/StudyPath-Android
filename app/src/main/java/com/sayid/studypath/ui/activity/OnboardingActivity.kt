@@ -9,7 +9,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.sayid.studypath.R
 import com.sayid.studypath.databinding.ActivityOnboardingBinding

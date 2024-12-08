@@ -7,7 +7,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.fragment.app.viewModels
 import com.sayid.studypath.R
 import com.sayid.studypath.data.Result
 import com.sayid.studypath.databinding.ActivityQuizConfirmationBinding

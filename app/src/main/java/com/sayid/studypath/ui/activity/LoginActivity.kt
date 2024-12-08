@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                             setListener()
                             observeAuthResult()
                             Log.d(TAG, result.error)
-                            showToast(this@LoginActivity, "Masalah: ${result.error}")
+                            showToast(this@LoginActivity, result.error)
                         }
                     }
                 }
