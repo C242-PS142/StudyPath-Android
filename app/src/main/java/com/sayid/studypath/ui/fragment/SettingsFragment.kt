@@ -45,7 +45,6 @@ class SettingsFragment : Fragment() {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                showToast(requireContext(), "Permission granted")
                 Log.d("Permission", "Permission granted")
             }
         }
