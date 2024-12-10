@@ -35,6 +35,8 @@ class QuizActivity : AppCompatActivity() {
     private val quizActivityViewModel: QuizActivityViewModel by viewModels {
         factory
     }
+    private var isClicked = false
+    private var isQuestionFetched = false
     private var currentStage: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,23 +53,38 @@ class QuizActivity : AppCompatActivity() {
 
         when (currentStage) {
             1 -> {
-                quizActivityViewModel.quizStage1.observe(this) { showQuiz(it) }
+                quizActivityViewModel.quizStage1.observe(this) {
+                    showQuiz(it)
+                    isQuestionFetched = true
+                }
             }
 
             2 -> {
-                quizActivityViewModel.quizStage2.observe(this) { showQuiz(it) }
+                quizActivityViewModel.quizStage2.observe(this) {
+                    showQuiz(it)
+                    isQuestionFetched = true
+                }
             }
 
             3 -> {
-                quizActivityViewModel.quizStage3.observe(this) { showQuiz(it) }
+                quizActivityViewModel.quizStage3.observe(this) {
+                    showQuiz(it)
+                    isQuestionFetched = true
+                }
             }
 
             4 -> {
-                quizActivityViewModel.quizStage4.observe(this) { showQuiz(it) }
+                quizActivityViewModel.quizStage4.observe(this) {
+                    showQuiz(it)
+                    isQuestionFetched = true
+                }
             }
 
             5 -> {
-                quizActivityViewModel.quizStage5.observe(this) { showQuiz(it) }
+                quizActivityViewModel.quizStage5.observe(this) {
+                    showQuiz(it)
+                    isQuestionFetched = true
+                }
             }
         }
     }
@@ -106,9 +123,6 @@ class QuizActivity : AppCompatActivity() {
                     currentQuizCode = quizs[currentProgress - 1].questionCode
                     Log.d("QUIZ CURRENT PROGRESS", "CURRENT QUIZ CODE: $currentQuizCode")
                 }
-            } else {
-                // Logika jika kuis selesai, misalnya navigasi ke hasil
-                nextStage(currentStage)
             }
         }
 // Fungsi untuk berpindah ke pertanyaan berikutnya
@@ -124,6 +138,8 @@ class QuizActivity : AppCompatActivity() {
             buttonEnum: ButtonEnum,
             answerValue: Int,
         ) {
+            if (!isQuestionFetched) return
+
             val rect = android.graphics.Rect()
             view.getGlobalVisibleRect(rect)
 
@@ -161,11 +177,17 @@ class QuizActivity : AppCompatActivity() {
                         animateButtons(buttonEnum, isRecover = true) {
                             isAnimating = false
                         }
+                        if (currentProgress > quizs.size) {
+                            nextStage(currentStage)
+                        } else {
+                            setEnableOptions(true)
+                        }
                     },
                     onStart = {
                         if (isWithinBounds) {
                             soundPool.play(soundId, 1f, 1f, 0, 0, 1f)
                         }
+                        setEnableOptions(false)
                     },
                 )
             }
@@ -221,6 +243,16 @@ class QuizActivity : AppCompatActivity() {
 
         // Tampilkan pertanyaan pertama
         updateQuiz()
+    }
+
+    private fun setEnableOptions(active: Boolean) {
+        binding.apply {
+            btnVeryAgree.isEnabled = active
+            btnAgree.isEnabled = active
+            btnNeutral.isEnabled = active
+            btnDisagree.isEnabled = active
+            btnVeryDisagree.isEnabled = active
+        }
     }
 
     private fun animateButtons(
@@ -327,10 +359,14 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun nextStage(stage: Int) {
-        val intent = Intent(this@QuizActivity, StageActivity::class.java)
-        intent.putExtra(StageActivity.CURRENTSTAGE, stage)
-        startActivity(intent)
-        finish()
+        if (!isClicked) {
+            isClicked = true
+            val intent = Intent(this@QuizActivity, StageActivity::class.java)
+            intent.putExtra(StageActivity.CURRENTSTAGE, stage)
+            startActivity(intent)
+            currentProgress = 1
+            finish()
+        }
     }
 
     enum class ButtonEnum {
@@ -344,6 +380,7 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        soundPool.release()
         _binding = null
     }
 
