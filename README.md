@@ -23,7 +23,21 @@
 - **Machine Learning**: TensorFlow from Cloud Computing (for personality-based recommendation models).
 - **UI/UX**: Material Design.
 - **Tools**: Gradle, GitHub Actions (CI/CD).
-- **Dependencies**: retrofit, viewpager2, security-crypto, firebase, aachartcore, converter-gson, logging-interceptor, glide, coroutines, datastore.
+
+<br>
+
+### Dependencies  
+| Dependency          | Functionality                   |  
+|:-------------------|:------------------------------|  
+| **Retrofit**        | REST API communication         |  
+| **ViewPager2**      | View pager for swipeable screens |  
+| **Firebase**        | Backend services and authentication |  
+| **AAChartCore**     | Interactive charting library   |  
+| **Converter-Gson**  | JSON serialization for Retrofit |  
+| **Logging-Interceptor** | HTTP logging for debugging   |  
+| **Glide**           | Image loading and caching      |  
+| **Coroutines**      | Asynchronous programming      |  
+| **DataStore**       | Jetpack library for data storage |  
 
 <br>
 
