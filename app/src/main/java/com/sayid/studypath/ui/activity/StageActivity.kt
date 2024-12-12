@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sayid.studypath.R
 import com.sayid.studypath.data.Result
+import com.sayid.studypath.data.remote.response.QuizAnswer
 import com.sayid.studypath.data.remote.response.QuizAnswerRequest
 import com.sayid.studypath.databinding.ActivityStageBinding
 import com.sayid.studypath.utils.QuizAnswerSingleton
@@ -29,6 +30,8 @@ class StageActivity : AppCompatActivity() {
     private val factory: ViewModelFactory by lazy {
         ViewModelFactory.getInstance(this)
     }
+    private lateinit var listAnswer: List<QuizAnswer>
+    private var isClicked = false
     private val quizActivityViewModel: QuizActivityViewModel by viewModels<QuizActivityViewModel> { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +51,10 @@ class StageActivity : AppCompatActivity() {
             playAnimation()
         }
 
+        QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
+            listAnswer = answer
+        }
+
         quizActivityViewModel.listQuizAnswerResponse.observe(this@StageActivity) { result ->
             if (result != null) {
                 when (result) {
@@ -65,7 +72,8 @@ class StageActivity : AppCompatActivity() {
 
                     is Result.Error -> {
                         isLoading(false)
-                        showToast(this, "Masalah: ${result.error}, Silahkan coba lagi!")
+                        isClicked = false
+                        showToast(this, "${result.error}, Silahkan coba lagi!")
                         Log.d(TAG, result.error)
                     }
                 }
@@ -86,19 +94,20 @@ class StageActivity : AppCompatActivity() {
             tvStageDescription.text = message
 
             btnNextStage.setOnClickListener {
-                stage += 1
-                if (stage <= 5) {
-                    val intent = Intent(this@StageActivity, QuizActivity::class.java)
-                    intent.putExtra(QuizActivity.STAGE, stage)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    QuizAnswerSingleton.listQuizAnswer.observe(this@StageActivity) { answer ->
+                if (!isClicked) {
+                    stage += 1
+                    if (stage <= 5) {
+                        isClicked = true
+                        val intent = Intent(this@StageActivity, QuizActivity::class.java)
+                        intent.putExtra(QuizActivity.STAGE, stage)
+                        startActivity(intent)
+                        finish()
+                    } else {
                         quizActivityViewModel.postQuizAnswers(
-                            QuizAnswerRequest(answer),
+                            QuizAnswerRequest(listAnswer),
                         )
+                        btnNextStage.text = "Lihat Hasil Tes!"
                     }
-                    btnNextStage.text = "Lihat Hasil Tes!"
                 }
             }
         }
@@ -193,6 +202,8 @@ class StageActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        mediaPlayer?.release()
+        mediaPlayer = null
         _binding = null
     }
 

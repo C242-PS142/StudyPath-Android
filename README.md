@@ -28,7 +28,7 @@
 <br>
 
 ## 📳 Demo Application
-Upcoming video.
+https://www.youtube.com/shorts/5Skt91hjKjQ
 
 <br>
 

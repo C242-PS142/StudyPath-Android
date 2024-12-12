@@ -43,11 +43,9 @@ class SettingsFragment : Fragment() {
         factory
     }
     private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission(),
-        ) { isGranted: Boolean ->
-            if (!isGranted) {
-                showToast(requireContext(), "Notifications permission rejected")
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                Log.d("Permission", "Permission granted")
             }
         }
 
@@ -125,7 +123,6 @@ class SettingsFragment : Fragment() {
                             } else {
                                 showToast(requireContext(), "Gagal Memuat Data Pengguna")
                             }
-                            Log.d("RESULT", result.error)
                         }
                     }
                 }
@@ -157,8 +154,18 @@ class SettingsFragment : Fragment() {
                     val positiveButton = dialog.getButton(DatePickerDialog.BUTTON_POSITIVE)
                     val negativeButton = dialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)
 
-                    positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_error))
-                    negativeButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.md_theme_onSurface))
+                    positiveButton.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.md_theme_error,
+                        ),
+                    )
+                    negativeButton.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.md_theme_onSurface,
+                        ),
+                    )
                 }
 
                 dialog.show()
@@ -223,15 +230,29 @@ class SettingsFragment : Fragment() {
 
     private fun checkAndRequestPermission(onGranted: () -> Unit) {
         if (Build.VERSION.SDK_INT >= 33) {
-            val isGranted =
-                requireContext().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
-            if (isGranted == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                onGranted()
-            } else {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            when {
+                requireContext().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
+                    android.content.pm.PackageManager.PERMISSION_GRANTED -> {
+                    onGranted()
+                }
+
+                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
+                    AlertDialog
+                        .Builder(requireContext())
+                        .setTitle("Permission Needed")
+                        .setMessage("We need this permission to send notifications.")
+                        .setPositiveButton("OK") { _, _ ->
+                            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        }.setNegativeButton("Cancel", null)
+                        .show()
+                }
+
+                else -> {
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
             }
         } else {
-            onGranted() // Permission not needed for versions below Android 13
+            onGranted()
         }
     }
 
