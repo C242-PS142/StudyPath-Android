@@ -66,7 +66,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.androidx.viewpager2)
-    implementation(libs.androidx.security.crypto)
     implementation(platform(libs.firebase.bom))
     implementation(libs.aachartcore.kotlin)
     implementation(libs.play.services.auth)
