@@ -46,6 +46,8 @@ class SettingsFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 Log.d("Permission", "Permission granted")
+            } else {
+                Log.d("Permission", "Permission rejected")
             }
         }
 
@@ -64,10 +66,9 @@ class SettingsFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= 33) {
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             requestPermissionLauncher.launch(Manifest.permission.SCHEDULE_EXACT_ALARM)
         }
@@ -230,26 +231,17 @@ class SettingsFragment : Fragment() {
 
     private fun checkAndRequestPermission(onGranted: () -> Unit) {
         if (Build.VERSION.SDK_INT >= 33) {
-            when {
-                requireContext().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
-                    android.content.pm.PackageManager.PERMISSION_GRANTED -> {
-                    onGranted()
-                }
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            requestPermissionLauncher.launch(Manifest.permission.SCHEDULE_EXACT_ALARM)
+        }
 
-                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
-                    AlertDialog
-                        .Builder(requireContext())
-                        .setTitle("Permission Needed")
-                        .setMessage("We need this permission to send notifications.")
-                        .setPositiveButton("OK") { _, _ ->
-                            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                        }.setNegativeButton("Cancel", null)
-                        .show()
-                }
-
-                else -> {
-                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                }
+        if (Build.VERSION.SDK_INT >= 33) {
+            if (requireContext().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
+                android.content.pm.PackageManager.PERMISSION_GRANTED
+            ) {
+                onGranted()
             }
         } else {
             onGranted()
