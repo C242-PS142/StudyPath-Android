@@ -22,7 +22,7 @@
 - **Language**: Kotlin
 - **Machine Learning**: TensorFlow from Cloud Computing (for personality-based recommendation models).
 - **UI/UX**: Material Design.
-- **Tools**: Gradle, GitHub Actions (CI/CD).
+- **Tools**: Android Studio, Gradle, Ktlint.
 
 <br>
 
